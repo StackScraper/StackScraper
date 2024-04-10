@@ -1,0 +1,10 @@
+Hello,
+
+for contributors:
+
+This app is made via VSC.
+
+Also you can install C/C++ extensions from Extensions in VSC for your own pleasure.
+
+Also if you get segmentation fault error while compiling, try entering VSC via Developer Command Line for VSC, at least for me it works.
+I am compiling using MSVC, cl.exe since gcc produced segmentation fault.
