@@ -1,0 +1,14 @@
+//
+// Created by Michin on 21.04.2024.
+//
+
+#ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATEEXIT_HPP
+#define INC_2024__TAB_DSA__8_BRODZIAK_STATEEXIT_HPP
+
+
+class StateExit {
+
+};
+
+
+#endif //INC_2024__TAB_DSA__8_BRODZIAK_STATEEXIT_HPP
