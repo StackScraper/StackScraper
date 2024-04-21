@@ -10,6 +10,8 @@
 #include <string>
 #include <utility>
 
+template <typename T>
+class FiniteStateMachine;
 
 template <typename T>
 class State{
