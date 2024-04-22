@@ -9,10 +9,10 @@
 #include "../FSM/StateMachine.hpp"
 
 //tbd
-//class StateIdle : public State<States>{
-//public:
-//    StateIdle(FiniteStateMachine<States>& fsm) : State<States>(fsm, States::IDLE, "IDLE"){}
-//};
+class StateIdle : public State<States>{
+public:
+    StateIdle(FiniteStateMachine<States>& fsm) : State<States>(fsm, States::IDLE, "IDLE"){}
+};
 
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_STATEIDLE_HPP
