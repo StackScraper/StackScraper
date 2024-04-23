@@ -17,7 +17,7 @@ class StateHistory : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateHistory(FiniteStateMachine<States>& fsm)
-    : State<States>(fsm, States::LOGIN, "LOGIN"){}
+    : State<States>(fsm, States::HISTORY, "HISTORY"){}
 
     void onEnter() override;
     void onUpdate() override;

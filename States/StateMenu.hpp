@@ -17,7 +17,7 @@ class StateMenu : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateMenu(FiniteStateMachine<States>& fsm)
-    : State<States>(fsm, States::LOGIN, "LOGIN"){}
+    : State<States>(fsm, States::MENU, "MENU"){}
 
     void onEnter() override;
     void onUpdate() override;

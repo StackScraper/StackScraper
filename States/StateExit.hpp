@@ -17,7 +17,7 @@ class StateExit : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateExit(FiniteStateMachine<States>& fsm)
-    : State<States>(fsm, States::LOGIN, "LOGIN"){}
+    : State<States>(fsm, States::EXIT, "EXIT"){}
 
     void onEnter() override;
     void onUpdate() override;

@@ -17,7 +17,7 @@ class StateFavourites : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateFavourites(FiniteStateMachine<States>& fsm)
-    : State<States>(fsm, States::LOGIN, "LOGIN"){}
+    : State<States>(fsm, States::FAVOURITES, "FAVOURITES"){}
 
     void onEnter() override;
     void onUpdate() override;

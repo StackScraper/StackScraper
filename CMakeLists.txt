@@ -31,4 +31,6 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StatesWrapper.hpp
         Logic/PromptSingleton.cpp
         Logic/PromptSingleton.hpp
+        States/StateTags.cpp
+        States/StateTags.hpp
 )
