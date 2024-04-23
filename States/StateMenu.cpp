@@ -3,3 +3,15 @@
 //
 
 #include "StateMenu.hpp"
+
+void StateMenu::onEnter() {
+    State::onEnter();
+}
+
+void StateMenu::onUpdate() {
+    State::onUpdate();
+}
+
+void StateMenu::onExit() {
+    State::onExit();
+}

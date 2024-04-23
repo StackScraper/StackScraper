@@ -4,12 +4,15 @@
 #include <iostream>
 #include "Engine.hpp"
 
+PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
 int main() {
 
     Engine eng = Engine();
-
-    eng.run();
-
+    bool finish = false;
+    while(!finish)
+    {
+        eng.run();
+    }
     return 0;
 }

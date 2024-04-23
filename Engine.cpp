@@ -6,7 +6,7 @@
 
 
 void Engine::run() {
-    fsm->update();
+    fsm->onUpdate();
 }
 
 Engine::Engine() {

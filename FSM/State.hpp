@@ -33,13 +33,13 @@ public:
     {
     }
     virtual ~State() {}
-    virtual void enter()
+    virtual void onEnter()
     {
     }
-    virtual void exit()
+    virtual void onExit()
     {
     }
-    virtual void update()
+    virtual void onUpdate()
     {
     }
 protected:
