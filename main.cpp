@@ -2,9 +2,14 @@
 //mechanism to handle functions from specific Model classes
 
 #include <iostream>
+#include "Engine.hpp"
 
 
 int main() {
-    std::cout << "Kocham cLew" << std::endl;
+
+    Engine eng = Engine();
+
+    eng.run();
+
     return 0;
 }

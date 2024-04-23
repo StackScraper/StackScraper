@@ -7,12 +7,22 @@
 
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
+#include "../FSM/State.hpp"
 
-//tbd
+#include <iostream>
+
+
 class StateIdle : public State<States>{
+    std::string prompt;
 public:
-    StateIdle(FiniteStateMachine<States>& fsm) : State<States>(fsm, States::IDLE, "IDLE"){}
+    explicit StateIdle(FiniteStateMachine<States>& fsm)
+    : State<States>(fsm, States::IDLE, "IDLE"){}
+
+    void enter() override;
+    void update() override;
+    void exit() override;
 };
 
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_STATEIDLE_HPP
+
