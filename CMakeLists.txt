@@ -27,4 +27,6 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StateHistory.hpp
         States/StateExit.cpp
         States/StateExit.hpp
+        Texts/AllTexts.hpp
+        States/StatesWrapper.hpp
 )

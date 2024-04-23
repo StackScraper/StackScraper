@@ -13,60 +13,67 @@
 #include <cassert>
 #include <utility>
 
-template<typename T>
-class FiniteStateMachine{
-public:
-    FiniteStateMachine() : mCurrentState(nullptr){}
+template <typename T>
+class State;
 
-    template<class S>
-            State<T>& add(T id)
+template <typename T>
+class FiniteStateMachine
+{
+protected:
+    std::map<T, std::unique_ptr<State<T>>> mStates;
+    State<T>* mCurrentState;
+public:
+    FiniteStateMachine()
+            : mCurrentState(nullptr)
+    {
+    }
+    template <class S>
+    State<T>& add(T id)
     {
         static_assert(not std::is_same<State<T>, S>());
         mStates[id] = std::make_unique<S>(*this);
         return *mStates[id];
     }
-
-    State<T>& getState(T stateId)
+    State<T>& getState(T stateID)
     {
-        return mStates[stateId];
+        return *mStates[stateID];
     }
-
-    State<T>& getCurrentState() const
+    State<T>& getCurrentState()
+    {
+        return *mCurrentState;
+    }
+    const State<T>& getCurrentState() const
     {
         return *mCurrentState;
     }
 
-    void setCurrentState(T stateId)
+    void setCurrentState(T stateID)
     {
-        State<T>* state = &getState(stateId);
+        State<T>* state = &getState(stateID);
         setCurrentState(state);
     }
-
-    void onUpdate()
+    void update()
     {
-        if(mCurrentState != nullptr)
+        if (mCurrentState != nullptr)
         {
-            mCurrentState->onUpdate();
+            mCurrentState->update();
         }
     }
 protected:
-    std::map<T, std::unique_ptr<State<T>>> mStates;
-    State<T>* mCurrentState;
-
     void setCurrentState(State<T>* state)
     {
-        if(mCurrentState == state)
+        if (mCurrentState == state)
         {
             return;
         }
-        if(mCurrentState != nullptr)
+        if (mCurrentState != nullptr)
         {
-            mCurrentState->onExit();
+            mCurrentState->exit();
         }
         mCurrentState = state;
-        if(mCurrentState != nullptr)
+        if (mCurrentState != nullptr)
         {
-            mCurrentState->onEnter();
+            mCurrentState->enter();
         }
     }
 };

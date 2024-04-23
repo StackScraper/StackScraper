@@ -5,3 +5,14 @@
 #include "Engine.hpp"
 
 
+void Engine::run() {
+    fsm->update();
+}
+
+Engine::Engine() {
+    fsm = std::make_unique<FiniteStateMachine<States>>();
+    State<States>& idleState = fsm->add<StateIdle>(States::IDLE);
+    State<States>& loginState = fsm->add<StateLogin>(States::LOGIN);
+
+    fsm->setCurrentState(States::IDLE);
+}

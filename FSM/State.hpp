@@ -9,37 +9,42 @@
 
 #include <string>
 #include <utility>
-
 template <typename T>
 class FiniteStateMachine;
 
 template <typename T>
-class State{
+class State
+{
 public:
-    inline T getId()
+    // The ID of the state.
+    inline T getID()
     {
-        return mId;
+        return mID;
     }
-    inline const std::string &getName() const
+    inline const std::string& getName() const
     {
         return mName;
     }
     explicit State(FiniteStateMachine<T>& fsm, T id,
-                   std::string name = "IDLE")
-            : mName(std::move(name))
-            , mId(id)
+                   std::string name = "default")
+            : mName(name)
+            , mID(id)
             , mFsm(fsm)
-    {}
-
-    virtual ~State() = default;
-    virtual void onEnter() = 0;
-    virtual void onExit() = 0;
-    virtual void onUpdate() = 0;
-
-
+    {
+    }
+    virtual ~State() {}
+    virtual void enter()
+    {
+    }
+    virtual void exit()
+    {
+    }
+    virtual void update()
+    {
+    }
 protected:
     std::string mName;
-    T mId;
+    T mID;
     FiniteStateMachine<T>& mFsm;
 };
 
