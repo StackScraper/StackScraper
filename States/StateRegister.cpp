@@ -3,3 +3,15 @@
 //
 
 #include "StateRegister.hpp"
+
+void StateRegister::onEnter() {
+    State::onEnter();
+}
+
+void StateRegister::onUpdate() {
+    State::onUpdate();
+}
+
+void StateRegister::onExit() {
+    State::onExit();
+}

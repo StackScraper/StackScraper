@@ -4,15 +4,19 @@
 
 #include "StateLogin.hpp"
 
-void StateLogin::enter() {
-    State::enter();
+void StateLogin::onEnter() {
+    State::onEnter();
     printf("Welcome in login!");
 }
 
-void StateLogin::update() {
-    State::update();
+void StateLogin::onUpdate() {
+    State::onUpdate();
+    std::string tmp;
+    std::cout<<prompt->retValues();
+    std::cin>>tmp;
+    mFsm.setCurrentState(States::IDLE);
 }
 
-void StateLogin::exit() {
-    State::exit();
+void StateLogin::onExit() {
+    State::onExit();
 }

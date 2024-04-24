@@ -1,9 +1,9 @@
 //
-// Created by Michin on 21.04.2024.
+// Created by Michin on 23.04.2024.
 //
 
-#ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATEREGISTER_HPP
-#define INC_2024__TAB_DSA__8_BRODZIAK_STATEREGISTER_HPP
+#ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATETAGS_HPP
+#define INC_2024__TAB_DSA__8_BRODZIAK_STATETAGS_HPP
 
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
@@ -13,10 +13,10 @@
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
 
-class StateRegister : public State<States> {
+class StateTags : public State<States>{
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
-    explicit StateRegister(FiniteStateMachine<States>& fsm)
+    explicit StateTags(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::REGISTER, "REGISTER"){}
 
     void onEnter() override;
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //INC_2024__TAB_DSA__8_BRODZIAK_STATEREGISTER_HPP
+#endif //INC_2024__TAB_DSA__8_BRODZIAK_STATETAGS_HPP

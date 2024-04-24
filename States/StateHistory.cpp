@@ -3,3 +3,15 @@
 //
 
 #include "StateHistory.hpp"
+
+void StateHistory::onExit() {
+    State::onExit();
+}
+
+void StateHistory::onUpdate() {
+    State::onUpdate();
+}
+
+void StateHistory::onEnter() {
+    State::onEnter();
+}

@@ -7,6 +7,7 @@
 
 #include "States/StatesWrapper.hpp"
 #include "FSM/StateMachine.hpp"
+#include "Logic/PromptSingleton.hpp"
 
 class Engine {
     std::unique_ptr<FiniteStateMachine<States>> fsm = nullptr;

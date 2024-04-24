@@ -10,17 +10,18 @@
 #include "../FSM/State.hpp"
 
 #include <iostream>
+#include "../Logic/PromptSingleton.hpp"
 
 
 class StateIdle : public State<States>{
-    std::string prompt;
+    PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateIdle(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::IDLE, "IDLE"){}
 
-    void enter() override;
-    void update() override;
-    void exit() override;
+    void onEnter() override;
+    void onUpdate() override;
+    void onExit() override;
 };
 
 

@@ -8,20 +8,20 @@
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
-
+#include "../Logic/PromptSingleton.hpp"
 #include <iostream>
 #include <string>
 
 
 class StateLogin : public State<States>{
-    std::string prompt;
+    PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateLogin(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::LOGIN, "LOGIN"){}
 
-    void enter() override;
-    void update() override;
-    void exit() override;
+    void onEnter() override;
+    void onUpdate() override;
+    void onExit() override;
 };
 
 

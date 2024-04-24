@@ -52,11 +52,11 @@ public:
         State<T>* state = &getState(stateID);
         setCurrentState(state);
     }
-    void update()
+    void onUpdate()
     {
         if (mCurrentState != nullptr)
         {
-            mCurrentState->update();
+            mCurrentState->onUpdate();
         }
     }
 protected:
@@ -68,12 +68,12 @@ protected:
         }
         if (mCurrentState != nullptr)
         {
-            mCurrentState->exit();
+            mCurrentState->onExit();
         }
         mCurrentState = state;
         if (mCurrentState != nullptr)
         {
-            mCurrentState->enter();
+            mCurrentState->onEnter();
         }
     }
 };

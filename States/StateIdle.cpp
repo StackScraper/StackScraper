@@ -5,22 +5,24 @@
 #include "StateIdle.hpp"
 #include "../Texts/AllTexts.hpp"
 
-void StateIdle::enter(){
-    State<States>::enter();
+void StateIdle::onEnter(){
+    State<States>::onEnter();
     system("cls");
     std::cout<<IdleTexts::title<<std::endl;
 }
 
-void StateIdle::update() {
-    State<States>::update();
+void StateIdle::onUpdate() {
+    State<States>::onUpdate();
     std::cout<<IdleTexts::helloIns<<std::endl;
-    std::cin>>prompt;
-    if(prompt == "login")
+    std::string temp;
+    std::cin>>temp;
+    prompt->setValues(temp);
+    if(prompt->retValues() == "login")
     {
         printf("login switch");
         mFsm.setCurrentState(States::LOGIN);
     }
-    else if(prompt == "register")
+    else if(prompt->retValues() == "register")
     {
         printf("register switch");
         mFsm.setCurrentState(States::REGISTER);
@@ -32,6 +34,6 @@ void StateIdle::update() {
     }
 }
 
-void StateIdle::exit() {
-
+void StateIdle::onExit() {
+    State<States>::onExit();
 }
