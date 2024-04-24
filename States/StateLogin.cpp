@@ -11,9 +11,6 @@ void StateLogin::onEnter() {
 
 void StateLogin::onUpdate() {
     State::onUpdate();
-    std::string tmp;
-    std::cout<<prompt->retValues();
-    std::cin>>tmp;
     mFsm.setCurrentState(States::IDLE);
 }
 

@@ -19,3 +19,7 @@ PromptSingleton *PromptSingleton::getInstance() {
         return instancePtr;
     }
 }
+
+void PromptSingleton::getPrompt() {
+    std::cin>>prompt;
+}

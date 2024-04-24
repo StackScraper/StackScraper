@@ -17,7 +17,7 @@ class StateTags : public State<States>{
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateTags(FiniteStateMachine<States>& fsm)
-    : State<States>(fsm, States::REGISTER, "REGISTER"){}
+    : State<States>(fsm, States::TAGS, "TAGS"){}
 
     void onEnter() override;
     void onUpdate() override;

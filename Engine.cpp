@@ -13,12 +13,14 @@ Engine::Engine() {
     fsm = std::make_unique<FiniteStateMachine<States>>();
     State<States>& idleState = fsm->add<StateIdle>(States::IDLE);
     State<States>& loginState = fsm->add<StateLogin>(States::LOGIN);
-    State<States>& exitState = fsm->add<StateLogin>(States::EXIT);
-    State<States>& favouritesState = fsm->add<StateLogin>(States::FAVOURITES);
-    State<States>& historyState = fsm->add<StateLogin>(States::HISTORY);
-    State<States>& menuState = fsm->add<StateLogin>(States::MENU);
-    State<States>& promptState = fsm->add<StateLogin>(States::PROMPT);
-    State<States>& registerState = fsm->add<StateLogin>(States::REGISTER);
+    State<States>& exitState = fsm->add<StateExit>(States::EXIT);
+    State<States>& favouritesState = fsm->add<StateFavourites>(States::FAVOURITES);
+    State<States>& historyState = fsm->add<StateHistory>(States::HISTORY);
+    State<States>& menuState = fsm->add<StateMenu>(States::MENU);
+    State<States>& promptState = fsm->add<StatePrompt>(States::PROMPT);
+    State<States>& registerState = fsm->add<StateRegister>(States::REGISTER);
+    State<States>& resultState = fsm->add<StateResult>(States::RESULT);
+    State<States>& tagsState = fsm->add<StateTags>(States::TAGS);
 
     fsm->setCurrentState(States::IDLE);
 }

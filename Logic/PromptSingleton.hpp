@@ -6,6 +6,7 @@
 #define INC_2024__TAB_DSA__8_BRODZIAK_PROMPTSINGLETON_HPP
 
 #include <string>
+#include <iostream>
 
 class PromptSingleton{
 private:
@@ -18,6 +19,7 @@ public:
     static PromptSingleton* getInstance();
     void setValues(std::string& val);
     std::string retValues(){ return prompt; }
+    void getPrompt();
 };
 
 
