@@ -5,16 +5,20 @@
 #include "StateIdle.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
+using namespace TextFunctions;
+using namespace TextColors;
+using namespace IdleTexts;
 
 void StateIdle::onEnter(){
     State<States>::onEnter();
     system("cls");
-    changeTextColor(14);
+    changeTextColor(10);
     print(IdleTexts::title);
 }
 
 void StateIdle::onUpdate() {
     State<States>::onUpdate();
+    setCursor(40, 7);
     typeWriteMessage(IdleTexts::helloIns, 50);
     prompt->getPrompt();
     if(prompt->retValues() == "login")

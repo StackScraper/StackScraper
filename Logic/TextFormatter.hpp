@@ -11,7 +11,7 @@
 #include <iomanip>
 #include "../Globals.hpp"
 
-namespace textColors
+namespace TextColors
 {
     static int BLUE = 1;
     static int GREEN = 2;
@@ -29,23 +29,32 @@ namespace textColors
     static int BEZOWYXD = 14;
 }
 
-static void changeTextColor(int color)
-{
-    SetConsoleTextAttribute(cmd::hOutput, color);
-}
-
-static void typeWriteMessage(std::string& s, int time)
-{
-    for (const auto c : s) {
-        std::cout << c << std::flush;
-        std::this_thread::sleep_for(std::chrono::milliseconds(time));
+namespace TextFunctions{
+    static void changeTextColor(int color)
+    {
+        SetConsoleTextAttribute(cmd::hOutput, color);
     }
-    printf("\n");
+
+    static void typeWriteMessage(std::string& s, int time)
+    {
+        for (const auto c : s) {
+            std::cout << c << std::flush;
+            std::this_thread::sleep_for(std::chrono::milliseconds(time));
+        }
+        printf("\n");
+    }
+
+    static void print(std::string& message)
+    {
+        std::cout<<message<<std::endl;
+    }
+
+    bool setCursor(short x, short y)
+    {
+        return SetConsoleCursorPosition(cmd::hOutput, {x, y});
+    }
 }
 
-static void print(std::string& message)
-{
-    std::cout<<message<<std::endl;
-}
+
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_TEXTFORMATTER_HPP

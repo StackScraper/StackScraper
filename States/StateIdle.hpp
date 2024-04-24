@@ -5,12 +5,13 @@
 #ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATEIDLE_HPP
 #define INC_2024__TAB_DSA__8_BRODZIAK_STATEIDLE_HPP
 
+#include <iostream>
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
-
-#include <iostream>
 #include "../Logic/PromptSingleton.hpp"
+
+
 
 
 class StateIdle : public State<States>{

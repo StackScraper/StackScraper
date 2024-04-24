@@ -10,6 +10,7 @@ void StateRegister::onEnter() {
 
 void StateRegister::onUpdate() {
     State::onUpdate();
+    mFsm.setCurrentState(States::IDLE);
 }
 
 void StateRegister::onExit() {
