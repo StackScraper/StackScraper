@@ -7,12 +7,11 @@
 #include "../Logic/TextFormatter.hpp"
 using namespace TextFunctions;
 using namespace TextColors;
-using namespace IdleTexts;
 
 void StateIdle::onEnter(){
     State<States>::onEnter();
     system("cls");
-    changeTextColor(10);
+    changeTextColor(BEIGE);
     print(IdleTexts::title);
 }
 

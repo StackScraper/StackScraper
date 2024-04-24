@@ -18,7 +18,7 @@ class StateResult : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
 public:
     explicit StateResult(FiniteStateMachine<States>& fsm)
-            : State<States>(fsm, States::REGISTER, "REGISTER"){}
+            : State<States>(fsm, States::RESULT, "RESULT"){}
 
     void onEnter() override;
     void onUpdate() override;

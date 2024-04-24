@@ -24,9 +24,9 @@ namespace TextColors
     static int BLUEBERRY = 9;
     static int LIGHTGREEN = 10;
     static int CYAN = 11;
-    static int COTOJEST = 12;
+    static int ROSE = 12;
     static int PINK = 13;
-    static int BEZOWYXD = 14;
+    static int BEIGE = 14;
 }
 
 namespace TextFunctions{

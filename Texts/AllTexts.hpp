@@ -22,4 +22,10 @@ namespace IdleTexts
     std::string helloIns = "Type login or register";
 }
 
+namespace loginTexts
+{
+
+}
+
+
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_ALLTEXTS_HPP
