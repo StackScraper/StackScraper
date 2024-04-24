@@ -4,19 +4,19 @@
 
 #include "StateIdle.hpp"
 #include "../Texts/AllTexts.hpp"
+#include "../Logic/TextFormatter.hpp"
 
 void StateIdle::onEnter(){
     State<States>::onEnter();
     system("cls");
-    std::cout<<IdleTexts::title<<std::endl;
+    changeTextColor(14);
+    print(IdleTexts::title);
 }
 
 void StateIdle::onUpdate() {
     State<States>::onUpdate();
-    std::cout<<IdleTexts::helloIns<<std::endl;
-    std::string temp;
-    std::cin>>temp;
-    prompt->setValues(temp);
+    typeWriteMessage(IdleTexts::helloIns, 50);
+    prompt->getPrompt();
     if(prompt->retValues() == "login")
     {
         printf("login switch");
@@ -29,7 +29,7 @@ void StateIdle::onUpdate() {
     }
     else
     {
-        printf("type normal thing!");
+        onEnter();
         mFsm.setCurrentState(States::IDLE);
     }
 }
