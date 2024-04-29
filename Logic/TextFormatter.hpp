@@ -49,7 +49,7 @@ namespace TextFunctions{
         std::cout<<message<<std::endl;
     }
 
-    bool setCursor(short x, short y)
+    static bool setCursor(short x, short y)
     {
         return SetConsoleCursorPosition(cmd::hOutput, {x, y});
     }
