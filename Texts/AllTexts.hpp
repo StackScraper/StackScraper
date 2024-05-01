@@ -39,5 +39,23 @@ namespace LoginTexts
     static std::string password = "password:";
 }
 
+namespace RegisterTexts
+{
+    static std::string title =   " ____    __                    __      ____                                                   \n"
+                                 "/\\  _`\\ /\\ \\__                /\\ \\    /\\  _`\\                                                 \n"
+                                 "\\ \\,\\L\\_\\ \\ ,_\\    __      ___\\ \\ \\/'\\\\ \\,\\L\\_\\    ___   _ __    __     _____      __   _ __  \n"
+                                 " \\/_\\__ \\\\ \\ \\/  /'__`\\   /'___\\ \\ , < \\/_\\__ \\   /'___\\/\\`'__\\/'__`\\  /\\ '__`\\  /'__`\\/\\`'__\\\n"
+                                 "   /\\ \\L\\ \\ \\ \\_/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\ /\\ \\L\\ \\/\\ \\__/\\ \\ \\//\\ \\L\\.\\_\\ \\ \\L\\ \\/\\  __/\\ \\ \\/ \n"
+                                 "   \\ `\\____\\ \\__\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\ `\\____\\ \\____\\\\ \\_\\\\ \\__/.\\_\\\\ \\ ,__/\\ \\____\\\\ \\_\\ \n"
+                                 "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
+                                 "                                                                          \\ \\_\\               \n"
+                                 "                                                                           \\/_/              ";
+
+    static std::string credentials = "We will ask you about credentials right now, okay?";
+    static std::string login = "login:";
+    static std::string password = "password:";
+    static std::string email="email:";
+}
+
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_ALLTEXTS_HPP

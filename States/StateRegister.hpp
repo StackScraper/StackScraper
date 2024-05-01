@@ -15,6 +15,9 @@
 
 class StateRegister : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::string log;
+    std::string pass;
+    std::string email;
 public:
     explicit StateRegister(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::REGISTER, "REGISTER"){}
