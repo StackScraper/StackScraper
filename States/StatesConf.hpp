@@ -16,7 +16,8 @@ enum class States
     TAGS,
     HISTORY,
     EXIT,
-    RESULT
+    RESULT,
+    ABOUT
 };
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_STATESCONF_HPP

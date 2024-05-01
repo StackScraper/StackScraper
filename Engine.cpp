@@ -21,6 +21,7 @@ Engine::Engine() {
     State<States>& registerState = fsm->add<StateRegister>(States::REGISTER);
     State<States>& resultState = fsm->add<StateResult>(States::RESULT);
     State<States>& tagsState = fsm->add<StateTags>(States::TAGS);
+    State<States>& aboutState = fsm->add<StateAbout>(States::ABOUT);
 
     fsm->setCurrentState(States::IDLE);
 }

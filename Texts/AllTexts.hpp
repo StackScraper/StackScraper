@@ -19,7 +19,7 @@ namespace IdleTexts
                           "                                                                          \\ \\_\\               \n"
                           "                                                                           \\/_/              ";
 
-    static std::string helloIns = "Type login or register";
+    static std::string helloIns = "Type login/register or about";
 }
 
 namespace LoginTexts
@@ -56,6 +56,12 @@ namespace RegisterTexts
     static std::string password = "password:";
     static std::string email="email:";
 }
+
+namespace AboutTexts
+{
+
+}
+
 
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_ALLTEXTS_HPP

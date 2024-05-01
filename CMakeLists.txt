@@ -39,4 +39,6 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/TextFormatter.hpp
         Logic/LoginManager.cpp
         Logic/LoginManager.hpp
+        States/StateAbout.cpp
+        States/StateAbout.hpp
 )
