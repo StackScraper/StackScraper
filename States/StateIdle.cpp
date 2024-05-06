@@ -26,6 +26,10 @@ void StateIdle::onUpdate() {
     {
         mFsm.setCurrentState(States::REGISTER);
     }
+    else if(prompt->retValues() == "about")
+    {
+        mFsm.setCurrentState(States::ABOUT);
+    }
     else
     {
         onEnter();
