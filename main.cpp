@@ -2,9 +2,18 @@
 //mechanism to handle functions from specific Model classes
 
 #include <iostream>
+#include "Engine.hpp"
+
+PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
 
 int main() {
-    std::cout << "Kocham cLew" << std::endl;
+
+    Engine eng = Engine();
+    bool finish = false;
+    while(!finish)
+    {
+        eng.run();
+    }
     return 0;
 }

@@ -5,9 +5,23 @@
 #ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATEFAVOURITES_HPP
 #define INC_2024__TAB_DSA__8_BRODZIAK_STATEFAVOURITES_HPP
 
+#include "StatesConf.hpp"
+#include "../FSM/StateMachine.hpp"
+#include "../FSM/State.hpp"
 
-class StateFavourites {
+#include <iostream>
+#include <string>
+#include "../Logic/PromptSingleton.hpp"
 
+class StateFavourites : public State<States> {
+    PromptSingleton* prompt = PromptSingleton::getInstance();
+public:
+    explicit StateFavourites(FiniteStateMachine<States>& fsm)
+    : State<States>(fsm, States::FAVOURITES, "FAVOURITES"){}
+
+    void onEnter() override;
+    void onUpdate() override;
+    void onExit() override;
 };
 
 
