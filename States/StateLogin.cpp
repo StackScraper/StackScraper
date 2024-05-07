@@ -17,9 +17,11 @@ void StateLogin::onUpdate() {
     State::onUpdate();
     TextFunctions::typeWriteMessage(LoginTexts::credentials, 50);
     TextFunctions::print(LoginTexts::login);
-    std::cin>>log;
+    prompt->getPrompt();
+    log = prompt->retValues();
     TextFunctions::print(LoginTexts::password);
-    std::cin>>pass;
+    prompt->getPrompt();
+    pass = prompt->retValues();
     if(LoginManager::login(log, pass))
     {
         mFsm.setCurrentState(States::MENU);

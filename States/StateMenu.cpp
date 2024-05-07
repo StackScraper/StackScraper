@@ -33,6 +33,7 @@ void StateMenu::onUpdate() {
     else
     {
         onEnter();
+        mFsm.setCurrentState(States::MENU);
     }
 }
 
