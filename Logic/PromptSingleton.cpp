@@ -21,5 +21,5 @@ PromptSingleton *PromptSingleton::getInstance() {
 }
 
 void PromptSingleton::getPrompt() {
-    std::cin>>prompt;
+    std::getline(std::cin, prompt);
 }
