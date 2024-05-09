@@ -15,8 +15,14 @@ void StateResult::onEnter() {
 void StateResult::onUpdate() {
     State::onUpdate();
     TextFunctions::setCursor(10, 10);
+
     TextFunctions::typeWriteMessage(ResultTexts::answerSubtitle, 30);
+
     TextFunctions::typeWriteMessage(ResultTexts::answer, 30);
+
+    TextFunctions::typeWriteMessage(ResultTexts::proceed, 30);
+    prompt->getPrompt();
+    mFsm.setCurrentState(States::MENU);
 }
 
 void StateResult::onExit() {

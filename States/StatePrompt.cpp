@@ -21,6 +21,10 @@ void StatePrompt::onUpdate() {
     {
         mFsm.setCurrentState(States::RESULT);
     }
+    else if(prompt->retValues() == "return")
+    {
+        mFsm.setCurrentState(States::MENU);
+    }
     else
     {
         onEnter();

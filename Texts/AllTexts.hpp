@@ -98,6 +98,22 @@ namespace ResultTexts
         "                                                                           \\/_/              ";
     static std::string answerSubtitle = "Most upvoted answered question:";
     static std::string answer = "Example answered question";
+    static std::string proceed = "Press enter to get back to menu";
+}
+
+namespace HistoryTexts
+{
+    static std::string title = " ____    __                    __      ____                                                   \n"
+      "/\\  _`\\ /\\ \\__                /\\ \\    /\\  _`\\                                                 \n"
+      "\\ \\,\\L\\_\\ \\ ,_\\    __      ___\\ \\ \\/'\\\\ \\,\\L\\_\\    ___   _ __    __     _____      __   _ __  \n"
+      " \\/_\\__ \\\\ \\ \\/  /'__`\\   /'___\\ \\ , < \\/_\\__ \\   /'___\\/\\`'__\\/'__`\\  /\\ '__`\\  /'__`\\/\\`'__\\\n"
+      "   /\\ \\L\\ \\ \\ \\_/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\ /\\ \\L\\ \\/\\ \\__/\\ \\ \\//\\ \\L\\.\\_\\ \\ \\L\\ \\/\\  __/\\ \\ \\/ \n"
+      "   \\ `\\____\\ \\__\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\ `\\____\\ \\____\\\\ \\_\\\\ \\__/.\\_\\\\ \\ ,__/\\ \\____\\\\ \\_\\ \n"
+      "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
+      "                                                                          \\ \\_\\               \n"
+      "                                                                           \\/_/              ";
+    static std::string historyTheme = "Your recent questions:";
+    static std::string returnText = "Type return to get back to menu";
 }
 
 
