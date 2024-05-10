@@ -3,6 +3,8 @@ project(2024__TAB_DSA__8_BRODZIAK)
 
 set(CMAKE_CXX_STANDARD 20)
 
+find_package(mysql-concpp REQUIRED PATHS "C:/MySQL/MySQL Connector C++ 8.4")
+
 set(DEFAULT_BUILD_TYPE "Release")
 if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
     set(DEFAULT_BUILD_TYPE "Debug")
@@ -64,4 +66,9 @@ FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
         GIT_TAG 3020c34ae2b732121f37433e61599c34535e68a8) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
 FetchContent_MakeAvailable(cpr)
 
-target_link_libraries(2024__TAB_DSA__8_BRODZIAK PRIVATE cpr::cpr)
+target_link_libraries(2024__TAB_DSA__8_BRODZIAK
+        PRIVATE cpr::cpr
+        mysql::concpp
+)
+
+target_compile_features(2024__TAB_DSA__8_BRODZIAK PRIVATE cxx_range_for)

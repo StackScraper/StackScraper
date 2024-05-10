@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "Engine.hpp"
+#include <curl/curl.h>
 
 PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
 
 int main() {
-
     Engine eng = Engine();
     bool finish = false;
     while(!finish)
