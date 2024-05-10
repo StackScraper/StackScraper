@@ -6,6 +6,7 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
+
 void StatePrompt::onEnter() {
     State::onEnter();
     system("cls");

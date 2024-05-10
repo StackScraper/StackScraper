@@ -10,9 +10,9 @@
 std::string StackManager::askQuestion() {
     cpr::Response r = cpr::Get(cpr::Url{finalInput});
     return r.text;
-    // return  finalInput;
+    //return  finalInput;
 }
 void StackManager::setQuestion(std::string newInput) {
-    questionInput = newInput;
+    questionInput = regex_replace(newInput, std::regex(" "), space);
     finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle="+questionInput+"&site=stackoverflow&filter=withbody";
 }
