@@ -12,9 +12,12 @@
 #include <iostream>
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
+#include "../Logic/StackManager.hpp"
+
 
 class StatePrompt : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    StackManager sm = StackManager();
 public:
     explicit StatePrompt(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::PROMPT, "PROMPT"){}
