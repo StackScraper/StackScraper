@@ -17,14 +17,9 @@ void StatePrompt::onUpdate() {
     TextFunctions::setCursor(10, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);
     prompt->getPrompt();
-    if (prompt->retValues() == "answered question")
-    {
-        mFsm.setCurrentState(States::RESULT);
-    }
-    else
-    {
-        onEnter();
-    }
+    sm.setQuestion(prompt->retValues());
+    std::string test = sm.askQuestion();
+    TextFunctions::typeWriteMessage(test, 30);
 }
 
 void StatePrompt::onExit() {
