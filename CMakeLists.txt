@@ -7,6 +7,11 @@ set(DEFAULT_BUILD_TYPE "Release")
 if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
     set(DEFAULT_BUILD_TYPE "Debug")
 endif()
+
+set(SOCI_BINARY_DIR libs/soci)
+option(SOCI_EMPTY "Build the sample backend called Empty" ON)
+add_subdirectory(${SOCI_BINARY_DIR})
+
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "Setting build type to '${DEFAULT_BUILD_TYPE}' as none was specified.")
     set(CMAKE_BUILD_TYPE "${DEFAULT_BUILD_TYPE}" CACHE STRING "Choose the type of build." FORCE)
@@ -66,4 +71,7 @@ FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
         GIT_TAG 3020c34ae2b732121f37433e61599c34535e68a8) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
 FetchContent_MakeAvailable(cpr)
 
-target_link_libraries(2024__TAB_DSA__8_BRODZIAK PRIVATE cpr::cpr)
+target_link_libraries(2024__TAB_DSA__8_BRODZIAK
+                        PRIVATE cpr::cpr
+                        Soci::core
+                        Soci::empty)
