@@ -11,7 +11,6 @@
 class PromptSingleton{
 private:
     std::string prompt;
-    std::string nick;
     static PromptSingleton* instancePtr;
     PromptSingleton()= default;
 public:
@@ -20,9 +19,7 @@ public:
     static PromptSingleton* getInstance();
     void setValues(std::string& val);
     std::string retValues(){ return prompt; }
-    void setNickname(std::string& s);
     void getPrompt();
-    std::string getNickname();
 };
 
 
