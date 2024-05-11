@@ -6,6 +6,7 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
+
 void StatePrompt::onEnter() {
     State::onEnter();
     system("cls");
@@ -26,7 +27,10 @@ void StatePrompt::onUpdate() {
     }
     else
     {
-        mFsm.setCurrentState(States::RESULT);
+          sm.setQuestion(prompt->retValues());
+          std::string test = sm.askQuestion();
+          TextFunctions::typeWriteMessage(test, 30);
+       // mFsm.setCurrentState(States::RESULT);
     }
 }
 
