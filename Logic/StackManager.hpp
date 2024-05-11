@@ -29,9 +29,11 @@ class StackManager {
 public:
     std::string askQuestion();
     void setQuestion(std::string newInput);
-    std::string getAnswer();
+    std::string getAnswer(std::string res);
     std::string changeJsonToString(std::string);
-    std::string getAnswerID(std::string);
+    int getQuestionId(std::string);
+
+
 };
 
 

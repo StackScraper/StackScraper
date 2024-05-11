@@ -6,7 +6,7 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include <nlohmann/json.hpp>
-
+#include <string>
 
 void StatePrompt::onEnter() {
     State::onEnter();
@@ -25,18 +25,16 @@ void StatePrompt::onUpdate() {
 
 
     std::string question = sm.changeJsonToString(JsonQuestion);
-
-
-
     TextFunctions::typeWriteMessage(question, 30);
 
-    std::string answer = sm.getAnswer();
+    std::string od = sm.getAnswer(JsonQuestion);
+    TextFunctions::typeWriteMessage(od, 30);
+    // std::string answer = sm.getAnswer();
+    // TextFunctions::typeWriteMessage(answer, 30);
+    //std::string answer = sm.getAnswer();
     //answer = sm.changeJsonToString(answer);
-    answer = sm.getAnswerID(JsonQuestion);
+    //int answer = sm.getAnswerID(JsonQuestion);
 
-
-
-    TextFunctions::typeWriteMessage(answer, 30);
 }
 
 void StatePrompt::onExit() {
