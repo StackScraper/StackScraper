@@ -8,6 +8,10 @@
 
 void StateHistory::onExit() {
     State::onExit();
+    std::vector<std::string> _history = DBmanager::getHistory();
+    for (auto his: _history) {
+        history += his;
+    }
 }
 
 void StateHistory::onUpdate() {
@@ -17,6 +21,8 @@ void StateHistory::onUpdate() {
     TextFunctions::setCursor(4, 12);
     TextFunctions::typeWriteMessage(HistoryTexts::historyTheme, 30);
     TextFunctions::setCursor(27, 13);
+    TextFunctions::print(history);
+    TextFunctions::setCursor(27, 13 + DBmanager::getHistory().size());
     prompt->getPrompt();
     if( TextFunctions::toLower(prompt->retValues()) == "return")
     {

@@ -8,6 +8,7 @@
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
+#include "..//Logic/DBmanager.h"
 
 #include <iostream>
 #include <string>
@@ -15,6 +16,7 @@
 
 class StateFavourites : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::string favs;
 public:
     explicit StateFavourites(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::FAVOURITES, "FAVOURITES"){}

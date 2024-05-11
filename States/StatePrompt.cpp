@@ -20,17 +20,13 @@ void StatePrompt::onUpdate() {
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->getPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    if (prompt->retValues() == "answered question")
-    {
-        mFsm.setCurrentState(States::RESULT);
-    }
-    else if(prompt->retValues() == "return")
+    if(prompt->retValues() == "return")
     {
         mFsm.setCurrentState(States::MENU);
     }
     else
     {
-        onEnter();
+        mFsm.setCurrentState(States::RESULT);
     }
 }
 

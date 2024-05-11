@@ -18,10 +18,15 @@ void StateResult::onUpdate() {
     TextFunctions::typeWriteMessage(ResultTexts::questionText, 30);
     TextFunctions::setCursor(50, 10);
     TextFunctions::changeTextColor(TextColors::CYAN);
-    std::cout<<prompt->retValues();
+    question = prompt->retValues();
+    TextFunctions::print(question);
+    answer = ApiManager::getAnswer(question);
     TextFunctions::changeTextColor(TextColors::BEIGE);
     TextFunctions::setCursor(10, 14);
     TextFunctions::typeWriteMessage(ResultTexts::answerSubtitle, 30);
+    TextFunctions::setCursor(10, 14 + ResultTexts::answerSubtitle.length());
+    std::cout<<answer;
+    // TextFunctions::print(answer);
     TextFunctions::setCursor(10, 16);
     TextFunctions::typeWriteMessage(ResultTexts::answer, 30);
     TextFunctions::setCursor(10, 18);

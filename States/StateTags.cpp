@@ -10,6 +10,10 @@ void StateTags::onEnter() {
     State::onEnter();
     system("cls");
     TextFunctions::print(TagsTexts::title);
+    std::vector<std::string> _tags = DBmanager::getTags();
+    for (auto tag: _tags) {
+        tags += tag;
+    }
 }
 
 void StateTags::onUpdate() {
@@ -19,6 +23,8 @@ void StateTags::onUpdate() {
     TextFunctions::setCursor(4, 12);
     TextFunctions::typeWriteMessage(TagsTexts::tagText, 30);
     TextFunctions::setCursor(4 + TagsTexts::tagText.length() +1, 13);
+    TextFunctions::print(tags);
+    TextFunctions::setCursor(4 + TagsTexts::tagText.length() +1, 13+DBmanager::getTags().size());
     prompt->getPrompt();
     if (TextFunctions::toLower(prompt->retValues()) == "return")
     {

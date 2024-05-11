@@ -8,13 +8,16 @@
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
+#include "..//Logic/DBmanager.h"
 
 #include <iostream>
 #include <string>
+#include<vector>
 #include "../Logic/PromptSingleton.hpp"
 
 class StateTags : public State<States>{
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::string tags;
 public:
     explicit StateTags(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::TAGS, "TAGS"){}
