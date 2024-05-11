@@ -16,13 +16,29 @@ void StateRegister::onEnter() {
 
 void StateRegister::onUpdate() {
     State::onUpdate();
+    TextFunctions::setCursor(32, 10);
     typeWriteMessage(RegisterTexts::credentials, 50);
-    print(RegisterTexts::login);
-    std::cin>>log;
-    print(RegisterTexts::password);
-    std::cin>>pass;
-    print(RegisterTexts::email);
-    std::cin>>email;
+    TextFunctions::setCursor(32, 12);
+    typeWriteMessage(RegisterTexts::login, 0);
+    TextFunctions::setCursor(39, 12);
+    TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
+    prompt->getPrompt();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
+    log = prompt->retValues();
+    TextFunctions::setCursor(32, 14);
+    typeWriteMessage(RegisterTexts::password,0);
+    TextFunctions::setCursor(42, 14);
+    TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
+    prompt->getPrompt();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
+    pass = prompt->retValues();
+    TextFunctions::setCursor(32, 16);
+    typeWriteMessage(RegisterTexts::email,0);
+    TextFunctions::setCursor(39, 16);
+    TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
+    prompt->getPrompt();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
+    email = prompt->retValues();;
     if(LoginManager::registerNew(log, email, pass))
     {
         mFsm.setCurrentState(States::MENU);

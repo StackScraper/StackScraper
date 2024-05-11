@@ -14,9 +14,12 @@ void StatePrompt::onEnter() {
 
 void StatePrompt::onUpdate() {
     State::onUpdate();
-    TextFunctions::setCursor(10, 10);
+    TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);
+    TextFunctions::setCursor(32, 12);
+    TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->getPrompt();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
     if (prompt->retValues() == "answered question")
     {
         mFsm.setCurrentState(States::RESULT);

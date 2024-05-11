@@ -15,9 +15,15 @@ void StateMenu::onEnter() {
 
 void StateMenu::onUpdate() {
     State::onUpdate();
-    setCursor(10, 10);
+    TextFunctions::setCursor(32, 10);
     typeWriteMessage(MenuTexts::helloText, 30);
+    TextFunctions::setCursor(32+ MenuTexts::helloText.length(), 10);
+    TextFunctions::changeTextColor(TextColors::PINK);
+    TextFunctions::print(MenuTexts::favText);
+    TextFunctions::setCursor(32, 12);
+    TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->getPrompt();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
     if(prompt->retValues() == "question")
     {
         mFsm.setCurrentState(States::PROMPT);
@@ -29,6 +35,10 @@ void StateMenu::onUpdate() {
     else if(prompt->retValues() == "tags")
     {
         mFsm.setCurrentState(States::TAGS);
+    }
+    else if (prompt->retValues() == "favourites")
+    {
+        mFsm.setCurrentState(States::FAVOURITES);
     }
     else
     {

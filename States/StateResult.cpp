@@ -14,13 +14,19 @@ void StateResult::onEnter() {
 
 void StateResult::onUpdate() {
     State::onUpdate();
-    TextFunctions::setCursor(10, 10);
-
+    TextFunctions::setCursor(32, 10);
+    TextFunctions::typeWriteMessage(ResultTexts::questionText, 30);
+    TextFunctions::setCursor(50, 10);
+    TextFunctions::changeTextColor(TextColors::CYAN);
+    std::cout<<prompt->retValues();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
+    TextFunctions::setCursor(10, 14);
     TextFunctions::typeWriteMessage(ResultTexts::answerSubtitle, 30);
-
+    TextFunctions::setCursor(10, 16);
     TextFunctions::typeWriteMessage(ResultTexts::answer, 30);
-
+    TextFunctions::setCursor(10, 18);
     TextFunctions::typeWriteMessage(ResultTexts::proceed, 30);
+    TextFunctions::setCursor(10, 20);
     prompt->getPrompt();
     mFsm.setCurrentState(States::MENU);
 }

@@ -12,9 +12,11 @@ void StateHistory::onExit() {
 
 void StateHistory::onUpdate() {
     State::onUpdate();
-    TextFunctions::setCursor(10, 10);
+    TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(HistoryTexts::returnText, 30);
+    TextFunctions::setCursor(4, 12);
     TextFunctions::typeWriteMessage(HistoryTexts::historyTheme, 30);
+    TextFunctions::setCursor(27, 13);
     prompt->getPrompt();
     if( TextFunctions::toLower(prompt->retValues()) == "return")
     {

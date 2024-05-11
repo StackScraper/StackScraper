@@ -68,7 +68,8 @@ namespace MenuTexts
                                  "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
                                  "                                                                          \\ \\_\\               \n"
                                  "                                                                           \\/_/              ";
-    static std::string helloText = "Hi! Choose question/history/tags";
+    static std::string helloText = "Hi! Choose question/history/tags/";
+    static std::string favText = "favourites";
 }
 
 namespace PromptTexts
@@ -82,7 +83,7 @@ namespace PromptTexts
         "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
         "                                                                          \\ \\_\\               \n"
         "                                                                           \\/_/              ";
-    static std::string promptText = "Write a question!";
+    static std::string promptText = "Write a question or type return to go back";
 }
 
 namespace ResultTexts
@@ -99,6 +100,7 @@ namespace ResultTexts
     static std::string answerSubtitle = "Most upvoted answered question:";
     static std::string answer = "Example answered question";
     static std::string proceed = "Press enter to get back to menu";
+    static std::string questionText = "Your question is: ";
 }
 
 namespace HistoryTexts
@@ -116,6 +118,52 @@ namespace HistoryTexts
     static std::string returnText = "Type return to get back to menu";
 }
 
+namespace FavouriteTexts
+{
+    static std::string title = " ____    __                    __      ____                                                   \n"
+        "/\\  _`\\ /\\ \\__                /\\ \\    /\\  _`\\                                                 \n"
+        "\\ \\,\\L\\_\\ \\ ,_\\    __      ___\\ \\ \\/'\\\\ \\,\\L\\_\\    ___   _ __    __     _____      __   _ __  \n"
+        " \\/_\\__ \\\\ \\ \\/  /'__`\\   /'___\\ \\ , < \\/_\\__ \\   /'___\\/\\`'__\\/'__`\\  /\\ '__`\\  /'__`\\/\\`'__\\\n"
+        "   /\\ \\L\\ \\ \\ \\_/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\ /\\ \\L\\ \\/\\ \\__/\\ \\ \\//\\ \\L\\.\\_\\ \\ \\L\\ \\/\\  __/\\ \\ \\/ \n"
+        "   \\ `\\____\\ \\__\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\ `\\____\\ \\____\\\\ \\_\\\\ \\__/.\\_\\\\ \\ ,__/\\ \\____\\\\ \\_\\ \n"
+        "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
+        "                                                                          \\ \\_\\               \n"
+        "                                                                           \\/_/              ";
+    static std::string favTheme = "Your favourite questions:";
+    static std::string returnText = "Type return to get back to menu";
+}
+
+namespace AboutTexts
+{
+    static std::string title = " ____    __                    __      ____                                                   \n"
+        "/\\  _`\\ /\\ \\__                /\\ \\    /\\  _`\\                                                 \n"
+        "\\ \\,\\L\\_\\ \\ ,_\\    __      ___\\ \\ \\/'\\\\ \\,\\L\\_\\    ___   _ __    __     _____      __   _ __  \n"
+        " \\/_\\__ \\\\ \\ \\/  /'__`\\   /'___\\ \\ , < \\/_\\__ \\   /'___\\/\\`'__\\/'__`\\  /\\ '__`\\  /'__`\\/\\`'__\\\n"
+        "   /\\ \\L\\ \\ \\ \\_/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\ /\\ \\L\\ \\/\\ \\__/\\ \\ \\//\\ \\L\\.\\_\\ \\ \\L\\ \\/\\  __/\\ \\ \\/ \n"
+        "   \\ `\\____\\ \\__\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\ `\\____\\ \\____\\\\ \\_\\\\ \\__/.\\_\\\\ \\ ,__/\\ \\____\\\\ \\_\\ \n"
+        "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
+        "                                                                          \\ \\_\\               \n"
+        "                                                                           \\/_/              ";
+    static std::string aboutText = "About ";
+    static std::string appText = "StackScraper";
+    static std::string description = "Super CLI app to give answers about various problems!";
+    static std::string returnText = "Type return to get back to menu";
+}
+
+namespace TagsTexts
+{
+    static std::string title = " ____    __                    __      ____                                                   \n"
+        "/\\  _`\\ /\\ \\__                /\\ \\    /\\  _`\\                                                 \n"
+        "\\ \\,\\L\\_\\ \\ ,_\\    __      ___\\ \\ \\/'\\\\ \\,\\L\\_\\    ___   _ __    __     _____      __   _ __  \n"
+        " \\/_\\__ \\\\ \\ \\/  /'__`\\   /'___\\ \\ , < \\/_\\__ \\   /'___\\/\\`'__\\/'__`\\  /\\ '__`\\  /'__`\\/\\`'__\\\n"
+        "   /\\ \\L\\ \\ \\ \\_/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\ /\\ \\L\\ \\/\\ \\__/\\ \\ \\//\\ \\L\\.\\_\\ \\ \\L\\ \\/\\  __/\\ \\ \\/ \n"
+        "   \\ `\\____\\ \\__\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\ `\\____\\ \\____\\\\ \\_\\\\ \\__/.\\_\\\\ \\ ,__/\\ \\____\\\\ \\_\\ \n"
+        "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
+        "                                                                          \\ \\_\\               \n"
+        "                                                                           \\/_/              ";
+    static std::string tagText = "Tags: ";
+    static std::string returnText = "Type return to get back to menu";
+}
 
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_ALLTEXTS_HPP
