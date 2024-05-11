@@ -25,10 +25,14 @@ void StatePrompt::onUpdate() {
 
 
     std::string question = sm.changeJsonToString(JsonQuestion);
-    TextFunctions::typeWriteMessage(question, 30);
+    //TextFunctions::typeWriteMessage(question, 30);
 
-    std::string od = sm.getAnswer(JsonQuestion);
-    TextFunctions::typeWriteMessage(od, 30);
+    sm.getAnswer(JsonQuestion);
+
+    TextFunctions::typeWriteMessage(sm.bestAnswer[0], 30);
+    TextFunctions::typeWriteMessage(sm.bestAnswer[1], 30);
+    TextFunctions::typeWriteMessage(sm.bestAnswer[2], 30);
+
     // std::string answer = sm.getAnswer();
     // TextFunctions::typeWriteMessage(answer, 30);
     //std::string answer = sm.getAnswer();
