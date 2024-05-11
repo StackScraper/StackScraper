@@ -8,6 +8,7 @@
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
+#include "..//Logic/DBmanager.h"
 
 #include <iostream>
 #include <string>
@@ -15,6 +16,7 @@
 
 class StateHistory : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::string history;
 public:
     explicit StateHistory(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::HISTORY, "HISTORY"){}

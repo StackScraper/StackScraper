@@ -15,8 +15,9 @@ void StateIdle::onEnter(){
 
 void StateIdle::onUpdate() {
     State<States>::onUpdate();
-    TextFunctions::setCursor(40, 7);
+    TextFunctions::setCursor(40, 9);
     TextFunctions::typeWriteMessage(IdleTexts::helloIns, 50);
+    TextFunctions::setCursor(40, 11);
     prompt->getPrompt();
     if(prompt->retValues() == "login")
     {
