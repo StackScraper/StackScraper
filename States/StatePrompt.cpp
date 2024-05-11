@@ -15,12 +15,23 @@ void StatePrompt::onEnter() {
 
 void StatePrompt::onUpdate() {
     State::onUpdate();
-    TextFunctions::setCursor(10, 10);
+    TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);
+    TextFunctions::setCursor(32, 12);
+    TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->getPrompt();
-    sm.setQuestion(prompt->retValues());
-    std::string test = sm.askQuestion();
-    TextFunctions::typeWriteMessage(test, 30);
+    TextFunctions::changeTextColor(TextColors::BEIGE);
+    if(prompt->retValues() == "return")
+    {
+        mFsm.setCurrentState(States::MENU);
+    }
+    else
+    {
+          sm.setQuestion(prompt->retValues());
+          std::string test = sm.askQuestion();
+          TextFunctions::typeWriteMessage(test, 30);
+       // mFsm.setCurrentState(States::RESULT);
+    }
 }
 
 void StatePrompt::onExit() {
