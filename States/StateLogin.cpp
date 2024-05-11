@@ -33,6 +33,7 @@ void StateLogin::onUpdate() {
     pass = prompt->retValues();
     if(LoginManager::login(log, pass))
     {
+        prompt->setNickname(log);
         mFsm.setCurrentState(States::MENU);
     }
     else

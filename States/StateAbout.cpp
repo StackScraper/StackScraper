@@ -28,7 +28,7 @@ void StateAbout::onUpdate() {
     prompt->getPrompt();
     if (TextFunctions::toLower(prompt->retValues()) == "return")
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.setCurrentState(States::IDLE);
     }
     else
     {

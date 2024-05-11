@@ -20,6 +20,14 @@ PromptSingleton *PromptSingleton::getInstance() {
     }
 }
 
+void PromptSingleton::setNickname(std::string &s) {
+    this->nick = s;
+}
+
 void PromptSingleton::getPrompt() {
     std::getline(std::cin, prompt);
+}
+
+std::string PromptSingleton::getNickname() {
+    return nick;
 }
