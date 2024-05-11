@@ -1,0 +1,155 @@
+# Continuous integration workflow for SOCI.
+name: GitHub CI
+
+on:
+  push:
+    branches:
+      - master
+      - 'release/**'
+    paths-ignore:
+      - .circleci/**
+      - .cirrus.yml
+      - .github/workflows/codeql.yml
+      - appveyor.yml
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - .circleci/**
+      - .cirrus.yml
+      - .github/workflows/codeql.yml
+      - appveyor.yml
+
+jobs:
+  build:
+    runs-on: ${{ matrix.runner || 'ubuntu-22.04' }}
+    container: ${{ matrix.container }}
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Note: the jobs are ordered in the order of decreasing running
+          # time, as this should minimize the total run-time of all jobs.
+          - backend: postgresql
+            runner: macos-11
+            name: PostgreSQL macOS
+          - backend: oracle
+            name: Oracle 11
+            no_boost: true
+          - backend: valgrind
+            name: Valgrind
+          - backend: odbc
+            # There are many leak reports under Ubuntu 22.04, see #1008.
+            container: ubuntu:18.04
+            name: ODBC
+          - backend: firebird
+            name: Firebird
+          - backend: postgresql
+            name: PostgreSQL Linux
+          - backend: mysql
+            name: MySQL
+          - backend: sqlite3
+            runner: macos-11
+            name: SQLite3 macOS
+          - backend: sqlite3
+            name: SQLite3 C++17
+            cxxstd: 17
+          - backend: sqlite3
+            name: SQLite3
+          - backend: empty
+            runner: macos-11
+            name: Empty macOS
+          - backend: empty
+            name: Empty
+            test_release_package: true
+          # Unsupported: db2exc package is only available in Ubuntu 14.04 not
+          # supported by GitHub Actions any longer, we'd need to run it in
+          # Docker container if we really need it.
+          # backend: db2
+          - backend: empty
+            name: Examples
+            build_examples: true
+
+    env:
+      SOCI_CI: true
+      SOCI_CI_BACKEND: ${{ matrix.backend }}
+      SOCI_MYSQL_ROOT_PASSWORD: root
+      ASAN_OPTIONS: fast_unwind_on_malloc=0
+
+    steps:
+      - name: Checkout
+        run: |
+          case "${{matrix.container}}" in
+            ubuntu:18.04)
+              export DEBIAN_FRONTEND=noninteractive
+
+              apt-get update -qq
+              apt-get install -qq git
+              ;;
+          esac
+
+          git config --global init.defaultBranch master
+          git config --global --add safe.directory `pwd`
+          git config --global advice.detachedHead false
+          git init .
+          git remote add origin https://github.com/SOCI/soci.git
+          git fetch --depth=1 origin $GITHUB_SHA
+          git checkout FETCH_HEAD
+
+      - name: Set environment variables
+        run: |
+          set_env_var() {
+            echo "Setting environment variable $1=$2"
+            echo $1=$2 >> $GITHUB_ENV
+          }
+
+          set_env_var SOCI_CI_BRANCH $GITHUB_REF
+          set_env_var SOCI_SOURCE_DIR $GITHUB_WORKSPACE
+
+          case "${{runner.os}}" in
+            Linux)
+              set_env_var PGHOST localhost
+              set_env_var PGPORT 5432
+              set_env_var PGUSER postgres
+              set_env_var PGPASSWORD 'Password12!'
+              ;;
+
+            macOS)
+              set_env_var PGDATA /usr/local/var/postgres
+              ;;
+          esac
+
+          case "${{matrix.container}}" in
+            ubuntu:18.04)
+              # We need to use this option as GitHub certificate is not recognized by
+              # wget in this old container otherwise.
+              set_env_var SOCI_WGET_OPTIONS --no-check-certificate
+              ;;
+          esac
+
+          if [ -n "${{matrix.cxxstd}}" ]; then
+            set_env_var SOCI_CXXSTD ${{matrix.cxxstd}}
+          fi
+          if [ "${{matrix.no_boost}}" = true ]; then
+            set_env_var WITH_BOOST OFF
+          fi
+          if [ "${{matrix.test_release_package}}" = true ]; then
+            set_env_var TEST_RELEASE_PACKAGE YES
+          fi
+          if [ "${{matrix.build_examples}}" = true ]; then
+            set_env_var BUILD_EXAMPLES YES
+          fi
+
+      - name: Install dependencies under Linux
+        if: runner.os == 'Linux'
+        run: ./scripts/ci/install.sh
+
+      - name: Prepare for build
+        run: ./scripts/ci/before_build.sh
+
+      - name: Build
+        run: ./scripts/ci/build.sh
+
+      - name: Test
+        run: ./scripts/ci/test.sh
