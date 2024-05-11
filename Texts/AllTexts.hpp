@@ -97,8 +97,8 @@ namespace ResultTexts
         "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
         "                                                                          \\ \\_\\               \n"
         "                                                                           \\/_/              ";
-    static std::string answerSubtitle = "Most upvoted answered question:";
-    static std::string answer = "Example answered question";
+    static std::string answerSubtitle = "Most upvoted answered question: ";
+    static std::string answer = "Example answered question: ";
     static std::string proceed = "Press enter to get back to menu";
     static std::string questionText = "Your question is: ";
 }
