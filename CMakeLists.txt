@@ -3,10 +3,7 @@ project(2024__TAB_DSA__8_BRODZIAK)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(DEFAULT_BUILD_TYPE "Release")
-if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
-    set(DEFAULT_BUILD_TYPE "Debug")
-endif()
+set(DEFAULT_BUILD_TYPE "Debug")
 
 set(SOCI_BINARY_DIR libs/soci)
 option(SOCI_EMPTY "Build the sample backend called Empty" ON)
