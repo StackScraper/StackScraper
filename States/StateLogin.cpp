@@ -3,6 +3,8 @@
 //
 
 #include "StateLogin.hpp"
+
+#include "../Logic/DBmanager.h"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Logic/LoginManager.hpp"
@@ -33,7 +35,7 @@ void StateLogin::onUpdate() {
     pass = prompt->retValues();
     if(LoginManager::login(log, pass))
     {
-        prompt->setNickname(log);
+      //  DBmanager::setNickName(log);
         mFsm.setCurrentState(States::MENU);
     }
     else
