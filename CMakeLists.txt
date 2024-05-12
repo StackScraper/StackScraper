@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(DEFAULT_BUILD_TYPE "Release")
 if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
-    set(DEFAULT_BUILD_TYPE "Debug")
+    set(DEFAULT_BUILD_TYPE "Release")
 endif()
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "Setting build type to '${DEFAULT_BUILD_TYPE}' as none was specified.")
@@ -42,8 +42,6 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StatesWrapper.hpp
         Logic/PromptSingleton.cpp
         Logic/PromptSingleton.hpp
-        Logic/StackManager.cpp
-        Logic/StackManager.hpp
         States/StateTags.cpp
         States/StateTags.hpp
         States/StateResult.cpp
@@ -54,27 +52,27 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/LoginManager.hpp
         States/StateAbout.cpp
         States/StateAbout.hpp
-        Logic/DBmanager.cpp
-        Logic/DBmanager.h
-        Logic/ApiManager.cpp
-        Logic/ApiManager.h
 )
+
 
 if(WIN32) # Install dlls in the same directory as the executable on Windows
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 endif()
 
+# Specify include and link directories
+target_include_directories(2024__TAB_DSA__8_BRODZIAK PRIVATE libs)
+
 include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
         GIT_TAG 3020c34ae2b732121f37433e61599c34535e68a8) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
 FetchContent_MakeAvailable(cpr)
 
-include(FetchContent)
-FetchContent_Declare(json GIT_REPOSITORY https://github.com/nlohmann/json.git
-        GIT_TAG 8c391e04fe4195d8be862c97f38cfe10e2a3472e) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
-FetchContent_MakeAvailable(json)
+find_package(SOCI)
 
+# Then, link your executable or library with the corresponding package targets:
 target_link_libraries(2024__TAB_DSA__8_BRODZIAK
         PRIVATE cpr::cpr
-        nlohmann_json)
+        soci::soci
+)
+
