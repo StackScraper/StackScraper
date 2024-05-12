@@ -2,8 +2,8 @@
 // Created by lucja on 11.05.2024.
 //
 
-#ifndef APIMANAGER_H
-#define APIMANAGER_H
+#ifndef APIMANAGER_HPP
+#define APIMANAGER_HPP
 
 #include<string>
 
@@ -15,4 +15,4 @@ public:
 
 
 
-#endif //APIMANAGER_H
+#endif //APIMANAGER_HPP
