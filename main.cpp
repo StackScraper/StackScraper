@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "Engine.hpp"
+#include <soci/soci.h>
+#include <soci/session.h>
+#include <soci/soci-backend.h>
 
 PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
