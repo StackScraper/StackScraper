@@ -21,18 +21,23 @@ void StateResult::onUpdate() {
     question = prompt->retValues();
     TextFunctions::print(question);
     answer = ApiManager::getAnswer(question);
-    TextFunctions::changeTextColor(TextColors::BEIGE);
-    TextFunctions::setCursor(10, 14);
-    TextFunctions::typeWriteMessage(ResultTexts::answerSubtitle, 30);
-    TextFunctions::setCursor(10 + ResultTexts::answerSubtitle.length(), 14 );
-    TextFunctions::changeTextColor(TextColors::PURPLE);
-    TextFunctions::print(answer);
-    TextFunctions::setCursor(10, 16);
-    TextFunctions::changeTextColor(TextColors::BEIGE);
-    TextFunctions::typeWriteMessage(ResultTexts::answer, 30);
-    TextFunctions::setCursor(10, 18);
-    TextFunctions::typeWriteMessage(ResultTexts::proceed, 30);
-    TextFunctions::setCursor(10, 20);
+    sm.setQuestion(prompt->retValues());
+    std::string JsonQuestion = sm.askQuestion();
+
+    std::string question = sm.changeJsonToString(JsonQuestion);
+    // TextFunctions::typeWriteMessage(question, 30);
+
+    std::cout << "Question:"<< std::endl;
+
+    std::cout << question << std::endl;
+
+    sm.getAnswer(JsonQuestion);
+
+    std::cout << "Answer 1:" << std::endl;
+
+    std::string tescik = sm.bestAnswer[0];
+
+    std::cout << tescik;
     prompt->getPrompt();
     mFsm.setCurrentState(States::MENU);
 }
