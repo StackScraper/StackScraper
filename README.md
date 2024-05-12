@@ -12,3 +12,22 @@ Development:
   For development of app, you need C++ compiler with CMake (VSC with MinGW or other compiler and CMake addon or CLion).
   Also, as we use Conan package manager you need Python 3.6 (or newer) and installed Conan. Follow https://www.jetbrains.com/help/clion/conan-plugin.html for CLion setup with Conan.
   Rest of libs is downloaded runtime with CMake itself.
+
+Coding conventions:
+  functions - PascalCase
+  rest - camelCase
+
+Comments:
+  Doxxygen:
+  multiline comment:
+  
+   /**
+    * 
+    *  @return 
+    */
+
+  singleline comment:
+  ///
+
+  inline comment:
+  ///<
