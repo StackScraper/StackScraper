@@ -8,13 +8,13 @@ bool DBmanager::registerMember(std::string &log, std::string &email, std::string
     return false;
 }
 
-std::string DBmanager::getNickName() {
-    return nickName;
-}
+// std::string DBmanager::getNickName() {
+//     return nickName;
+// }
 
-void DBmanager::setNickName(std::string& nick) {
-    nickName = nick;
-}
+// void DBmanager::setNickName(std::string& nick) {
+//     nickName = nick;
+// }
 
 std::vector<std::string> DBmanager::getTags() {
     std::vector<std::string> tags;

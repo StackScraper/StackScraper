@@ -14,11 +14,13 @@
 #include <iostream>
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
+#include "../Logic/StackManager.hpp"
 
 class StateResult : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
     std::string question;
     std::string answer;
+    StackManager sm = StackManager();
 public:
     explicit StateResult(FiniteStateMachine<States>& fsm)
             : State<States>(fsm, States::RESULT, "RESULT"){}

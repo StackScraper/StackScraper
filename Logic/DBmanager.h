@@ -9,11 +9,11 @@
 #include<vector>
 
 class DBmanager {
-    static std::string nickName;
+    // static std::string nickName;
 public:
     static bool registerMember(std::string& log, std::string& email, std::string& pass);
-    static std::string getNickName();
-    static void setNickName(std::string& nick);
+    // static std::string getNickName();
+    // static void setNickName(std::string& nick);
     static std::vector<std::string> getTags();
     static std::vector<std::string> getMembers();
     static std::vector<std::string> getFavourites();

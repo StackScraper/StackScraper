@@ -19,19 +19,21 @@ void StatePrompt::onUpdate() {
     TextFunctions::setCursor(10, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);
     prompt->getPrompt();
-    sm.setQuestion(prompt->retValues());
-    std::string JsonQuestion = sm.askQuestion();
+    if(prompt->retValues() == "return")
+        mFsm.setCurrentState(States::MENU);
+    else
+        mFsm.setCurrentState(States::RESULT);
 
 
-
-    std::string question = sm.changeJsonToString(JsonQuestion);
-    //TextFunctions::typeWriteMessage(question, 30);
-
-    sm.getAnswer(JsonQuestion);
-
-    TextFunctions::typeWriteMessage(sm.bestAnswer[0], 30);
-    TextFunctions::typeWriteMessage(sm.bestAnswer[1], 30);
-    TextFunctions::typeWriteMessage(sm.bestAnswer[2], 30);
+    // TextFunctions::typeWriteMessage(tescik, 30);
+    // std::cout << "Answer 2:" << std::endl;
+    //
+    // tescik = sm.bestAnswer[1];
+    // TextFunctions::typeWriteMessage(tescik, 30);
+    // std::cout << "Answer 3:" << std::endl;
+    //
+    // tescik = sm.bestAnswer[2];
+    // TextFunctions::typeWriteMessage(tescik, 30);
 
     // std::string answer = sm.getAnswer();
     // TextFunctions::typeWriteMessage(answer, 30);

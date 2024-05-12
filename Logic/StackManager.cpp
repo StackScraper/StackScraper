@@ -71,7 +71,12 @@ int StackManager::getQuestionId(std::string input) {
     }
 }
 void StackManager::fillTabel(std::string input) {
-    nlohmann::json data = nlohmann::json::parse(input);
+
+    cpr::Response r = cpr::Get(cpr::Url{input});
+
+    std::string jsonText = r.text;
+
+    nlohmann::json data = nlohmann::json::parse(jsonText);
 
     if (data.contains("items") && data["items"].is_array()) {
         // Iteruj przez elementy w "items" (maksymalnie 3 pierwsze)
