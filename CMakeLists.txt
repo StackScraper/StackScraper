@@ -55,9 +55,9 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StateAbout.cpp
         States/StateAbout.hpp
         Logic/DBmanager.cpp
-        Logic/DBmanager.h
+        Logic/DBmanager.hpp
         Logic/ApiManager.cpp
-        Logic/ApiManager.h
+        Logic/ApiManager.hpp
 )
 
 

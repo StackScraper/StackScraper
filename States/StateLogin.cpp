@@ -4,7 +4,7 @@
 
 #include "StateLogin.hpp"
 
-#include "../Logic/DBmanager.h"
+#include "../Logic/DBmanager.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Logic/LoginManager.hpp"
