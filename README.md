@@ -1,12 +1,14 @@
-Console app project for university assignment
+Purpose:
+  Have you find yourself distracted with some nonesense errors while developing your new-fresh TO-DO List?
+  Now you don't have to exit focus mode to type error in google, instead you can paste it in StackScraper.
+  StackScraper is console based application developed in C++ and CMake.
+  With StackScraper you can paste error, and get instant respond with question related to your problem from StackOverflow.
+  Question on itself won't help you much, that is why we also include answers ;)
 
-Contributors:
-- To define new behaviour of the app add/adjust existing states
-- Functions to define/adjust are self explainatory
-- Class AllTexts will contain namespaces for all states
-- New state has to be added in the enum in StatesConf class
-- States Wrapper wraps up all states, so contains only includes
-- Right now all states has to define variable for containing user prompt, later it'll be changed to Singleton probably
-- You can define changes in states in function update or exit
-- in function start you want to prepare canva (terminal) for your needs
-  Have fun :)
+Installation:
+  Currently working on 1st version of app
+
+Development:
+  For development of app, you need C++ compiler with CMake (VSC with MinGW or other compiler and CMake addon or CLion).
+  Also, as we use Conan package manager you need Python 3.6 (or newer) and installed Conan. Follow https://www.jetbrains.com/help/clion/conan-plugin.html for CLion setup with Conan.
+  Rest of libs is downloaded runtime with CMake itself.
