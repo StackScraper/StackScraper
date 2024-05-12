@@ -10,6 +10,8 @@
 #include <thread>
 #include <iomanip>
 #include "../Globals.hpp"
+#include <algorithm>
+#include <cctype>
 
 namespace TextColors
 {
@@ -52,6 +54,14 @@ namespace TextFunctions{
     static bool setCursor(short x, short y)
     {
         return SetConsoleCursorPosition(cmd::hOutput, {x, y});
+    }
+
+    static std::string toLower(std::string data) {
+
+         std::transform(data.begin(), data.end(), data.begin(),
+    [](unsigned char c){ return std::tolower(c); });
+
+        return data;
     }
 }
 
