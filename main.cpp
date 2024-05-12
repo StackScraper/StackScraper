@@ -3,12 +3,15 @@
 
 #include <iostream>
 #include "Engine.hpp"
-#include <curl/curl.h>
+#include <soci/soci.h>
+#include <soci/session.h>
+#include <soci/soci-backend.h>
 
 PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
 
 int main() {
+
     Engine eng = Engine();
     bool finish = false;
     while(!finish)
