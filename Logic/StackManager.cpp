@@ -27,7 +27,7 @@ void StackManager::getAnswer(std::string res) {
     answerInput = std::to_string(temp);
     answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
     fillTabel(answerInput);
-//std::cout << answerInput;
+
 }
 
 std::string StackManager::changeJsonToString(std::string input) {
