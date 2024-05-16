@@ -28,8 +28,9 @@ void StateResult::onUpdate() {
     // TextFunctions::typeWriteMessage(question, 30);
 
     std::cout << "Question:"<< std::endl;
-
-    std::cout << question << std::endl;
+    std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
+    std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
+    std::cout << finalQuestion << std::endl;
 
     sm.getAnswer(JsonQuestion);
 
