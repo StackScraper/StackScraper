@@ -99,3 +99,24 @@ void StackManager::fillTabel(std::string input) {
         std::cout << "Brak klucza 'items' lub 'items' nie jest tablicą" << std::endl;
     }
 }
+std::string StackManager::RemoveHtmlTags(const std::string& input) {
+    std::regex htmlTagRegex(R"(<(?!\/?code)[^>]*>)");
+    return std::regex_replace(input, htmlTagRegex, "");
+}
+std::string StackManager::ReturnNiceCode(std::string input) {
+
+    int pos = input.find("&lt;");
+
+    while (pos != std::string::npos) {
+        input.replace(pos, 4, "<");
+        pos = input.find("&lt;", pos + 1);
+    }
+
+    pos = input.find("&gt;");
+    while (pos != std::string::npos) {
+        input.replace(pos, 4, ">");
+        pos = input.find("&gt;", pos + 1);
+    }
+
+    return input;
+}

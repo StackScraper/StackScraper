@@ -35,9 +35,11 @@ void StateResult::onUpdate() {
 
     std::cout << "Answer 1:" << std::endl;
 
-    std::string tescik = sm.bestAnswer[0];
+    const std::string tescik = sm.bestAnswer[0];
+    std::string withOutHtmlTags = sm.RemoveHtmlTags(tescik);
+    std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
 
-    std::cout << tescik;
+    std::cout << finalAnswer;
     prompt->getPrompt();
     mFsm.setCurrentState(States::MENU);
 }

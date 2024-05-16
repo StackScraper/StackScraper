@@ -35,7 +35,8 @@ public:
     std::string changeJsonToString(std::string);
     int getQuestionId(std::string);
     void fillTabel(std::string input);
-
+    std::string RemoveHtmlTags(const std::string& input);
+    std::string ReturnNiceCode(std::string input);
 };
 
 
