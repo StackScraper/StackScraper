@@ -20,7 +20,10 @@ void StackManager::setQuestion(std::string newInput) {
     questionInput = regex_replace(newInput, std::regex(" "), space);
     finalInput = baseInput+apiVesion+"similar?order=desc&sort=activity&title="+questionInput+"&site=stackoverflow&filter=withbody";
 }
-
+void StackManager::setQuestionByTags(std::string newInput) {
+    questionInput = regex_replace(newInput, std::regex(" "), space);
+    finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
+}
 void StackManager::getAnswer(std::string res) {
     int temp = getQuestionId(res);
     answerID=std::to_string(temp);
