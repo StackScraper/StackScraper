@@ -9,6 +9,7 @@ class ConanApplication(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps"
 
+
     def layout(self):
         cmake_layout(self)
 
