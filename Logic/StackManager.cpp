@@ -8,8 +8,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-//https://api.stackexchange.com/2.3/questions/123/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody
-
+//SEARCH: https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=how%20to%20declare%20array%20of%20string%20in%20cpp&site=stackoverflow&filter=withbody
 std::string StackManager::askQuestion() {
     cpr::Response r = cpr::Get(cpr::Url{finalInput});
     return r.text;
@@ -17,16 +16,19 @@ std::string StackManager::askQuestion() {
 }
 void StackManager::setQuestion(std::string newInput) {
     questionInput = regex_replace(newInput, std::regex(" "), space);
-    finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle="+questionInput+"&site=stackoverflow&filter=withbody";
+    finalInput = baseInput+apiVesion+"search/advanced?order=desc&sort=relevance&q="+questionInput+"&site=stackoverflow&filter=withbody";
 }
-
+void StackManager::setQuestionByTags(std::string newInput) {
+    questionInput = regex_replace(newInput, std::regex(" "), space);
+    finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
+}
 void StackManager::getAnswer(std::string res) {
     int temp = getQuestionId(res);
     answerID=std::to_string(temp);
     answerInput = std::to_string(temp);
     answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
     fillTabel(answerInput);
-//std::cout << answerInput;
+
 }
 
 std::string StackManager::changeJsonToString(std::string input) {
@@ -98,4 +100,35 @@ void StackManager::fillTabel(std::string input) {
     } else {
         std::cout << "Brak klucza 'items' lub 'items' nie jest tablicą" << std::endl;
     }
+}
+std::string StackManager::RemoveHtmlTags(const std::string& input) {
+    std::regex htmlTagRegex(R"(<(?!\/?code)[^>]*>)");
+    return std::regex_replace(input, htmlTagRegex, "");
+}
+std::string StackManager::ReturnNiceCode(std::string input) {
+
+    int pos = input.find("&lt;");
+
+    while (pos != std::string::npos) {
+        input.replace(pos, 4, "<");
+        pos = input.find("&lt;", pos + 1);
+    }
+
+    pos = input.find("&gt;");
+    while (pos != std::string::npos) {
+        input.replace(pos, 4, ">");
+        pos = input.find("&gt;", pos + 1);
+    }
+    pos = input.find("&quot;");
+    while (pos != std::string::npos) {
+        input.replace(pos, 6, "\"");
+        pos = input.find("&quot;", pos + 1);
+    }
+    pos = input.find("&amp;");
+    while (pos != std::string::npos) {
+        input.replace(pos, 5, "&");
+        pos = input.find("&amp;", pos + 1);
+
+    }
+    return input;
 }
