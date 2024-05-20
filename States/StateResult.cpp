@@ -43,8 +43,9 @@ void StateResult::onUpdate() {
     const std::string tescik = sm.bestAnswer[0];
     std::string withOutHtmlTags = sm.RemoveHtmlTags(tescik);
     std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
-
-    std::cout << finalAnswer;
+    std::string test2 = sh.RecognizeSyntax(finalAnswer);
+    std::cout << test2;
+    std::cout << test2;
     prompt->getPrompt();
     mFsm.setCurrentState(States::MENU);
 }
