@@ -128,6 +128,7 @@ std::string StackManager::ReturnNiceCode(std::string input) {
     while (pos != std::string::npos) {
         input.replace(pos, 5, "&");
         pos = input.find("&amp;", pos + 1);
+
     }
     return input;
 }
