@@ -5,6 +5,7 @@
 #include "StateResult.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
+#include "../Logic/SyntaxHighlighting.hpp"
 
 void StateResult::onEnter() {
     State::onEnter();
@@ -25,16 +26,18 @@ void StateResult::onUpdate() {
     std::string JsonQuestion = sm.askQuestion();
 
     std::string question = sm.changeJsonToString(JsonQuestion);
-    // TextFunctions::typeWriteMessage(question, 30);
+    //TextFunctions::typeWriteMessage(question, 30);
 
     std::cout << "Question:"<< std::endl;
 
     std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
     std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
-    std::cout << finalQuestion << std::endl;
+    SyntaxHighlighting sh = SyntaxHighlighting();
+    std::string test = sh.RecognizeSyntax(finalQuestion);
+    std::cout << test;
+
 
     sm.getAnswer(JsonQuestion);
-
     std::cout << "Answer 1:" << std::endl;
 
     const std::string tescik = sm.bestAnswer[0];

@@ -28,6 +28,13 @@ class StackManager {
 
 
 public:
+
+    //wywalic
+    std::string syntax;
+    std::vector<std::string>keyWord;
+    std::vector<std::string>basicSyntax;
+    int posOfKeyWord;
+
     std::string bestAnswer[3] = {"","",""};
     std::string askQuestion();
     void setQuestion(std::string newInput);
@@ -38,6 +45,7 @@ public:
     void fillTabel(std::string input);
     std::string RemoveHtmlTags(const std::string& input);
     std::string ReturnNiceCode(std::string input);
+
 };
 
 
