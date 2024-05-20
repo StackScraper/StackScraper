@@ -58,6 +58,7 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/DBmanager.hpp
         Logic/ApiManager.cpp
         Logic/ApiManager.hpp
+
 )
 
 

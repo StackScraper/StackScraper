@@ -29,15 +29,19 @@ void StateResult::onUpdate() {
 
     std::cout << "Question:"<< std::endl;
 
-    std::cout << question << std::endl;
+    std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
+    std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
+    std::cout << finalQuestion << std::endl;
 
     sm.getAnswer(JsonQuestion);
 
     std::cout << "Answer 1:" << std::endl;
 
-    std::string tescik = sm.bestAnswer[0];
+    const std::string tescik = sm.bestAnswer[0];
+    std::string withOutHtmlTags = sm.RemoveHtmlTags(tescik);
+    std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
 
-    std::cout << tescik;
+    std::cout << finalAnswer;
     prompt->getPrompt();
     mFsm.setCurrentState(States::MENU);
 }
