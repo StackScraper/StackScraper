@@ -3,18 +3,23 @@
 
 #include <iostream>
 #include "Engine.hpp"
-#include <sqlite3.h>
+#include "Logic/Database/DBmanager.hpp"
 
 PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
 
 int main() {
 
-    Engine eng = Engine();
-    bool finish = false;
-    while(!finish)
-    {
-        eng.run();
-    }
+
+
+    DBmanager michal = DBmanager();
+
+
+    // Engine eng = Engine();
+    // bool finish = false;
+    // while(!finish)
+    // {
+    //     eng.run();
+    // }
     return 0;
 }
