@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
+#include <regex>
 
 
 std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
@@ -133,13 +134,9 @@ std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
         "\033[0;33mclass\033[0m"
 
     };
-    for(int i=0; i<keyWord.size();i++) {
-        int posOfKeyWord = in.find(basicSyntax[i]);
-        while (posOfKeyWord != std::string::npos) {
-            in.replace(posOfKeyWord, basicSyntax[i].length(), keyWord[i]);
-            posOfKeyWord = in.find(basicSyntax[i], posOfKeyWord + keyWord[i].length());
-
-        }
-    }
+ for (size_t i = 0; i < basicSyntax.size(); ++i) {
+  std::regex wordRegex("\\b" + std::regex_replace(basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s])"), R"(\$&)") + "\\b");
+  in = std::regex_replace(in, wordRegex, keyWord[i]);
+ }
     return in;
 }
