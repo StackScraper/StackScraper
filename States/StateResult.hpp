@@ -21,6 +21,10 @@ class StateResult : public State<States> {
     std::string question;
     std::string answer;
     StackManager sm = StackManager();
+    std::vector<std::string> dict = {
+            "question",
+            "return"
+    };
 public:
     explicit StateResult(FiniteStateMachine<States>& fsm)
             : State<States>(fsm, States::RESULT, "RESULT"){}

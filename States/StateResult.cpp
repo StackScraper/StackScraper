@@ -7,6 +7,8 @@
 #include "../Logic/TextFormatter.hpp"
 #include "../Logic/SyntaxHighlighting.hpp"
 
+
+
 void StateResult::onEnter() {
     State::onEnter();
     system("cls");
@@ -45,8 +47,12 @@ void StateResult::onUpdate() {
     std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
 
     std::cout << finalAnswer;
-    prompt->getPrompt();
-    mFsm.setCurrentState(States::MENU);
+    prompt->getPromptAuto(dict);
+    if(prompt->retValues() == "return")
+    {
+        mFsm.setCurrentState(States::MENU);
+    }
+    mFsm.setCurrentState(States::PROMPT);
 }
 
 void StateResult::onExit() {
