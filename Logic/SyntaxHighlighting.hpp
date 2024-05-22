@@ -14,11 +14,14 @@ class SyntaxHighlighting {
         std::string syntax;
         std::vector<std::string>keyWord;
         std::vector<std::string>basicSyntax;
+        bool startOfCode = false;
+
 public:
-        std::string RecognizeSyntax(std::string in);
+        std::vector<std::string> RecognizeSyntax(std::string in);
         int IsInCodeSection(std::string in);
         std::string Hightlighting(std::string in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
                                 std::vector<std::string>&specialCharacter, std::vector<std::string>&colorSpecialCharacter);
+        std::vector<std::string> splitWithWhiteSpaces(const std::string& str);
 };
 
 
