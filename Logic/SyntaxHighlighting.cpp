@@ -18,7 +18,7 @@ std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
                     "char","cin","getline",
                     "cout","return","long",
                     "short", "cerr", "<<",
-                    ">>","#include","using namespace",
+                    ">>","include","using",
                     "NULL","nullptr","class",
                     "void","private","public",
                     "*","&","\"",
@@ -68,8 +68,11 @@ std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
                     "script","strong","style",
                     "td","table","sup",
                     "ul","ol","li",
-                    //test
-                    "class"
+                    "p","b","s",
+                    "i","br","td",
+                    "a","img","tr",
+                    //others
+                    "print","namespace"
     };
     // std::cout << "\033[1;31mbold red text\033[0m\n";
     keyWord = {//CPP KEYWORD
@@ -81,7 +84,7 @@ std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
                 "\033[0;33mchar\033[0m","\033[0;31mcin\033[0m","\033[0;31mgetline\033[0m",
                 "\033[0;31mcout\033[0m","\033[0;31mreturn\033[0m", "\033[0;33mlong\033[0m",
                  "\033[0;33mshort\033[0m","\033[0;31mcerr\033[0m","\033[0;32m<<\033[0m",
-                "\033[0;32m>>\033[0m","\033[0;33m#include\033[0m", "\033[0;32musing namespace\033[0m",
+                "\033[0;32m>>\033[0m","\033[0;33minclude\033[0m", "\033[0;32musing\033[0m",
                 "\033[0;32mNULL\033[0m","\033[0;32mnullptr\033[0m", "\033[0;33mclass\033[0m",
                  "\033[0;33mvoid\033[0m","\033[0;31mprivate\033[0m","\033[0;32mpublic\033[0m",
                 "\033[0;34m*\033[0m","\033[0;34m&\033[0m","\033[0;32m\"\033[0m",
@@ -131,12 +134,39 @@ std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
                 "\033[0;33mscript\033[0m","\033[0;31mstrong\033[0m", "\033[0;32mstyle\033[0m",
                 "\033[0;32mtd\033[0m","\033[0;32mtable\033[0m","\033[0;32msup\033[0m",
                 "\033[0;33mul\033[0m","\033[0;33mol\033[0m","\033[0;33mli\033[0m",
-        "\033[0;33mclass\033[0m"
+                "\033[0;33mp\033[0m","\033[0;31mb\033[0m","\033[0;33ms\033[0m",
+                "\033[0;35mi\033[0m","\033[0;35mbr\033[0m","\033[0;31mtd\033[0m",
+                "\033[0;34ma\033[0m","\033[0;32mimg\033[0m","\033[0;31mtr\033[0m",
+                //others
+                "\033[0;31mprint\033[0m","\033[0;32mnamespace\033[0m"
 
     };
+   std::vector<std::string>specialCharacter = {
+       "<",">","\"",
+    "\'","*","&",
+    "|" , "$",":",
+    "->"
+
+   };
+ std::vector<std::string>colorSpecialCharacter = {
+  "\033[0;32m<\033[0m", "\033[0;32m>\033[0m", "\033[0;32m\"\033[0m",
+  "\033[0;31m\'\033[0m","\033[0;34m*\033[0m","\033[0;34m&\033[0m",
+  "\033[0;33m|\033[0m","\033[0;34m$\033[0m","\033[0;32m:\033[0m",
+  "\033[0;32m->\033[0m"
+ };
+
  for (size_t i = 0; i < basicSyntax.size(); ++i) {
-  std::regex wordRegex("\\b" + std::regex_replace(basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s])"), R"(\$&)") + "\\b");
-  in = std::regex_replace(in, wordRegex, keyWord[i]);
+      std::regex wordRegex("\\b" + std::regex_replace(basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"), R"(\$&<>)") + "\\b");
+       in = std::regex_replace(in, wordRegex, keyWord[i]);
+ }
+
+ for(int i=0; i<specialCharacter.size();i++) {
+        int posOfSecialWord = in.find(specialCharacter[i]);
+        while (posOfSecialWord != std::string::npos) {
+           in.replace(posOfSecialWord, specialCharacter[i].length(), colorSpecialCharacter[i]);
+          posOfSecialWord = in.find(specialCharacter[i], posOfSecialWord + colorSpecialCharacter[i].length());
+
+      }
  }
     return in;
 }
