@@ -6,6 +6,8 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
+
+
 void StateAbout::onEnter() {
     State::onEnter();
     system("cls");
@@ -25,7 +27,7 @@ void StateAbout::onUpdate() {
     TextFunctions::setCursor(32, 14);
     TextFunctions::typeWriteMessage(AboutTexts::returnText, 30);
     TextFunctions::setCursor(32, 16);
-    prompt->getPrompt();
+    prompt->getPromptAuto(dict);
     if (TextFunctions::toLower(prompt->retValues()) == "return")
     {
         mFsm.setCurrentState(States::IDLE);

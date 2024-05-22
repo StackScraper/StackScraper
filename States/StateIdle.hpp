@@ -10,12 +10,17 @@
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
 #include "../Logic/PromptSingleton.hpp"
-
+#include <vector>
 
 
 
 class StateIdle : public State<States>{
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::vector<std::string> dict = {
+            "login",
+            "register",
+            "about"
+    };
 public:
     explicit StateIdle(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::IDLE, "IDLE"){}

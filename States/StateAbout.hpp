@@ -13,9 +13,13 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class StateAbout : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::vector<std::string> dict = {
+            "return"
+    };
 public:
     explicit StateAbout(FiniteStateMachine<States>& fsm)
             : State<States>(fsm, States::ABOUT, "ABOUT"){}

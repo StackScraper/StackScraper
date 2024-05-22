@@ -14,6 +14,7 @@ void StateMenu::onEnter() {
 }
 
 void StateMenu::onUpdate() {
+
     State::onUpdate();
     TextFunctions::setCursor(32, 10);
     typeWriteMessage(MenuTexts::helloText, 30);
@@ -22,7 +23,7 @@ void StateMenu::onUpdate() {
     TextFunctions::print(MenuTexts::favText);
     TextFunctions::setCursor(32, 12);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPrompt();
+    prompt->getPromptAuto(dict);
     TextFunctions::changeTextColor(TextColors::BEIGE);
     if(prompt->retValues() == "question")
     {

@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cctype>
 
+
 namespace TextColors
 {
     static int BLUE = 1;
@@ -63,6 +64,8 @@ namespace TextFunctions{
 
         return data;
     }
+
+
 }
 
 

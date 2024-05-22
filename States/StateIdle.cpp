@@ -6,6 +6,8 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
+
+
 void StateIdle::onEnter(){
     State<States>::onEnter();
     system("cls");
@@ -14,11 +16,12 @@ void StateIdle::onEnter(){
 }
 
 void StateIdle::onUpdate() {
+
     State<States>::onUpdate();
     TextFunctions::setCursor(40, 9);
     TextFunctions::typeWriteMessage(IdleTexts::helloIns, 50);
     TextFunctions::setCursor(40, 11);
-    prompt->getPrompt();
+    prompt->getPromptAuto(dict);
     if(prompt->retValues() == "login")
     {
         mFsm.setCurrentState(States::LOGIN);
