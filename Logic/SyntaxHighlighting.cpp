@@ -155,18 +155,28 @@ std::string SyntaxHighlighting::RecognizeSyntax(std::string in) {
   "\033[0;32m->\033[0m"
  };
 
- for (size_t i = 0; i < basicSyntax.size(); ++i) {
-      std::regex wordRegex("\\b" + std::regex_replace(basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"), R"(\$&<>)") + "\\b");
-       in = std::regex_replace(in, wordRegex, keyWord[i]);
- }
+    in = Hightlighting(in, basicSyntax, keyWord, specialCharacter, colorSpecialCharacter);
 
- for(int i=0; i<specialCharacter.size();i++) {
-        int posOfSecialWord = in.find(specialCharacter[i]);
-        while (posOfSecialWord != std::string::npos) {
-           in.replace(posOfSecialWord, specialCharacter[i].length(), colorSpecialCharacter[i]);
-          posOfSecialWord = in.find(specialCharacter[i], posOfSecialWord + colorSpecialCharacter[i].length());
-
-      }
- }
     return in;
+}
+int SyntaxHighlighting::IsInCodeSection(std::string in) {
+      int pos = in.find("<code>");
+      return pos;
+}
+std::string SyntaxHighlighting::Hightlighting(std::string in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
+                          std::vector<std::string>&specialCharacter, std::vector<std::string>&colorSpecialCharacter) {
+
+ for (size_t i = 0; i < basicSyntax.size(); i++) {
+      std::regex wordRegex("\\b" + std::regex_replace(basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"), R"(\$&<>)") + "\\b");
+      in = std::regex_replace(in, wordRegex, keyWord[i]);
+ }
+ for(int i=0; i<specialCharacter.size();i++) {
+      int posOfSecialWord = in.find(specialCharacter[i]);
+      while (posOfSecialWord != std::string::npos) {
+           in.replace(posOfSecialWord, specialCharacter[i].length(), colorSpecialCharacter[i]);
+           posOfSecialWord = in.find(specialCharacter[i], posOfSecialWord + colorSpecialCharacter[i].length());
+      }
+
+   }
+   return in;
 }
