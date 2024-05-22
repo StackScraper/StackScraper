@@ -15,6 +15,9 @@ public:
      std::string deleteUser(int id);
      std::string updateUserPass(int id, std::string pass);
 
+     std::string insertAdmin(int userId);
+     std::string getAdmins();
+     std::string deleteAdmin(int adminId);
 };
 
 

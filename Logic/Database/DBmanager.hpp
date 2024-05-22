@@ -22,20 +22,23 @@ class DBmanager {
     int openDatabase();
     int createDatabase();
     int closeDatabase();
+
     int createUserTable();
     int createAdminTable();
     int createPhraseTable();
     int createTagTable();
-    int queryUser();
-    int insertData();
-    int selectData();
-    int updateData();
-    int deleteData();
+    int createPhraseTagTable();
+    int createFavPhrasesTable();
+    int createSearchedPhrasesTable();
 public:
+    bool insertUser(std::string& nickname, std::string& password);
+    std::vector<std::pair<std::string,std::string>> getUsers();
+    bool updateUserPassword(int id,std::string& password);
+    bool deleteUser(int id);
+
     DBmanager();
     ~DBmanager();
     static bool registerMember(std::string& log, std::string& email, std::string& pass);
-    static std::string getNickName();
     static void setNickName(std::string& nick);
     static std::vector<std::string> getTags();
     static std::vector<std::string> getMembers();
