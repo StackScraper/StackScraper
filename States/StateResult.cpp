@@ -46,13 +46,16 @@ void StateResult::onUpdate() {
     std::string withOutHtmlTags = sm.RemoveHtmlTags(tescik);
     std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
 
-    std::cout << finalAnswer;
+    std::string test2 = sh.RecognizeSyntax(finalAnswer);
+    std::cout << test2;
+    std::cout << test2;
     prompt->getPromptAuto(dict);
     if(prompt->retValues() == "return")
     {
         mFsm.setCurrentState(States::MENU);
     }
     mFsm.setCurrentState(States::PROMPT);
+
 }
 
 void StateResult::onExit() {
