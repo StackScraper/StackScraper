@@ -7,6 +7,12 @@
 
 #include <string>
 
+/**
+ * File which contains namespaces of strings to use by all states of the program
+ * Every state has its own namespace
+ */
+
+///namespace for Idle state
 namespace IdleTexts
 {
     static std::string title =   " ____    __                    __      ____                                                   \n"
@@ -22,6 +28,7 @@ namespace IdleTexts
     static std::string helloIns = "Type login/register or about";
 }
 
+///namespace for Login state
 namespace LoginTexts
 {
     static std::string title =   " ____    __                    __      ____                                                   \n"
@@ -39,6 +46,7 @@ namespace LoginTexts
     static std::string password = "password:";
 }
 
+///namespace for Register state
 namespace RegisterTexts
 {
     static std::string title =   " ____    __                    __      ____                                                   \n"
@@ -57,6 +65,7 @@ namespace RegisterTexts
     static std::string email="email:";
 }
 
+///namespace for Menu state
 namespace MenuTexts
 {
     static std::string title =   " ____    __                    __      ____                                                   \n"
@@ -72,6 +81,7 @@ namespace MenuTexts
     static std::string favText = "favourites";
 }
 
+///namespace for Prompt state
 namespace PromptTexts
 {
     static std::string title = " ____    __                    __      ____                                                   \n"
@@ -86,6 +96,7 @@ namespace PromptTexts
     static std::string promptText = "Write a question or type return to go back";
 }
 
+///namespace for Result state
 namespace ResultTexts
 {
     static std::string title = " ____    __                    __      ____                                                   \n"
@@ -103,6 +114,7 @@ namespace ResultTexts
     static std::string questionText = "Your question is: ";
 }
 
+///namespace for History state
 namespace HistoryTexts
 {
     static std::string title = " ____    __                    __      ____                                                   \n"
@@ -118,6 +130,7 @@ namespace HistoryTexts
     static std::string returnText = "Type return to get back to menu";
 }
 
+///namespace for Favourites state
 namespace FavouriteTexts
 {
     static std::string title = " ____    __                    __      ____                                                   \n"
@@ -133,6 +146,7 @@ namespace FavouriteTexts
     static std::string returnText = "Type return to get back to menu";
 }
 
+///namespace for About state
 namespace AboutTexts
 {
     static std::string title = " ____    __                    __      ____                                                   \n"
@@ -150,6 +164,7 @@ namespace AboutTexts
     static std::string returnText = "Type return to get back to menu";
 }
 
+///namespace for Tags state
 namespace TagsTexts
 {
     static std::string title = " ____    __                    __      ____                                                   \n"

@@ -17,9 +17,7 @@ endif()
 add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Engine.cpp
         Engine.hpp
-        FSM/StateMachine.cpp
         FSM/StateMachine.hpp
-        FSM/State.cpp
         FSM/State.hpp
         States/StateIdle.cpp
         States/StateIdle.hpp
