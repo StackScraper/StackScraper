@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 class PromptSingleton{
 private:
@@ -20,6 +21,7 @@ public:
     void setValues(std::string& val);
     std::string retValues(){ return prompt; }
     void getPrompt();
+    void getPromptAuto(std::vector<std::string> dict);
 };
 
 

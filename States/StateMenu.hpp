@@ -12,9 +12,17 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class StateMenu : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
+    std::vector<std::string> dict = {
+            "question",
+            "history",
+            "tags",
+            "favourites"
+    };
+
 public:
     explicit StateMenu(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::MENU, "MENU"){}

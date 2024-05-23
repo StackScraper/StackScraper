@@ -8,6 +8,8 @@
 #include "../Logic/SyntaxHighlighting.hpp"
 #include <vector>
 
+
+
 void StateResult::onEnter() {
     State::onEnter();
     system("cls");
@@ -46,13 +48,18 @@ void StateResult::onUpdate() {
     const std::string tescik = sm.bestAnswer[0];
     std::string withOutHtmlTags = sm.RemoveHtmlTags(tescik);
     std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
-    std::vector<std::string> vectorOfAnswer = sh.RecognizeSyntax(finalAnswer);
+
+
+std::vector<std::string> vectorOfAnswer = sh.RecognizeSyntax(finalAnswer);
     for(int i=0; i< vectorOfAnswer.size();i++) {
         std::cout << vectorOfAnswer[i];
     }
-
-    prompt->getPrompt();
-    mFsm.setCurrentState(States::MENU);
+    prompt->getPromptAuto(dict);
+    if(prompt->retValues() == "return")
+    {
+        mFsm.setCurrentState(States::MENU);
+    }
+    mFsm.setCurrentState(States::PROMPT);
 }
 
 void StateResult::onExit() {

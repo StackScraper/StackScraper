@@ -8,6 +8,8 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
+
+
 void StatePrompt::onEnter() {
     State::onEnter();
     system("cls");
@@ -15,10 +17,12 @@ void StatePrompt::onEnter() {
 }
 
 void StatePrompt::onUpdate() {
+
+
     State::onUpdate();
     TextFunctions::setCursor(10, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);
-    prompt->getPrompt();
+    prompt->getPromptAuto(dict);
     if(prompt->retValues() == "return")
         mFsm.setCurrentState(States::MENU);
     else
