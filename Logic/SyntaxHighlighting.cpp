@@ -145,43 +145,42 @@ std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
        "<",">","\"",
     "\'","*","&",
     "|" , "$",":",
-    "->"
+    "->","#"
 
    };
  std::vector<std::string>colorSpecialCharacter = {
   "\033[0;32m<\033[0m", "\033[0;32m>\033[0m", "\033[0;32m\"\033[0m",
   "\033[0;31m\'\033[0m","\033[0;34m*\033[0m","\033[0;34m&\033[0m",
   "\033[0;33m|\033[0m","\033[0;34m$\033[0m","\033[0;32m:\033[0m",
-  "\033[0;32m->\033[0m"
+  "\033[0;32m->\033[0m","\033[0;33m#\033[0m"
  };
     std::vector<std::string>input = splitWithWhiteSpaces(in);
- //   std::cout << "------------------------------"<<std::endl;
- //  for(int i=0;i<input.size();i++) {
- //   std::cout << inptut[i];
- //  }
- // std::cout <<std::endl<< "------------------------------"<<std::endl;
-   for(int i=0;i<input.size();i++) {
 
-      //std::string sub = input[i].substr()
+   for(int i=0;i<input.size();i++) {
       if (input[i].find("<code>") != std::string::npos) {
        startOfCode=true;
+       int pos = input[i].find("<code>");
+       while (pos != std::string::npos) {
+        input[i].replace(pos, 6, "");
+        pos = input[i].find("<code>", pos + 1);
+       }
       }
 
     if (input[i].find("</code>") != std::string::npos) {
         startOfCode=false;
+     int pos = input[i].find("</code>");
+     while (pos != std::string::npos) {
+      input[i].replace(pos, 7, "");
+      pos = input[i].find("</code>", pos + 1);
+     }
     }
       if(startOfCode) {
          input[i] = Hightlighting(input[i], basicSyntax, keyWord, specialCharacter, colorSpecialCharacter);
       }
    }
-
-
     return input;
 }
-int SyntaxHighlighting::IsInCodeSection(std::string in) {
-      int pos = in.find("<code>");
-      return pos;
-}
+
 std::string SyntaxHighlighting::Hightlighting(std::string in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
                           std::vector<std::string>&specialCharacter, std::vector<std::string>&colorSpecialCharacter) {
 
@@ -211,7 +210,7 @@ std::vector<std::string> SyntaxHighlighting::splitWithWhiteSpaces(const std::str
     result.push_back(current);
     current.clear();
    }
-   result.push_back(std::string(1, ch)); // dodajemy biały znak jako osobny element
+   result.push_back(std::string(1, ch));
   } else {
    current += ch;
   }
