@@ -59,7 +59,9 @@ std::vector<std::string> vectorOfAnswer = sh.RecognizeSyntax(finalAnswer);
     {
         mFsm.setCurrentState(States::MENU);
     }
-    mFsm.setCurrentState(States::PROMPT);
+    else {
+        mFsm.setCurrentState(States::PROMPT);
+    }
 }
 
 void StateResult::onExit() {
