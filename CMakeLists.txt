@@ -60,6 +60,7 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/ApiManager.hpp
         Logic/SyntaxHighlighting.cpp
         Logic/SyntaxHighlighting.hpp
+        Logic/Syntax.hpp
 
 )
 

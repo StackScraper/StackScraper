@@ -12,16 +12,15 @@
 class SyntaxHighlighting {
 
         std::string syntax;
-        std::vector<std::string>keyWord;
-        std::vector<std::string>basicSyntax;
         bool startOfCode = false;
+        std::vector<std::string>input;
 
 public:
         std::vector<std::string> RecognizeSyntax(std::string in);
-
-        std::string Hightlighting(std::string in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
+        std::string Hightlighting(std::string &in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
                                 std::vector<std::string>&specialCharacter, std::vector<std::string>&colorSpecialCharacter);
-        std::vector<std::string> splitWithWhiteSpaces(const std::string& str);
+        void SplitWithWhiteSpaces(const std::string& str);
+        void RemoveTags(std::string &input,std::string tag, std::string out);
 
 };
 
