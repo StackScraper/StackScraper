@@ -36,14 +36,18 @@ public:
     bool updateUserPassword(int id,std::string& password);
     bool deleteUser(int id);
 
+    bool insertAdmin(int Id);
+    std::vector<std::pair<std::string,std::string>> getAdmins();
+    bool deleteAdmin(int adminId);
+
     DBmanager();
     ~DBmanager();
-    static bool registerMember(std::string& log, std::string& email, std::string& pass);
+   static bool registerMember(std::string& log, std::string& email, std::string& pass);
     static void setNickName(std::string& nick);
-    static std::vector<std::string> getTags();
-    static std::vector<std::string> getMembers();
-    static std::vector<std::string> getFavourites();
-    static std::vector<std::string> getHistory();
+     static std::vector<std::string> getTags();
+     static std::vector<std::string> getMembers();
+     static std::vector<std::string> getFavourites();
+     static std::vector<std::string> getHistory();
 };
 
 

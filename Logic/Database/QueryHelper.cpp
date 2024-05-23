@@ -20,3 +20,15 @@ std::string QueryHelper::updateUserPass(int id, std::string pass)
 {
     return std::format("UPDATE USER set PASSWORD = '{}' where ID={}; ",pass,id );
 }
+
+std::string QueryHelper::insertAdmin(int userId) {
+    return std::format("INSERT INTO ADMIN (USERID) VALUES ({});",userId );
+}
+
+std::string QueryHelper::getAdmins() {
+    return "SELECT * from ADMIN";
+}
+
+std::string QueryHelper::deleteAdmin(int adminId) {
+    return std::format("DELETE from ADMIN where ID={}; ",adminId);
+}

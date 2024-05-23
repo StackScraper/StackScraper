@@ -277,6 +277,48 @@ bool DBmanager::deleteUser(int id)
     }
 }
 
+bool DBmanager::insertAdmin(int Id) {
+    const char* sql = queryHelper.insertAdmin(Id).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+        return false;
+    } else {
+        fprintf(stdout, "Records created successfully\n");
+        return true;
+    }
+
+
+}
+
+std::vector<std::pair<std::string, std::string>> DBmanager::getAdmins() {
+    receivedData = {};
+    const char* sql = queryHelper.getAdmins().c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return {{"SQL ERROR",zErrMsg}};
+    } else {
+        return receivedData;
+    }
+}
+
+bool DBmanager::deleteAdmin(int adminId) {
+    const char* sql = queryHelper.deleteAdmin(adminId).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 DBmanager::DBmanager()
 {
     std::ifstream f("test.db");
