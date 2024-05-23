@@ -5,7 +5,7 @@
 #include "StateRegister.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/LoginManager.hpp"
+#include "../Logic/Database/LoginManager.hpp"
 using namespace TextFunctions;
 
 void StateRegister::onEnter() {

@@ -8,7 +8,7 @@
 #include "StatesConf.hpp"
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
-#include "..//Logic/DBmanager.hpp"
+#include "..//Logic/Database/DBmanager.hpp"
 
 #include <iostream>
 #include <string>

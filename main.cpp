@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "Engine.hpp"
-#include <sqlite3.h>
 
 /**
  * Declaration of PromptSingleton - class responsible for holding information about actual
@@ -17,7 +16,9 @@ PromptSingleton* PromptSingleton::instancePtr = nullptr;
  * @return 0 if everything executes fine
  */
 int main() {
+
     Engine eng = Engine(); ///< Engine of the application
+
     bool finish = false;
     while(!finish)
     {
