@@ -6,6 +6,9 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Logic/SyntaxHighlighting.hpp"
+#include <vector>
+
+
 
 void StateResult::onEnter() {
     State::onEnter();
@@ -33,8 +36,10 @@ void StateResult::onUpdate() {
     std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
     std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
     SyntaxHighlighting sh = SyntaxHighlighting();
-    std::string test = sh.RecognizeSyntax(finalQuestion);
-    std::cout << test;
+    std::vector<std::string>vectorOfQuestion = sh.RecognizeSyntax(finalQuestion);
+    for(int i=0;i<vectorOfQuestion.size();i++) {
+        std::cout <<vectorOfQuestion[i];
+    }
 
 
     sm.getAnswer(JsonQuestion);
@@ -43,11 +48,20 @@ void StateResult::onUpdate() {
     const std::string tescik = sm.bestAnswer[0];
     std::string withOutHtmlTags = sm.RemoveHtmlTags(tescik);
     std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
-    std::string test2 = sh.RecognizeSyntax(finalAnswer);
-    std::cout << test2;
-    std::cout << test2;
-    prompt->getPrompt();
-    mFsm.setCurrentState(States::MENU);
+
+
+std::vector<std::string> vectorOfAnswer = sh.RecognizeSyntax(finalAnswer);
+    for(int i=0; i< vectorOfAnswer.size();i++) {
+        std::cout << vectorOfAnswer[i];
+    }
+    prompt->getPromptAuto(dict);
+    if(prompt->retValues() == "return")
+    {
+        mFsm.setCurrentState(States::MENU);
+    }
+    else {
+        mFsm.setCurrentState(States::PROMPT);
+    }
 }
 
 void StateResult::onExit() {

@@ -13,20 +13,34 @@
 #include <cassert>
 #include <utility>
 
+/**
+ * Predefinition of State class
+ * @tparam T template class for which state is created
+ */
 template <typename T>
 class State;
 
+/**
+ * Template class of state machine
+ * @tparam T template class for which state machine is created
+ */
 template <typename T>
 class FiniteStateMachine
 {
 protected:
-    std::map<T, std::unique_ptr<State<T>>> mStates;
-    State<T>* mCurrentState;
+    std::map<T, std::unique_ptr<State<T>>> mStates; ///< map of states
+    State<T>* mCurrentState; ///< pointer to current state
 public:
+    ///Default constructor
     FiniteStateMachine()
             : mCurrentState(nullptr)
-    {
-    }
+    {}
+    /**
+     * Function which adds new state to the map
+     * @tparam S template class, should be chosen accordingly to whole state machine
+     * @param id id of the freshly added state
+     * @return pointer on the new state
+     */
     template <class S>
     State<T>& add(T id)
     {
@@ -34,24 +48,45 @@ public:
         mStates[id] = std::make_unique<S>(*this);
         return *mStates[id];
     }
+    /**
+     * Function for returning interesting state
+     * @param stateID identification of desired state
+     * @return desired state
+     */
     State<T>& getState(T stateID)
     {
         return *mStates[stateID];
     }
+    /**
+     * Function for returning current state
+     * @return current state
+     */
     State<T>& getCurrentState()
     {
         return *mCurrentState;
     }
+
+    /**
+     * Function for returning current state
+     * @return current state
+     */
     const State<T>& getCurrentState() const
     {
         return *mCurrentState;
     }
 
+    /**
+     * Function for changing state as desired
+     * @param stateID id of desired state
+     */
     void setCurrentState(T stateID)
     {
         State<T>* state = &getState(stateID);
         setCurrentState(state);
     }
+    /**
+     * Function called to change state
+     */
     void onUpdate()
     {
         if (mCurrentState != nullptr)
@@ -60,6 +95,11 @@ public:
         }
     }
 protected:
+    /**
+     * Protected function which is used by public setCurrentState to change state for existing instead of
+     * creating multiple instances of same state
+     * @param state
+     */
     void setCurrentState(State<T>* state)
     {
         if (mCurrentState == state)
