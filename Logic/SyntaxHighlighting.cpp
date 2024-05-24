@@ -10,66 +10,75 @@
 #include <cctype>
 #include "Syntax.hpp"
 
-std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
-  input.clear();
-  SplitWithWhiteSpaces(in);
+void SyntaxHighlighting::RecognizeSyntax(std::string& in) {
 
-   for(int i=0;i<input.size();i++) {
-      if (input[i].find("<code>") != std::string::npos) {
+ int pos;
+ int posI;
+ int beginCode = 0;
+ int endCode = 0;
+
+
+
+      if (in.find("<code>") != std::string::npos) {
+       pos = in.find("<code>");
+       pos = beginCode;
        startOfCode=true;
-       RemoveTags(input[i],"<code>","");
+       RemoveTags(in,"<code>","", pos);
       }
 
-    if (input[i].find("</code>") != std::string::npos) {
-        startOfCode=false;
-        RemoveTags(input[i],"</code>","");
-    }
-      if(startOfCode) {
-         input[i] = Hightlighting(input[i], Syntax::basicSyntax, Syntax::keyWord,
-                      Syntax::specialCharacter, Syntax::colorSpecialCharacter);
+      if (in.find("</code>") != std::string::npos) {
+       pos = in.find("</code>");
+       pos = endCode;
+       startOfCode=false;
+       RemoveTags(in,"</code>","", pos);
       }
-   }
-    return input;
+
+      posI = pos;
+      // posI++;
+
+      in = Hightlighting(in, pos, posI, beginCode, endCode);
+       pos = posI;
+
+
+
+
+
 }
 
-std::string SyntaxHighlighting::Hightlighting(std::string &in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
-                          std::vector<std::string>&specialCharacter, std::vector<std::string>&colorSpecialCharacter) {
+std::string SyntaxHighlighting::Hightlighting(std::string &in, int pos, int posI, int beginCode, int endCode) {
 
 
  for (size_t i = 0; i < Syntax::basicSyntax.size(); i++) {
       std::regex wordRegex("\\b" + std::regex_replace(Syntax::basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"), R"(\$&<>)") + "\\b");
-      in = std::regex_replace(in, wordRegex, keyWord[i]);
+      // in.replace(pos, posI, std::regex_replace(in.substr(pos, posI), wordRegex, Syntax::keyWord[i]));
+      //in = std::regex_replace(in, wordRegex, Syntax::keyWord[i]);
+     pos = beginCode;
+  posI = pos;
+
+   // while(!std::isspace(in[posI]))
+   //  posI++;
+
+     in = std::regex_replace(in, wordRegex, Syntax::keyWord[i]);
  }
- for(int i=0; i<specialCharacter.size();i++) {
-     RemoveTags(in, specialCharacter[i],colorSpecialCharacter[i]);
+ for(int i=0; i<Syntax::specialCharacter.size();i++) {
+     ColorChar(in, Syntax::specialCharacter[i],Syntax::colorSpecialCharacter[i], pos);
 
    }
    return in;
 }
 
-void SyntaxHighlighting::SplitWithWhiteSpaces(const std::string& str) {
+void SyntaxHighlighting::RemoveTags(std::string &input,std::string tag,std::string out, int pos) {
 
- std::string current;
+ while (pos != std::string::npos) {
+  input.replace(pos, tag.length(), out);
+  // out=="" ? pos = input.find(tag, pos + 1) : pos = input.find(tag, pos + out.length());
+   pos = input.find(tag, pos + out.length());
 
- for (char ch : str) {
-  if (std::isspace(ch)) {
-   if (!current.empty()) {
-    input.push_back(current);
-    current.clear();
-   }
-   input.push_back(std::string(1, ch));
-  } else {
-   current += ch;
-  }
- }
-
- if (!current.empty()) {
-  input.push_back(current);
  }
 }
-void SyntaxHighlighting::RemoveTags(std::string &input,std::string tag,std::string out) {
 
- int pos = input.find(tag);
+void SyntaxHighlighting::ColorChar(std::string &input,std::string tag,std::string out, int pos) {
+
  while (pos != std::string::npos) {
   input.replace(pos, tag.length(), out);
   //out=="" ? pos = input.find(tag, pos + 1) : pos = input.find(tag, pos + out.length());
