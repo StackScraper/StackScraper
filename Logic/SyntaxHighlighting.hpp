@@ -19,7 +19,7 @@ public:
         std::string Hightlighting(std::string &in, int pos, int posI, int beginCode, int endCode);
         void SplitWithWhiteSpaces(const std::string& str);
         void RemoveTags(std::string &input,std::string tag, std::string out, int pos);
-        void ColorChar(std::string &input,std::string tag, std::string out, int pos);
+        void ColorChar(std::string &input,std::string tag, std::string out, int pos, int begin, int end);
 
 };
 
