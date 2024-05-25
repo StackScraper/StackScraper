@@ -91,7 +91,8 @@ namespace Syntax {
   "background-color", "background", "opactity",
   "absolute", "fixed", "style",
   "span", "input", "placeholder",
-  "#ifndef", "define", "regex"
+  "#ifndef", "define", "regex",
+    "println"
 
  };
  static std::vector<std::string> keyWord = {
@@ -178,7 +179,8 @@ namespace Syntax {
   "\033[0;31mbackground-color\033[0m", "\033[0;31mbackground\033[0m", "\033[0;31mopacity\033[0m",
   "\033[0;32mabsolute\033[0m", "\033[0;32mfixed\033[0m", "\033[0;32mstyle\033[0m",
   "\033[0;31mspan\033[0m", "\033[0;33minput\033[0m", "\033[0;32mplaceholder\033[0m",
-  "\033[0;35mifndef\033[0m", "\033[0;34mdefine\033[0m", "\033[0;32mregex\033[0m"
+  "\033[0;35mifndef\033[0m", "\033[0;34mdefine\033[0m", "\033[0;32mregex\033[0m",
+  "\033[0;36mprintln\033[0m"
  };
  static std::vector<std::string> specialCharacter = {
   "<", ">", "\"",

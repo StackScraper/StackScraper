@@ -19,6 +19,7 @@ class StateResult : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
     std::string question;
     std::string answer;
+
     StackManager sm = StackManager();
     std::vector<std::string> dict = {
             "question",
@@ -31,7 +32,7 @@ public:
     void onEnter() override;
     void onUpdate() override;
     void onExit() override;
-	//void QuestionManage();
+	void QuestionManage();
 };
 
 
