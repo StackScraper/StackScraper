@@ -8,10 +8,7 @@
 #include <regex>
 #include "Syntax.hpp"
 
-void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
-
-    std::vector<std::regex> regexes;
-
+SyntaxHighlighting::SyntaxHighlighting() {
     for(int i = 0; i < Syntax::basicSyntax.size(); i++)
     {
         std::regex wordRegex("\\b" +
@@ -20,7 +17,9 @@ void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
 
         regexes.push_back(wordRegex);
     }
+}
 
+void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
     std::string sentence;
     int codePos = 0;
     std::string result;
@@ -35,7 +34,7 @@ void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
             if (in.find("</code>") != std::string::npos) {
                 codePos = in.find("</code>");
                 RemoveTags(in, "</code>", "", codePos);
-                result += Hightlighting(sentence, regexes);
+                result += Hightlighting(sentence);
             } else {
                 terminate = true;
             }
@@ -51,7 +50,7 @@ void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
     in = result;
 }
 
-std::string SyntaxHighlighting::Hightlighting(std::string &in, std::vector<std::regex>& regexes) {
+std::string SyntaxHighlighting::Hightlighting(std::string &in) {
     for (size_t i = 0; i < regexes.size(); i++) {
         in = std::regex_replace(in, regexes[i], Syntax::keyWord[i]);
     }
