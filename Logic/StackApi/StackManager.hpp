@@ -29,11 +29,7 @@ class StackManager {
 
 public:
 
-    //wywalic
-    std::string syntax;
-    std::vector<std::string>keyWord;
-    std::vector<std::string>basicSyntax;
-    int posOfKeyWord;
+
 
     std::string bestAnswer[3] = {"","",""};
     std::string askQuestion();

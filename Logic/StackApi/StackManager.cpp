@@ -108,7 +108,6 @@ std::string StackManager::RemoveHtmlTags(const std::string& input) {
 std::string StackManager::ReturnNiceCode(std::string input) {
 
     int pos = input.find("&lt;");
-
     while (pos != std::string::npos) {
         input.replace(pos, 4, "<");
         pos = input.find("&lt;", pos + 1);
