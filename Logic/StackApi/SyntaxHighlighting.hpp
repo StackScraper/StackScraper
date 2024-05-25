@@ -17,7 +17,7 @@ public:
         std::string Hightlighting(std::string &in);
         void RemoveTags(std::string &input,std::string tag, std::string out, int pos);
         void ColorChar(std::string &input,std::string tag, std::string out);
-
+        void ColorBracket(std::string &in);
 };
 
 
