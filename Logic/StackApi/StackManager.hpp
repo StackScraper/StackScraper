@@ -41,7 +41,7 @@ public:
     void fillTabel(std::string input);
     std::string RemoveHtmlTags(const std::string& input);
     std::string ReturnNiceCode(std::string input);
-
+    void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
 };
 
 
