@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <regex>
 class SyntaxHighlighting {
 
         std::string syntax;
@@ -16,7 +16,7 @@ class SyntaxHighlighting {
 
 public:
         void RecognizeSyntax(std::string& in);
-        std::string Hightlighting(std::string &in);
+        std::string Hightlighting(std::string &in, std::vector<std::regex>& regexes);
         void SplitWithWhiteSpaces(const std::string& str);
         void RemoveTags(std::string &input,std::string tag, std::string out, int pos);
         void ColorChar(std::string &input,std::string tag, std::string out);

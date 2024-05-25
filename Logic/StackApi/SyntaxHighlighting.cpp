@@ -9,6 +9,18 @@
 #include "Syntax.hpp"
 
 void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
+
+    std::vector<std::regex> regexes;
+
+    for(int i = 0; i < Syntax::basicSyntax.size(); i++)
+    {
+        std::regex wordRegex("\\b" +
+                             std::regex_replace(Syntax::basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"),
+                                                R"(\$&<>)") + "\\b");
+
+        regexes.push_back(wordRegex);
+    }
+
     std::string sentence;
     int codePos = 0;
     std::string result;
@@ -23,7 +35,7 @@ void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
             if (in.find("</code>") != std::string::npos) {
                 codePos = in.find("</code>");
                 RemoveTags(in, "</code>", "", codePos);
-                result += Hightlighting(sentence);
+                result += Hightlighting(sentence, regexes);
             } else {
                 terminate = true;
             }
@@ -39,12 +51,9 @@ void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
     in = result;
 }
 
-std::string SyntaxHighlighting::Hightlighting(std::string &in) {
-    for (size_t i = 0; i < Syntax::basicSyntax.size(); i++) {
-        std::regex wordRegex("\\b" +
-                             std::regex_replace(Syntax::basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"),
-                                                R"(\$&<>)") + "\\b");
-        in = std::regex_replace(in, wordRegex, Syntax::keyWord[i]);
+std::string SyntaxHighlighting::Hightlighting(std::string &in, std::vector<std::regex>& regexes) {
+    for (size_t i = 0; i < regexes.size(); i++) {
+        in = std::regex_replace(in, regexes[i], Syntax::keyWord[i]);
     }
     for (int i = 0; i < Syntax::specialCharacter.size(); i++) {
         ColorChar(in, Syntax::specialCharacter[i], Syntax::colorSpecialCharacter[i]);
