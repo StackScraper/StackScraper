@@ -36,10 +36,8 @@ void StateResult::onUpdate() {
     std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
     std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
     SyntaxHighlighting sh = SyntaxHighlighting();
-    std::vector<std::string>vectorOfQuestion = sh.RecognizeSyntax(finalQuestion);
-    for(int i=0;i<vectorOfQuestion.size();i++) {
-        std::cout <<vectorOfQuestion[i];
-    }
+    sh.RecognizeSyntax(finalQuestion);
+    std::cout << finalQuestion;
 
 
     sm.getAnswer(JsonQuestion);
@@ -50,10 +48,8 @@ void StateResult::onUpdate() {
     std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
 
 
-std::vector<std::string> vectorOfAnswer = sh.RecognizeSyntax(finalAnswer);
-    for(int i=0; i< vectorOfAnswer.size();i++) {
-        std::cout << vectorOfAnswer[i];
-    }
+    sh.RecognizeSyntax(finalAnswer);
+    std::cout << finalAnswer;
     prompt->getPromptAuto(dict);
     if(prompt->retValues() == "return")
     {

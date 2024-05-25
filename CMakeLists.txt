@@ -56,6 +56,7 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/Database/DBmanager.hpp
         Logic/SyntaxHighlighting.cpp
         Logic/SyntaxHighlighting.hpp
+        Logic/Syntax.hpp
         Logic/Database/QueryHelper.cpp
         Logic/Database/QueryHelper.hpp
 )
