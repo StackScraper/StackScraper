@@ -5,7 +5,7 @@
 #include "StateResult.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/SyntaxHighlighting.hpp"
+#include "../Logic/StackApi/SyntaxHighlighting.hpp"
 #include <vector>
 
 
@@ -32,6 +32,8 @@ void StateResult::onUpdate() {
     //TextFunctions::typeWriteMessage(question, 30);
 
     std::cout << "Question:"<< std::endl;
+
+    TextFunctions::changeTextColor(TextColors::WHITE);
 
     std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
     std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
@@ -62,4 +64,6 @@ void StateResult::onUpdate() {
 
 void StateResult::onExit() {
     State::onExit();
+    TextFunctions::changeTextColor(TextColors::CYAN);
+
 }

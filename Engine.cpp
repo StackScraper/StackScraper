@@ -29,5 +29,5 @@ Engine::Engine() {
     State<States>& tagsState = fsm->add<StateTags>(States::TAGS);
     State<States>& aboutState = fsm->add<StateAbout>(States::ABOUT);
 
-    fsm->setCurrentState(States::PROMPT);
+    fsm->setCurrentState(States::IDLE);
 }

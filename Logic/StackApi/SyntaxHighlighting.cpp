@@ -3,15 +3,12 @@
 //
 
 #include "SyntaxHighlighting.hpp"
-#include <iostream>
 #include <string>
-#include <nlohmann/json.hpp>
+#include "nlohmann/json.hpp"
 #include <regex>
-#include <cctype>
 #include "Syntax.hpp"
 
 void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
-
     std::string sentence;
     int codePos = 0;
     std::string result;
