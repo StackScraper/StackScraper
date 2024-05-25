@@ -10,81 +10,67 @@
 #include <cctype>
 #include "Syntax.hpp"
 
-void SyntaxHighlighting::RecognizeSyntax(std::string& in) {
+void SyntaxHighlighting::RecognizeSyntax(std::string &in) {
 
- int pos;
- int posI;
- int beginCode = 0;
- int endCode = 0;
+    std::string sentence;
+    int codePos = 0;
+    std::string result;
+    bool terminate = false;
+    while (!terminate) {
+        sentence = in.substr(codePos, in.find("<code>") - codePos);
+        if (in.find("<code>") != std::string::npos) {
+            codePos = in.find("<code>");
+            RemoveTags(in, "<code>", "", codePos);
+            result += sentence;
+            sentence = in.substr(codePos, in.find("</code>") - codePos);
+            if (in.find("</code>") != std::string::npos) {
+                codePos = in.find("</code>");
+                RemoveTags(in, "</code>", "", codePos);
+                result += Hightlighting(sentence);
+            } else {
+                terminate = true;
+            }
+        } else {
+            terminate = true;
+        }
 
-
-
-      if (in.find("<code>") != std::string::npos) {
-       pos = in.find("<code>");
-       beginCode = pos;
-       startOfCode=true;
-       RemoveTags(in,"<code>","", pos);
-      }
-
-      if (in.find("</code>") != std::string::npos) {
-       pos = in.find("</code>");
-       endCode = pos;
-       startOfCode=false;
-       RemoveTags(in,"</code>","", pos);
-      }
-
-      posI = pos;
-      // posI++;
-
-      pos = beginCode;
-      in = Hightlighting(in, pos, posI, beginCode, endCode);
-       pos = posI;
-
-
-
-
-
+        if (terminate && (codePos != in.length())) {
+            sentence = in.substr(codePos, in.length() - codePos);
+            result += sentence;
+        }
+    }
+    in = result;
 }
 
-std::string SyntaxHighlighting::Hightlighting(std::string &in, int pos, int posI, int beginCode, int endCode) {
-
-
- for (size_t i = 0; i < Syntax::basicSyntax.size(); i++) {
-      std::regex wordRegex("\\b" + std::regex_replace(Syntax::basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"), R"(\$&<>)") + "\\b");
-      // in.replace(pos, posI, std::regex_replace(in.substr(pos, posI), wordRegex, Syntax::keyWord[i]));
-      //in = std::regex_replace(in, wordRegex, Syntax::keyWord[i]);
-  //    pos = beginCode;
-  // posI = pos;
-
-   // while(!std::isspace(in[posI]))
-   //  posI++;
-
-     in = std::regex_replace(in, wordRegex, Syntax::keyWord[i]);
- }
- for(int i=0; i<Syntax::specialCharacter.size();i++) {
-     ColorChar(in, Syntax::specialCharacter[i],Syntax::colorSpecialCharacter[i],pos, beginCode, endCode);
-
-   }
-   return in;
+std::string SyntaxHighlighting::Hightlighting(std::string &in) {
+    for (size_t i = 0; i < Syntax::basicSyntax.size(); i++) {
+        std::regex wordRegex("\\b" +
+                             std::regex_replace(Syntax::basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"),
+                                                R"(\$&<>)") + "\\b");
+        in = std::regex_replace(in, wordRegex, Syntax::keyWord[i]);
+    }
+    for (int i = 0; i < Syntax::specialCharacter.size(); i++) {
+        ColorChar(in, Syntax::specialCharacter[i], Syntax::colorSpecialCharacter[i]);
+    }
+    return in;
 }
 
-void SyntaxHighlighting::RemoveTags(std::string &input,std::string tag,std::string out, int pos) {
-
- while (pos != std::string::npos) {
-  input.replace(pos, tag.length(), out);
-  //out=="" ? pos = input.find(tag, pos + 1) : pos = input.find(tag, pos + out.length());
-  pos = input.find(tag, pos + out.length());
-
- }
+void SyntaxHighlighting::RemoveTags(std::string &input, std::string tag, std::string out, int pos) {
+    pos = input.find(tag, pos + out.length());
+    if (pos != std::string::npos) {
+        input.replace(pos, tag.length(), out);
+    }
 }
 
-void SyntaxHighlighting::ColorChar(std::string &input,std::string tag,std::string out,int pos, int begin, int end) {
+void SyntaxHighlighting::ColorChar(std::string &input, std::string tag, std::string out) {
 
- while (pos != std::string::npos) {
-  input.replace(pos, tag.length(), out);
-   pos = input.find(tag, pos + out.length());
+    int pos = 0;
+    pos = input.find(tag, pos + out.length());
+    while (pos != std::string::npos) {
+        input.replace(pos, tag.length(), out);
+        pos = input.find(tag, pos + out.length());
 
-  //out=="" ? pos = input.find(tag, pos + 1) : pos = input.find(tag, pos + out.length());
+        //out=="" ? pos = input.find(tag, pos + 1) : pos = input.find(tag, pos + out.length());
 
- }
+    }
 }
