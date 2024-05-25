@@ -24,7 +24,7 @@ void StateResult::onUpdate() {
     TextFunctions::changeTextColor(TextColors::CYAN);
     question = prompt->retValues();
     TextFunctions::print(question);
-    answer = ApiManager::getAnswer(question);
+
     sm.setQuestion(prompt->retValues());
     std::string JsonQuestion = sm.askQuestion();
 
@@ -55,7 +55,9 @@ void StateResult::onUpdate() {
     {
         mFsm.setCurrentState(States::MENU);
     }
-    mFsm.setCurrentState(States::PROMPT);
+    else {
+        mFsm.setCurrentState(States::PROMPT);
+    }
 }
 
 void StateResult::onExit() {

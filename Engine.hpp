@@ -9,12 +9,16 @@
 #include "FSM/StateMachine.hpp"
 #include "Logic/PromptSingleton.hpp"
 
-class Engine {
-    std::unique_ptr<FiniteStateMachine<States>> fsm = nullptr;
-public:
 
-    Engine();
-    void run();
+/**
+ * Engine of the program
+ * Responsible for handling init of StateMachine
+ */
+class Engine {
+    std::unique_ptr<FiniteStateMachine<States>> fsm = nullptr; ///< Pointer to state machine
+public:
+    Engine(); ///< Default constructor
+    void run(); ///< Function which executes start of state machine
 };
 
 

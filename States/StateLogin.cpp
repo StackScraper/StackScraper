@@ -4,10 +4,10 @@
 
 #include "StateLogin.hpp"
 
-#include "../Logic/DBmanager.hpp"
+#include "../Logic/Database/DBmanager.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/LoginManager.hpp"
+#include "../Logic/Database/LoginManager.hpp"
 
 void StateLogin::onEnter() {
     State::onEnter();

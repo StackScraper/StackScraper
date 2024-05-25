@@ -4,11 +4,17 @@
 
 #include "Engine.hpp"
 
-
+/**
+ * Function which executes first onUpdate of state
+ */
 void Engine::run() {
     fsm->onUpdate();
 }
 
+/**
+ * Function which inits state machine and all of it's states
+ * Sets first state to IDLE
+ */
 Engine::Engine() {
     fsm = std::make_unique<FiniteStateMachine<States>>();
     State<States>& idleState = fsm->add<StateIdle>(States::IDLE);
