@@ -1,16 +1,14 @@
 //
-// Created by jakub on 20.05.2024.
+// Created by jakub on 23.05.2024.
 //
-
-#include "SyntaxHighlighting.hpp"
-#include <iostream>
+#include <vector>
 #include <string>
-#include <nlohmann/json.hpp>
-#include <regex>
-#include <cctype>
 
-std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
-    basicSyntax = {"for","while","do",
+#ifndef SYNTAX_HPP
+#define SYNTAX_HPP
+
+namespace Syntax{
+    static std::vector<std::string>basicSyntax = {"for","while","do",
                     "if", "else","int",
                     "string","::","std",
                     "double","float","bool",
@@ -25,7 +23,7 @@ std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
                     "=","const","static",
                     "delete", "new", "break",
                     "continue","protected","enum",
-                    "\'","typedef","try",
+                    "typedef","try",
                     "catch","throw","template",
                     "operator","this","friend",
                     "volatile","extern","struct",
@@ -74,8 +72,7 @@ std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
                     //others
                     "print","namespace"
     };
-    // std::cout << "\033[1;31mbold red text\033[0m\n";
-    keyWord = {//CPP KEYWORD
+    static std::vector<std::string>keyWord = {//CPP KEYWORD
                 "\033[0;32mfor\033[0m","\033[0;32mwhile\033[0m","\033[0;32mdo\033[0m",
                 "\033[0;34mif\033[0m", "\033[0;34melse\033[0m","\033[0;33mint\033[0m",
                 "\033[0;33mstring\033[0m","\033[0;31m::\033[0m","\033[0;35mstd\033[0m",
@@ -91,7 +88,7 @@ std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
                 "\033[0;33m=\033[0m","\033[0;35mconst\033[0m","\033[0;35mstatic\033[0m",
                 "\033[0;31mdelete\033[0m","\033[0;36mnew\033[0m","\033[0;31mbreak\033[0m",
                 "\033[0;33mcontinue\033[0m","\033[0;33mprotected\033[0m","\033[0;33menum\033[0m",
-                 "\033[0;31m\'\033[0m","\033[0;32mtypedef\033[0m","\033[0;36mtry\033[0m",
+                 "\033[0;32mtypedef\033[0m","\033[0;36mtry\033[0m",
                 "\033[0;36mcatch\033[0m","\033[0;31mthrow\033[0m","\033[0;34mtemplate\033[0m",
                 "\033[0;33moperator\033[0m","\033[0;32mthis\033[0m","\033[0;35mfriend\033[0m",
                 "\033[0;33mvolatile\033[0m","\033[0;33mextern\033[0m","\033[0;33mstruct\033[0m",
@@ -139,87 +136,18 @@ std::vector<std::string> SyntaxHighlighting::RecognizeSyntax(std::string in) {
                 "\033[0;34ma\033[0m","\033[0;32mimg\033[0m","\033[0;31mtr\033[0m",
                 //others
                 "\033[0;31mprint\033[0m","\033[0;32mnamespace\033[0m"
-
     };
-   std::vector<std::string>specialCharacter = {
-       "<",">","\"",
-    "\'","*","&",
-    "|" , "$",":",
-    "->"
-
-   };
- std::vector<std::string>colorSpecialCharacter = {
+     static std::vector<std::string>specialCharacter = {
+              "<",">","\"",
+            "\'","*","&",
+              "|" , "$",":",
+              "->","#"
+};
+ static std::vector<std::string>colorSpecialCharacter = {
   "\033[0;32m<\033[0m", "\033[0;32m>\033[0m", "\033[0;32m\"\033[0m",
   "\033[0;31m\'\033[0m","\033[0;34m*\033[0m","\033[0;34m&\033[0m",
   "\033[0;33m|\033[0m","\033[0;34m$\033[0m","\033[0;32m:\033[0m",
-  "\033[0;32m->\033[0m"
+  "\033[0;32m->\033[0m","\033[0;33m#\033[0m"
  };
-    std::vector<std::string>input = splitWithWhiteSpaces(in);
- //   std::cout << "------------------------------"<<std::endl;
- //  for(int i=0;i<input.size();i++) {
- //   std::cout << inptut[i];
- //  }
- // std::cout <<std::endl<< "------------------------------"<<std::endl;
-   for(int i=0;i<input.size();i++) {
-
-      //std::string sub = input[i].substr()
-      if (input[i].find("<code>") != std::string::npos) {
-       startOfCode=true;
-      }
-
-    if (input[i].find("</code>") != std::string::npos) {
-        startOfCode=false;
-    }
-      if(startOfCode) {
-         input[i] = Hightlighting(input[i], basicSyntax, keyWord, specialCharacter, colorSpecialCharacter);
-      }
-   }
-
-
-    return input;
 }
-int SyntaxHighlighting::IsInCodeSection(std::string in) {
-      int pos = in.find("<code>");
-      return pos;
-}
-std::string SyntaxHighlighting::Hightlighting(std::string in,std::vector<std::string>&basic_strings, std::vector<std::string>&keyWord,
-                          std::vector<std::string>&specialCharacter, std::vector<std::string>&colorSpecialCharacter) {
-
-
- for (size_t i = 0; i < basicSyntax.size(); i++) {
-      std::regex wordRegex("\\b" + std::regex_replace(basicSyntax[i], std::regex(R"([-[\]{}()*+?.,\^$|#\s:])"), R"(\$&<>)") + "\\b");
-      in = std::regex_replace(in, wordRegex, keyWord[i]);
- }
- for(int i=0; i<specialCharacter.size();i++) {
-      int posOfSecialWord = in.find(specialCharacter[i]);
-      while (posOfSecialWord != std::string::npos) {
-          in.replace(posOfSecialWord, specialCharacter[i].length(), colorSpecialCharacter[i]);
-          posOfSecialWord = in.find(specialCharacter[i], posOfSecialWord + colorSpecialCharacter[i].length());
-      }
-
-   }
-   return in;
-}
-
-std::vector<std::string> SyntaxHighlighting::splitWithWhiteSpaces(const std::string& str) {
- std::vector<std::string> result;
- std::string current;
-
- for (char ch : str) {
-  if (std::isspace(ch)) {
-   if (!current.empty()) {
-    result.push_back(current);
-    current.clear();
-   }
-   result.push_back(std::string(1, ch)); // dodajemy biały znak jako osobny element
-  } else {
-   current += ch;
-  }
- }
-
- if (!current.empty()) {
-  result.push_back(current);
- }
-
- return result;
-}
+#endif //SYNTAX_HPP
