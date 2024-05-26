@@ -6,6 +6,8 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
+
+
 void StateHistory::onExit() {
     State::onExit();
     std::vector<std::string> _history;// = DBmanager::getHistory();
@@ -15,6 +17,8 @@ void StateHistory::onExit() {
 }
 
 void StateHistory::onUpdate() {
+
+
     State::onUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(HistoryTexts::returnText, 30);

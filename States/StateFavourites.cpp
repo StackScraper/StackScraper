@@ -6,6 +6,8 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
+
+
 void StateFavourites::onExit() {
     State::onExit();
     std::vector<std::string> _favs;// = DBmanager::getFavourites();
@@ -15,6 +17,8 @@ void StateFavourites::onExit() {
 }
 
 void StateFavourites::onUpdate() {
+
+
     State::onUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(FavouriteTexts::returnText, 30);

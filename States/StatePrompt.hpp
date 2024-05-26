@@ -18,6 +18,9 @@
 class StatePrompt : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
     StackManager sm = StackManager();
+    std::vector<std::string> dict = {
+            "return"
+    };
 public:
     explicit StatePrompt(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::PROMPT, "PROMPT"){}

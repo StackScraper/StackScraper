@@ -40,6 +40,10 @@ public:
     bool insertTag(std::string body);
 
 
+    bool insertAdmin(int Id);
+    std::vector<std::pair<std::string,std::string>> getAdmins();
+    bool deleteAdmin(int adminId);
+
     DBmanager();
     ~DBmanager();
     bool registerMember(std::string& log, std::string& email, std::string& pass);

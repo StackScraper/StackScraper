@@ -6,9 +6,17 @@
 #include "Logic/Database/DBmanager.hpp"
 #include "Logic/Database/LoginManager.hpp"
 
+/**
+ * Declaration of PromptSingleton - class responsible for holding information about actual
+ * user input in the application
+ */
 PromptSingleton* PromptSingleton::instancePtr = nullptr;
 
-
+/**
+ * Main class of the program
+ * Creates Engine and start main lop
+ * @return 0 if everything executes fine
+ */
 int main() {
 
     std::string log1 = "Michal";

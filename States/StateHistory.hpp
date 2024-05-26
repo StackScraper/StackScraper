@@ -17,6 +17,9 @@
 class StateHistory : public State<States> {
     PromptSingleton* prompt = PromptSingleton::getInstance();
     std::string history;
+    std::vector<std::string> dict = {
+            "return"
+    };
 public:
     explicit StateHistory(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::HISTORY, "HISTORY"){}
