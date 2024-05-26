@@ -59,7 +59,6 @@ int DBmanager::createDatabase()
     this->createTagTable();
     this->createPhraseTagTable();
     this->createFavPhrasesTable();
-    this->createSearchedPhrasesTable();
     return 1;
 }
 
@@ -119,9 +118,10 @@ int DBmanager::createPhraseTable() {
     /* Create SQL statement */
     const char* sql = "CREATE TABLE PHRASE("  \
        "ID INTEGER PRIMARY KEY AUTOINCREMENT," \
+       "USERID INTEGER," \
        "BODY TEXT NOT NULL," \
-       "RESPONSE TEXT NOT NULL"\
-       ");" \
+       "RESPONSE TEXT NOT NULL,"\
+       "FOREIGN KEY (USERID) REFERENCES USER(ID));" \
     ;
 
     /* Execute SQL statement */
@@ -187,30 +187,6 @@ int DBmanager::createFavPhrasesTable()
 {
     /* Create SQL statement */
     const char* sql = "CREATE TABLE FAVORITEPHRASES("  \
-       "USERID INTEGER," \
-       "PHRASEID INTEGER," \
-       "PRIMARY KEY (USERID, PHRASEID)," \
-       "FOREIGN KEY (USERID) REFERENCES USER(ID)," \
-       "FOREIGN KEY (PHRASEID) REFERENCES PHRASE(ID));" \
-    ;
-
-    /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
-
-    if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-        return 0;
-    } else {
-        fprintf(stdout, "Table created successfully\n");
-        return 1;
-    }
-}
-
-int DBmanager::createSearchedPhrasesTable()
-{
-    /* Create SQL statement */
-    const char* sql = "CREATE TABLE SEARCHEDPHRASES("  \
        "USERID INTEGER," \
        "PHRASEID INTEGER," \
        "PRIMARY KEY (USERID, PHRASEID)," \

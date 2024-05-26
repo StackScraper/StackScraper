@@ -8,6 +8,7 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Logic/Database/LoginManager.hpp"
+#include "..//Logic/Database/DBmanager.hpp"
 
 void StateLogin::onEnter() {
     State::onEnter();
@@ -33,9 +34,9 @@ void StateLogin::onUpdate() {
     prompt->getPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
     pass = prompt->retValues();
-    if(LoginManager::login(log, pass))
+    DBmanager db = DBmanager();
+    if(db.loginUser(log,pass))
     {
-      //  DBmanager::setNickName(log);
         mFsm.setCurrentState(States::MENU);
     }
     else

@@ -6,6 +6,7 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Logic/Database/LoginManager.hpp"
+#include "..//Logic/Database/DBmanager.hpp"
 using namespace TextFunctions;
 
 void StateRegister::onEnter() {
@@ -38,8 +39,9 @@ void StateRegister::onUpdate() {
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->getPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    email = prompt->retValues();;
-    if(LoginManager::registerNew(log, pass))
+    email = prompt->retValues();
+    DBmanager db = DBmanager();
+    if(db.insertUser(log,pass))
     {
         mFsm.setCurrentState(States::MENU);
     }

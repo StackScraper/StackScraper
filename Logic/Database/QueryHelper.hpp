@@ -10,6 +10,7 @@
 
 class QueryHelper {
 public:
+
      static std::string insertUser(std::string nick, std::string pass);
      static std::string getUsers();
      static std::string deleteUser(int id);
