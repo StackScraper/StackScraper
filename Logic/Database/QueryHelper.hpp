@@ -21,6 +21,20 @@ public:
      static std::string deleteAdmin(int adminId);
 
      static std::string loginUser(std::string &log, std::string &pass);
+
+     static std::string insertPhrase(std::string &body, std::string &response);
+     static std::string getPhrases();
+     static std::string deletePhrase(int id);
+
+     static std::string insertTag(std::string body);
+     static std::string getTags();
+     static std::string deleteTag(int id);
+
+     static std::string insertFavourite(int phraseId);
+     static std::string getFavourites();
+     static std::string deleteFavourite(int favId);
+
+     static std::string connectTagToPhrase();
 };
 
 

@@ -26,7 +26,6 @@ class DBmanager {
     int createPhraseTable();
     int createTagTable();
     int createPhraseTagTable();
-    int createFavPhrasesTable();
 public:
     bool insertUser(std::string& nickname, std::string& password);
     std::vector<std::pair<std::string,std::string>> getUsers();

@@ -24,18 +24,6 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     return 0;
 }
 
-static int callbackString(void *data, int argc, char **argv, char **azColName) {
-    std::vector<std::string>& targetVector = *static_cast<std::vector<std::string>*>(data);
-
-    for (int i = 0; i < argc; i++) {
-        if (argv[i]) {
-            targetVector.push_back(argv[i]);
-        }
-    }
-    return 0;
-}
-
-
 typedef int (*sqlite3_callback)(
    void*,    /* Data provided in the 4th argument of sqlite3_exec() */
    int,      /* The number of columns in row */
@@ -58,7 +46,10 @@ int DBmanager::createDatabase()
     this->createPhraseTable();
     this->createTagTable();
     this->createPhraseTagTable();
-    this->createFavPhrasesTable();
+
+    std::string admin = "admin";
+    this->insertUser(admin,admin);
+    this->insertAdmin(1);
     return 1;
 }
 
@@ -78,7 +69,7 @@ int DBmanager::createUserTable()
     ;
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -100,7 +91,7 @@ int DBmanager::createAdminTable() {
     ;
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -111,7 +102,6 @@ int DBmanager::createAdminTable() {
         return 1;
     }
 
-    return 0;
 }
 
 int DBmanager::createPhraseTable() {
@@ -121,11 +111,12 @@ int DBmanager::createPhraseTable() {
        "USERID INTEGER," \
        "BODY TEXT NOT NULL," \
        "RESPONSE TEXT NOT NULL,"\
+       "FAVOURITE INTEGER DEFAULT 0,"\
        "FOREIGN KEY (USERID) REFERENCES USER(ID));" \
     ;
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -146,7 +137,7 @@ int DBmanager::createTagTable() {
     ;
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -171,31 +162,7 @@ int DBmanager::createPhraseTagTable()
     ;
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
-
-    if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-        return 0;
-    } else {
-        fprintf(stdout, "Table created successfully\n");
-        return 1;
-    }
-}
-
-int DBmanager::createFavPhrasesTable()
-{
-    /* Create SQL statement */
-    const char* sql = "CREATE TABLE FAVORITEPHRASES("  \
-       "USERID INTEGER," \
-       "PHRASEID INTEGER," \
-       "PRIMARY KEY (USERID, PHRASEID)," \
-       "FOREIGN KEY (USERID) REFERENCES USER(ID)," \
-       "FOREIGN KEY (PHRASEID) REFERENCES PHRASE(ID));" \
-    ;
-
-    /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -211,7 +178,7 @@ int DBmanager::createFavPhrasesTable()
 {
     const char* sql = QueryHelper::insertUser(nickname,password).c_str();
 
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -268,7 +235,7 @@ bool DBmanager::deleteUser(int id)
 bool DBmanager::insertAdmin(int Id) {
     const char* sql = QueryHelper::insertAdmin(Id).c_str();
 
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);

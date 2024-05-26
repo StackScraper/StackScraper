@@ -25,7 +25,7 @@ int main() {
    //  std::string pas1 = "Gej";
    //  std::string pas2 = "Obciagacz";
    //
-   //  DBmanager michal = DBmanager();
+     DBmanager michal = DBmanager();
    //
    // // michal.insertUser(log1,pas1);
    //
