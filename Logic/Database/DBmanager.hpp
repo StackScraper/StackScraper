@@ -12,6 +12,8 @@
 
 class DBmanager {
     static std::string nickName;
+    static int id;
+
     sqlite3 *db;
     char *zErrMsg;
     int rc;
@@ -38,11 +40,23 @@ public:
     std::vector<std::pair<std::string,std::string>> getAdmins();
     bool deleteAdmin(int adminId);
 
+    bool insertPhrase(std::string &body, std::string &response);
+    std::vector<std::pair<std::string,std::string>>  getPhrases();
+    bool deletePhrase(int id);
+
+    bool insertTag(std::string body);
+    std::vector<std::pair<std::string,std::string>> getTags();
+    bool deleteTag(int id);
+
+    bool insertFavourite(int phraseId);
+    std::vector<std::pair<std::string,std::string>> getFavourites();
+    bool deleteFavourite(int favId);
+
+    bool connectTagToPhrase(int phraseId,int tagId);
 
     DBmanager();
     ~DBmanager();
 
-    void setNickName(std::string& nick);
 };
 
 

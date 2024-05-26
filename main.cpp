@@ -45,11 +45,11 @@ int main() {
    //  else std::cout<<":( kormka";
 
 
-    Engine eng = Engine();
-    bool finish = false;
-    while(!finish)
-    {
-        eng.run();
-    }
+    // Engine eng = Engine();
+    // bool finish = false;
+    // while(!finish)
+    // {
+    //     eng.run();
+    // }
     return 0;
 }

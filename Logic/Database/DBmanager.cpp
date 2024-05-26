@@ -7,7 +7,8 @@
 #include <fstream>
 #include <iostream>
 
-std::string DBmanager::nickName = "Michal";
+std::string DBmanager::nickName = "admin";
+int DBmanager::id = 1;
 
 std::vector<std::pair<std::string,std::string>> receivedData;
 
@@ -274,30 +275,10 @@ bool DBmanager::deleteAdmin(int adminId) {
     }
 }
 
-DBmanager::DBmanager()
-{
-    std::ifstream f("test.db");
-    if(f.good()) {
-        this->openDatabase();
-    }
-    else {
-        this->openDatabase();
-        this->createDatabase();
-    }
-}
-
-DBmanager::~DBmanager()
-{
-    this->closeDatabase();
-}
-
-void DBmanager::setNickName(std::string& nick) {
-    DBmanager::nickName = nick;
-}
 
 bool DBmanager::loginUser(std::string &log, std::string &pass) {
 
-  const char* sql = QueryHelper::loginUser(log,pass).c_str();
+    const char* sql = QueryHelper::loginUser(log,pass).c_str();
 
     receivedData = {};
 
@@ -317,4 +298,21 @@ bool DBmanager::loginUser(std::string &log, std::string &pass) {
         return true;
     }
 
+}
+
+DBmanager::DBmanager()
+{
+    std::ifstream f("test.db");
+    if(f.good()) {
+        this->openDatabase();
+    }
+    else {
+        this->openDatabase();
+        this->createDatabase();
+    }
+}
+
+DBmanager::~DBmanager()
+{
+    this->closeDatabase();
 }

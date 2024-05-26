@@ -34,7 +34,7 @@ public:
      static std::string getFavourites();
      static std::string deleteFavourite(int favId);
 
-     static std::string connectTagToPhrase();
+     static std::string connectTagToPhrase(int phraseId,int tagId);
 };
 
 
