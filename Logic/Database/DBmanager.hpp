@@ -35,15 +35,19 @@ public:
     std::vector<std::pair<std::string,std::string>> getUsers();
     bool updateUserPassword(int id,std::string& password);
     bool deleteUser(int id);
+    bool loginUser(const std::string& log, const std::string& pass);
+    bool insrtFavoritePhrases(std::string nickname, int phraseId);
+    bool insertTag(std::string body);
+
 
     DBmanager();
     ~DBmanager();
-    static bool registerMember(std::string& log, std::string& email, std::string& pass);
-    static void setNickName(std::string& nick);
-    static std::vector<std::string> getTags();
-    static std::vector<std::string> getMembers();
-    static std::vector<std::string> getFavourites();
-    static std::vector<std::string> getHistory();
+    bool registerMember(std::string& log, std::string& email, std::string& pass);
+    void setNickName(std::string& nick);
+    std::vector<std::string> getTags();
+    std::vector<std::string> getMembers();
+    std::vector<std::string> getFavourites();
+    std::vector<std::string> getHistory();
 };
 
 
