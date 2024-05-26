@@ -40,8 +40,8 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StatesWrapper.hpp
         Logic/PromptSingleton.cpp
         Logic/PromptSingleton.hpp
-        Logic/StackManager.cpp
-        Logic/StackManager.hpp
+        Logic/StackApi/StackManager.cpp
+        Logic/StackApi/StackManager.hpp
         States/StateTags.cpp
         States/StateTags.hpp
         States/StateResult.cpp
@@ -54,8 +54,9 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StateAbout.hpp
         Logic/Database/DBmanager.cpp
         Logic/Database/DBmanager.hpp
-        Logic/SyntaxHighlighting.cpp
-        Logic/SyntaxHighlighting.hpp
+        Logic/StackApi/SyntaxHighlighting.cpp
+        Logic/StackApi/SyntaxHighlighting.hpp
+        Logic/StackApi/Syntax.hpp
         Logic/Database/QueryHelper.cpp
         Logic/Database/QueryHelper.hpp
 )

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
-#include "../Logic/StackManager.hpp"
+#include "../Logic/StackApi/StackManager.hpp"
 
 
 class StatePrompt : public State<States> {
