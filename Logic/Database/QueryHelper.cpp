@@ -9,7 +9,7 @@ std::string QueryHelper::insertUser(std::string nick, std::string pass) {
 }
 
 std::string QueryHelper::getUsers() {
-    return "SELECT * from USER";
+    return "SELECT * from USER;";
 }
 
 std::string QueryHelper::deleteUser(int id) {
@@ -31,4 +31,8 @@ std::string QueryHelper::getAdmins() {
 
 std::string QueryHelper::deleteAdmin(int adminId) {
     return std::format("DELETE from ADMIN where ID={}; ",adminId);
+}
+
+std::string QueryHelper::loginUser(std::string &log, std::string &pass) {
+    return std::format("SELECT * from USER where NICKNAME='{}' AND PASSWORD='{}' ;",log,pass);
 }

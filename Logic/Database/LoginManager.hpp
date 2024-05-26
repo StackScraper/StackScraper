@@ -10,7 +10,7 @@
 class LoginManager {
 public:
     static bool login(std::string& log, std::string& pass);
-    static bool registerNew(std::string& log, std::string& email, std::string& pass);
+    static bool registerNew(std::string& log, std::string& pass);
 };
 
 

@@ -13,7 +13,7 @@ bool LoginManager::login(std::string& log, std::string& pass) {
     return false;
 }
 
-bool LoginManager::registerNew(std::string& log, std::string& email, std::string& pass) {
+bool LoginManager::registerNew(std::string& log, std::string& pass) {
     //todo
     return false;
 }

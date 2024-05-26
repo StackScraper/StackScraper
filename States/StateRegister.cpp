@@ -39,7 +39,7 @@ void StateRegister::onUpdate() {
     prompt->getPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
     email = prompt->retValues();;
-    if(LoginManager::registerNew(log, email, pass))
+    if(LoginManager::registerNew(log, pass))
     {
         mFsm.setCurrentState(States::MENU);
     }

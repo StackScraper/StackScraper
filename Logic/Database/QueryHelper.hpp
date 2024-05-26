@@ -10,16 +10,17 @@
 
 class QueryHelper {
 public:
-     std::string insertUser(std::string nick, std::string pass);
-     std::string getUsers();
-     std::string deleteUser(int id);
-     std::string updateUserPass(int id, std::string pass);
+     static std::string insertUser(std::string nick, std::string pass);
+     static std::string getUsers();
+     static std::string deleteUser(int id);
+     static std::string updateUserPass(int id, std::string pass);
 
-     std::string insertAdmin(int userId);
-     std::string getAdmins();
-     std::string deleteAdmin(int adminId);
+     static std::string insertAdmin(int userId);
+     static std::string getAdmins();
+     static std::string deleteAdmin(int adminId);
+
+     static std::string loginUser(std::string &log, std::string &pass);
 };
-
 
 
 #endif //QUERYHELPER_HPP

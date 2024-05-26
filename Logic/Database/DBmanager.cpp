@@ -233,7 +233,7 @@ int DBmanager::createSearchedPhrasesTable()
 
  bool DBmanager::insertUser(std::string& nickname, std::string& password)
 {
-    const char* sql = queryHelper.insertUser(nickname,password).c_str();
+    const char* sql = QueryHelper::insertUser(nickname,password).c_str();
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -250,7 +250,7 @@ int DBmanager::createSearchedPhrasesTable()
  std::vector<std::pair<std::string,std::string>> DBmanager::getUsers()
 {
     receivedData = {};
-    const char* sql = queryHelper.getUsers().c_str();
+    const char* sql = QueryHelper::getUsers().c_str();
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
@@ -263,7 +263,7 @@ int DBmanager::createSearchedPhrasesTable()
 
 bool DBmanager::updateUserPassword(int id, std::string &password)
 {
-    const char* sql = queryHelper.updateUserPass(id,password).c_str();
+    const char* sql = QueryHelper::updateUserPass(id,password).c_str();
 
 /* Execute SQL statement */
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
@@ -278,7 +278,7 @@ bool DBmanager::updateUserPassword(int id, std::string &password)
 
 bool DBmanager::deleteUser(int id)
 {
-    const char* sql = queryHelper.deleteUser(id).c_str();
+    const char* sql = QueryHelper::deleteUser(id).c_str();
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
@@ -290,7 +290,7 @@ bool DBmanager::deleteUser(int id)
 }
 
 bool DBmanager::insertAdmin(int Id) {
-    const char* sql = queryHelper.insertAdmin(Id).c_str();
+    const char* sql = QueryHelper::insertAdmin(Id).c_str();
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -308,7 +308,7 @@ bool DBmanager::insertAdmin(int Id) {
 
 std::vector<std::pair<std::string, std::string>> DBmanager::getAdmins() {
     receivedData = {};
-    const char* sql = queryHelper.getAdmins().c_str();
+    const char* sql = QueryHelper::getAdmins().c_str();
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
@@ -320,7 +320,7 @@ std::vector<std::pair<std::string, std::string>> DBmanager::getAdmins() {
 }
 
 bool DBmanager::deleteAdmin(int adminId) {
-    const char* sql = queryHelper.deleteAdmin(adminId).c_str();
+    const char* sql = QueryHelper::deleteAdmin(adminId).c_str();
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
@@ -352,77 +352,26 @@ void DBmanager::setNickName(std::string& nick) {
     DBmanager::nickName = nick;
 }
 
-bool DBmanager::registerMember(std::string &log, std::string &email, std::string &pass) {
-    return false;
-}
+bool DBmanager::loginUser(std::string &log, std::string &pass) {
 
-bool DBmanager::loginUser(const std::string &log, const std::string &pass) {
+  const char* sql = QueryHelper::loginUser(log,pass).c_str();
 
-/*   std::string sql= ("SELECT * FROM user WHERE nickname = '" + log + "' AND password = '" + pass);
-    rc = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &zErrMsg);
+    receivedData = {};
 
-    if( rc != SQLITE_OK || rc!= SQLITE_ROW ) {
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    for(int i =0;i<receivedData.size();i++) {
+        std::cout<<receivedData[i].first<<" "<< receivedData[i].second<<std::endl;
+    }
+    std::cout<<std::endl;
+
+    if( rc != SQLITE_OK ) {
         return false;
     } else {
-        return true;
-    }*/ // something wonk
-    return true;
-
-}
-bool DBmanager::insrtFavoritePhrases(std::string nickname, int phraseId) {
-    const char* sql = ("INSERT INTO FAVORITEPHRASES (USERID, PHRASEID) VALUES ((select ID from user WHERE nickname = '"+nickname+"'), '"+std::to_string(phraseId)+"')").c_str();
-
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
-
-    if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-        return false;
-    } else {
-        fprintf(stdout, "Records created successfully\n");
+        if(receivedData.empty()) {
+            return false;
+        }
         return true;
     }
+
 }
-
-bool DBmanager::insertTag(std::string body) {
-    std::string sql= ("INSERT INTO TAG (BODY) VALUES ('"+body+"')");
-
-    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
-
-    if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-        return false;
-    } else {
-        fprintf(stdout, "Records created successfully\n");
-        return true;
-    }
-}
-
-std::vector<std::string> DBmanager::getTags() {
-    std::vector<std::string> tags = {};
-    std::string sql = ("SELECT BODY FROM TAG");
-    rc = sqlite3_exec(db, sql.c_str(), callbackString, &tags, &zErrMsg);
-    return tags;
-}
-
-std::vector<std::string> DBmanager::getMembers() {
-    std::vector<std::string> members = {};
-    // logic to do
-    return members;
-}
-
-std::vector<std::string> DBmanager::getFavourites() {
-    std::vector<std::string> favs ={};
-    std::string sql = ("SELECT PHRASEID FROM FAVORITEPHRASES WHERE USERID IN (SELECT ID FROM user WHERE NICKNAME = '"+nickName+"')");
-    rc = sqlite3_exec(db, sql.c_str(), callbackString, &favs, &zErrMsg);
-
-    return favs;
-}
-
-std::vector<std::string> DBmanager::getHistory() {
-    std::vector<std::string> history = {};
-    // logic to do
-    return history;
-}
-
