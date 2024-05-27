@@ -10,6 +10,11 @@
 
 class QueryHelper {
 public:
+     static std::string createUserTable();
+     static std::string createAdminTable();
+     static std::string createPhraseTable();
+     static std::string createTagTable();
+     static std::string createPhraseTagTable();
 
      static std::string insertUser(std::string nick, std::string pass);
      static std::string getUsers();
@@ -22,7 +27,7 @@ public:
 
      static std::string loginUser(std::string &log, std::string &pass);
 
-     static std::string insertPhrase(std::string &body, std::string &response);
+     static std::string insertPhrase(int &id,std::string &body, std::string &response);
      static std::string getPhrases();
      static std::string deletePhrase(int id);
 
@@ -31,10 +36,11 @@ public:
      static std::string deleteTag(int id);
 
      static std::string insertFavourite(int phraseId);
-     static std::string getFavourites();
-     static std::string deleteFavourite(int favId);
+     static std::string getFavourites(int userId);
+     static std::string deleteFavourite(int phraseId);
 
      static std::string connectTagToPhrase(int phraseId,int tagId);
+     static std::string getPhrasesWithTag();
 };
 
 

@@ -44,7 +44,7 @@ public:
     std::vector<std::pair<std::string,std::string>>  getPhrases();
     bool deletePhrase(int id);
 
-    bool insertTag(std::string body);
+    bool insertTag(std::string& body);
     std::vector<std::pair<std::string,std::string>> getTags();
     bool deleteTag(int id);
 
@@ -53,10 +53,10 @@ public:
     bool deleteFavourite(int favId);
 
     bool connectTagToPhrase(int phraseId,int tagId);
+    std::vector<std::pair<std::string,std::string>> getPhraseWithTag();
 
     DBmanager();
     ~DBmanager();
-
 };
 
 

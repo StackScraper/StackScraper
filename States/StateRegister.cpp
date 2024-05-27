@@ -5,7 +5,6 @@
 #include "StateRegister.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/Database/LoginManager.hpp"
 #include "..//Logic/Database/DBmanager.hpp"
 using namespace TextFunctions;
 
@@ -43,7 +42,7 @@ void StateRegister::onUpdate() {
     DBmanager db = DBmanager();
     if(db.insertUser(log,pass))
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.setCurrentState(States::LOGIN);
     }
     else
     {

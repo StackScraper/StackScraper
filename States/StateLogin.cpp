@@ -7,7 +7,6 @@
 #include "../Logic/Database/DBmanager.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/Database/LoginManager.hpp"
 #include "..//Logic/Database/DBmanager.hpp"
 
 void StateLogin::onEnter() {

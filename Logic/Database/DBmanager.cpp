@@ -36,7 +36,7 @@ typedef int (*sqlite3_callback)(
 
 int DBmanager::openDatabase()
 {
-    rc = sqlite3_open("test.db", &db); // TODO ss.db
+    rc = sqlite3_open("ss.db", &db);
     return rc? 0:1;
 }
 
@@ -63,14 +63,10 @@ int DBmanager::closeDatabase()
 int DBmanager::createUserTable()
 {
     /* Create SQL statement */
-    const char* sql = "CREATE TABLE USER("  \
-       " ID INTEGER PRIMARY KEY AUTOINCREMENT," \
-       "NICKNAME           TEXT    NOT NULL," \
-       "PASSWORD           TEXT    NOT NULL);" \
-    ;
+    const std::string sql = QueryHelper::createUserTable();
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -85,14 +81,10 @@ int DBmanager::createUserTable()
 int DBmanager::createAdminTable() {
 
     /* Create SQL statement */
-    const char* sql = "CREATE TABLE ADMIN("  \
-       "ID INTEGER PRIMARY KEY AUTOINCREMENT," \
-       "USERID INTEGER," \
-       "FOREIGN KEY (USERID) REFERENCES USER(ID));" \
-    ;
+    const std::string sql = QueryHelper::createAdminTable();
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -107,17 +99,10 @@ int DBmanager::createAdminTable() {
 
 int DBmanager::createPhraseTable() {
     /* Create SQL statement */
-    const char* sql = "CREATE TABLE PHRASE("  \
-       "ID INTEGER PRIMARY KEY AUTOINCREMENT," \
-       "USERID INTEGER," \
-       "BODY TEXT NOT NULL," \
-       "RESPONSE TEXT NOT NULL,"\
-       "FAVOURITE INTEGER DEFAULT 0,"\
-       "FOREIGN KEY (USERID) REFERENCES USER(ID));" \
-    ;
+    const std::string sql = QueryHelper::createPhraseTable();
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -131,14 +116,10 @@ int DBmanager::createPhraseTable() {
 
 int DBmanager::createTagTable() {
     /* Create SQL statement */
-    const char* sql = "CREATE TABLE TAG("  \
-       "ID INTEGER PRIMARY KEY AUTOINCREMENT," \
-       "BODY TEXT NOT NULL" \
-       ");" \
-    ;
+    const std::string sql = QueryHelper::createTagTable();
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -154,16 +135,10 @@ int DBmanager::createTagTable() {
 int DBmanager::createPhraseTagTable()
 {
     /* Create SQL statement */
-    const char* sql = "CREATE TABLE PHRASETAG("  \
-       "PHRASEID INTEGER," \
-       "TAGID INTEGER," \
-       "PRIMARY KEY (PHRASEID, TAGID)," \
-       "FOREIGN KEY (PHRASEID) REFERENCES PHRASE(ID)," \
-       "FOREIGN KEY (TAGID) REFERENCES TAG(ID));" \
-    ;
+     const std::string sql = QueryHelper::createPhraseTagTable();
 
     /* Execute SQL statement */
-    rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -272,6 +247,155 @@ bool DBmanager::deleteAdmin(int adminId) {
         return false;
     } else {
         return true;
+    }
+}
+
+bool DBmanager::insertPhrase(std::string &body, std::string &response) {
+
+    const std::string sql = QueryHelper::insertPhrase(id,body,response);
+
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+        return false;
+    } else {
+        fprintf(stdout, "Records created successfully\n");
+        return true;
+    }
+
+
+}
+
+std::vector<std::pair<std::string, std::string>> DBmanager::getPhrases() {
+    receivedData = {};
+    const char* sql = QueryHelper::getPhrases().c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return {{"SQL ERROR",zErrMsg}};
+    } else {
+        return receivedData;
+    }
+}
+
+bool DBmanager::deletePhrase(int id) {
+    const char* sql = QueryHelper::deletePhrase(id).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool DBmanager::insertTag(std::string& body) {
+    const std::string sql = QueryHelper::insertTag(body);
+
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+        return false;
+    } else {
+        fprintf(stdout, "Records created successfully\n");
+        return true;
+    }
+}
+
+std::vector<std::pair<std::string, std::string>> DBmanager::getTags() {
+    receivedData = {};
+    const char* sql = QueryHelper::getTags().c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return {{"SQL ERROR",zErrMsg}};
+    } else {
+        return receivedData;
+    }
+}
+
+bool DBmanager::deleteTag(int id) {
+    const char* sql = QueryHelper::deleteTag(id).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool DBmanager::insertFavourite(int phraseId) {
+    const std::string sql = QueryHelper::insertFavourite(phraseId);
+
+    rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+        return false;
+    } else {
+        fprintf(stdout, "Records created successfully\n");
+        return true;
+    }
+
+}
+
+std::vector<std::pair<std::string, std::string>> DBmanager::getFavourites() {
+    receivedData = {};
+    const char* sql = QueryHelper::getFavourites(id).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return {{"SQL ERROR",zErrMsg}};
+    } else {
+        return receivedData;
+    }
+}
+
+bool DBmanager::deleteFavourite(int favId) {
+    const char* sql = QueryHelper::deleteTag(favId).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool DBmanager::connectTagToPhrase(int phraseId, int tagId) {
+    const char* sql = QueryHelper::connectTagToPhrase(phraseId,tagId).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+std::vector<std::pair<std::string, std::string>> DBmanager::getPhraseWithTag() {
+    receivedData = {};
+    const std::string sql = QueryHelper::getPhrasesWithTag();
+
+    rc = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return {{"SQL ERROR",zErrMsg}};
+    } else {
+        return receivedData;
     }
 }
 
