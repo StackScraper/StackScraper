@@ -16,15 +16,15 @@
 #include "../Logic/PromptSingleton.hpp"
 
 class StateTags : public State<States>{
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string tags;
 public:
     explicit StateTags(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::TAGS, "TAGS"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 

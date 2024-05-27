@@ -20,7 +20,8 @@ int main() {
     bool finish = false;
     while(!finish)
     {
-        eng.run();
+
+        eng.Run(); ///< Start engine
     }
     return 0;
 }

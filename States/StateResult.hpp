@@ -14,12 +14,15 @@
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
 #include "../Logic/StackApi/StackManager.hpp"
+#include "../Logic/StackApi/SyntaxHighlighting.hpp"
+
 
 class StateResult : public State<States> {
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string question;
     std::string answer;
     StackManager sm = StackManager();
+    SyntaxHighlighting sh = SyntaxHighlighting();
     std::vector<std::string> dict = {
             "question",
             "return"
@@ -28,9 +31,11 @@ public:
     explicit StateResult(FiniteStateMachine<States>& fsm)
             : State<States>(fsm, States::RESULT, "RESULT"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
+
+    void QuestionManage();
 };
 
 

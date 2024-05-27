@@ -14,16 +14,16 @@
 
 
 class StateLogin : public State<States>{
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string log;
     std::string pass;
 public:
     explicit StateLogin(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::LOGIN, "LOGIN"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 

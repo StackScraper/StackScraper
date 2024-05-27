@@ -7,8 +7,8 @@
 /**
  * Function which executes first onUpdate of state
  */
-void Engine::run() {
-    fsm->onUpdate();
+void Engine::Run() {
+    fsm->OnUpdate();
 }
 
 /**
@@ -17,17 +17,17 @@ void Engine::run() {
  */
 Engine::Engine() {
     fsm = std::make_unique<FiniteStateMachine<States>>();
-    State<States>& idleState = fsm->add<StateIdle>(States::IDLE);
-    State<States>& loginState = fsm->add<StateLogin>(States::LOGIN);
-    State<States>& exitState = fsm->add<StateExit>(States::EXIT);
-    State<States>& favouritesState = fsm->add<StateFavourites>(States::FAVOURITES);
-    State<States>& historyState = fsm->add<StateHistory>(States::HISTORY);
-    State<States>& menuState = fsm->add<StateMenu>(States::MENU);
-    State<States>& promptState = fsm->add<StatePrompt>(States::PROMPT);
-    State<States>& registerState = fsm->add<StateRegister>(States::REGISTER);
-    State<States>& resultState = fsm->add<StateResult>(States::RESULT);
-    State<States>& tagsState = fsm->add<StateTags>(States::TAGS);
-    State<States>& aboutState = fsm->add<StateAbout>(States::ABOUT);
+    State<States>& idleState = fsm->Add<StateIdle>(States::IDLE);
+    State<States>& loginState = fsm->Add<StateLogin>(States::LOGIN);
+    State<States>& exitState = fsm->Add<StateExit>(States::EXIT);
+    State<States>& favouritesState = fsm->Add<StateFavourites>(States::FAVOURITES);
+    State<States>& historyState = fsm->Add<StateHistory>(States::HISTORY);
+    State<States>& menuState = fsm->Add<StateMenu>(States::MENU);
+    State<States>& promptState = fsm->Add<StatePrompt>(States::PROMPT);
+    State<States>& registerState = fsm->Add<StateRegister>(States::REGISTER);
+    State<States>& resultState = fsm->Add<StateResult>(States::RESULT);
+    State<States>& tagsState = fsm->Add<StateTags>(States::TAGS);
+    State<States>& aboutState = fsm->Add<StateAbout>(States::ABOUT);
 
-    fsm->setCurrentState(States::IDLE);
+    fsm->SetCurrentState(States::IDLE);
 }

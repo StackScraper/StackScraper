@@ -6,8 +6,8 @@
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
 
-void StateTags::onEnter() {
-    State::onEnter();
+void StateTags::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(TagsTexts::title);
     std::vector<std::string> _tags;// = DBmanager::getTags();
@@ -16,26 +16,26 @@ void StateTags::onEnter() {
     }
 }
 
-void StateTags::onUpdate() {
-    State::onUpdate();
+void StateTags::OnUpdate() {
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(TagsTexts::returnText, 30);
     TextFunctions::setCursor(4, 12);
     TextFunctions::typeWriteMessage(TagsTexts::tagText, 30);
     TextFunctions::setCursor(4 + TagsTexts::tagText.length() +1, 13);
     TextFunctions::print(tags);
-    //TextFunctions::setCursor(4 + TagsTexts::tagText.length() +1, 13+DBmanager::getTags().size());
-    prompt->getPrompt();
-    if (TextFunctions::toLower(prompt->retValues()) == "return")
+   // TextFunctions::setCursor(4 + TagsTexts::tagText.length() +1, 13+DBmanager::getTags().size());
+    prompt->GetPrompt();
+    if (TextFunctions::toLower(prompt->RetValues()) == "return")
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.SetCurrentState(States::MENU);
     }
     else
     {
-        onEnter();
+        OnEnter();
     }
 }
 
-void StateTags::onExit() {
-    State::onExit();
+void StateTags::OnExit() {
+    State::OnExit();
 }

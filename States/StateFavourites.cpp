@@ -8,38 +8,42 @@
 
 
 
-void StateFavourites::onExit() {
-    State::onExit();
+
+void StateFavourites::OnExit() {
+    State::OnExit();
     std::vector<std::string> _favs;// = DBmanager::getFavourites();
+
     for (auto fav: _favs) {
         favs += fav;
     }
 }
 
-void StateFavourites::onUpdate() {
+void StateFavourites::OnUpdate() {
 
 
-    State::onUpdate();
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(FavouriteTexts::returnText, 30);
     TextFunctions::setCursor(4, 12);
     TextFunctions::typeWriteMessage(FavouriteTexts::favTheme, 30);
     TextFunctions::setCursor(4 + FavouriteTexts::favTheme.length() + 1, 13);
     TextFunctions::print(favs);
+
     //TextFunctions::setCursor(4 + FavouriteTexts::favTheme.length() + 1, 13 + DBmanager::getFavourites().size());
-    prompt->getPrompt();
-    if (TextFunctions::toLower(prompt->retValues()) == "return")
+    prompt->GetPromptAuto(dict);
+    if (TextFunctions::toLower(prompt->RetValues()) == "return")
+
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.SetCurrentState(States::MENU);
     }
     else
     {
-        onEnter();
+        OnEnter();
     }
 }
 
-void StateFavourites::onEnter() {
-    State::onEnter();
+void StateFavourites::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(FavouriteTexts::title);
 }

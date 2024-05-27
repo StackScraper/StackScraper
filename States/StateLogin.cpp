@@ -9,41 +9,42 @@
 #include "../Logic/TextFormatter.hpp"
 #include "..//Logic/Database/DBmanager.hpp"
 
-void StateLogin::onEnter() {
-    State::onEnter();
+void StateLogin::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(LoginTexts::title);
 }
 
-void StateLogin::onUpdate() {
-    State::onUpdate();
+void StateLogin::OnUpdate() {
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(LoginTexts::credentials, 50);
     TextFunctions::setCursor(32, 12);
     TextFunctions::print(LoginTexts::login);
     TextFunctions::setCursor(39, 12);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPrompt();
+    prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    log = prompt->retValues();
+    log = prompt->RetValues();
     TextFunctions::setCursor(32, 14);
     TextFunctions::print(LoginTexts::password);
     TextFunctions::setCursor(42, 14);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPrompt();
+    prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
     pass = prompt->retValues();
     DBmanager db = DBmanager();
     if(db.loginUser(log,pass))
     {
         mFsm.setCurrentState(States::MENU);
+
     }
     else
     {
-        mFsm.setCurrentState(States::IDLE);
+        mFsm.SetCurrentState(States::IDLE);
     }
 }
 
-void StateLogin::onExit() {
-    State::onExit();
+void StateLogin::OnExit() {
+    State::OnExit();
 }
