@@ -40,7 +40,6 @@ void StateRegister::OnUpdate() {
     TextFunctions::changeTextColor(TextColors::BEIGE);
 
     email = prompt->RetValues();
-    std::cout<<"hej";
     DBmanager db = DBmanager();
     if(db.insertUser(log,pass))
     {
