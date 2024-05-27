@@ -33,21 +33,16 @@ void StackManager::GetAnswer(std::string res) {
 void StackManager::ChangeJsonToString(std::string & input) {
 
     nlohmann::json data = nlohmann::json::parse(input);
-
-
     if (data.contains("items") && data["items"].is_array()) {
-        // Pobranie pierwszego elementu z tablicy "items"
         nlohmann::json item = data["items"][0];
-
-        // Sprawdzenie czy istnieje klucz "body"
         if (item.contains("body")) {
-            std::string body = item["body"]; // Pobranie wartości "body"
+            std::string body = item["body"];
             input = body;
         } else {
-            input = "Nie znaleziono klucza 'body'.";
+            input = "Can not find similar problem";
         }
     } else {
-        input = "Nie znaleziono klucza 'items' lub nie jest to tablica.";
+        input = "Can not find similar problem";
     }
 
 }
@@ -57,12 +52,9 @@ int StackManager::GetQuestionId(std::string input) {
     nlohmann::json data = nlohmann::json::parse(input);
 
     if (data.contains("items") && data["items"].is_array()) {
-        // Pobranie pierwszego elementu z tablicy "items"
         nlohmann::json item = data["items"][0];
-
-        // Sprawdzenie czy istnieje klucz "body"
         if (item.contains("question_id")) {
-            int body = item["question_id"]; // Pobranie wartości "body"
+            int body = item["question_id"];
             return body;
         } else {
             return 0;
@@ -72,61 +64,39 @@ int StackManager::GetQuestionId(std::string input) {
     }
 }
 void StackManager::FillTabel(std::string input) {
-
     cpr::Response r = cpr::Get(cpr::Url{input});
-
     std::string jsonText = r.text;
-
     nlohmann::json data = nlohmann::json::parse(jsonText);
-
     if (data.contains("items") && data["items"].is_array()) {
         // Iteruj przez elementy w "items" (maksymalnie 3 pierwsze)
         for (int i = 0; i < std::min(3, (int)data["items"].size()); ++i) {
             nlohmann::json item = data["items"][i];
-
-            // Sprawdź czy istnieje klucz "body" w bieżącym elemencie
             if (item.contains("body")) {
-                // Pobierz wartość "body" jako std::string
                 std::string bodyContent = item["body"].get<std::string>();
                 bestAnswer[i] = bodyContent;
             } else {
-                // Obsłuż sytuację braku klucza "body"
-                std::cout << "Brak klucza 'body' dla elementu " << i << std::endl;
-                // Możesz ustawić domyślną wartość lub inaczej obsłużyć ten przypadek
-                bestAnswer[i] = "Brak zawartości";
+                std::cout << "Answer not found " << std::endl;
+                //bestAnswer[i] = "Brak zawartości";
             }
         }
     } else {
-        std::cout << "Brak klucza 'items' lub 'items' nie jest tablicą" << std::endl;
+        std::cout << "" << std::endl;
     }
 }
 void StackManager::RemoveHtmlTags(std::string& input) {
     std::regex htmlTagRegex(R"(<(?!\/?code)[^>]*>)");
     input = std::regex_replace(input, htmlTagRegex, "");
 }
+void StackManager::ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar) {
+    int pos = input.find(inChar);
+    while (pos != std::string::npos) {
+        input.replace(pos, inChar.length(), outChar);
+        pos = input.find(inChar, pos + 1);
+    }
+}
 void StackManager::ReturnNiceCode(std::string& input) {
-
-    int pos = input.find("&lt;");
-
-    while (pos != std::string::npos) {
-        input.replace(pos, 4, "<");
-        pos = input.find("&lt;", pos + 1);
-    }
-
-    pos = input.find("&gt;");
-    while (pos != std::string::npos) {
-        input.replace(pos, 4, ">");
-        pos = input.find("&gt;", pos + 1);
-    }
-    pos = input.find("&quot;");
-    while (pos != std::string::npos) {
-        input.replace(pos, 6, "\"");
-        pos = input.find("&quot;", pos + 1);
-    }
-    pos = input.find("&amp;");
-    while (pos != std::string::npos) {
-        input.replace(pos, 5, "&");
-        pos = input.find("&amp;", pos + 1);
-
-    }
+    ChangingSpecialChar(input, "&lt;", "<");
+    ChangingSpecialChar(input, "&gt;", ">");
+    ChangingSpecialChar(input, "&quot;", "\"");
+    ChangingSpecialChar(input, "&amp;", "&");
 }

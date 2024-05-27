@@ -24,22 +24,7 @@ void StateResult::OnUpdate() {
     TextFunctions::changeTextColor(TextColors::BEIGE);
     question = prompt->RetValues();
     TextFunctions::print(question);
-    sm.SetQuestion(prompt->RetValues());
-    sm.AskQuestion(question);
-    std::string jSonQ = question;
-    sm.ChangeJsonToString(question);
-    TextFunctions::changeTextColor(TextColors::WHITE);
-    sm.RemoveHtmlTags(question);
-    sm.ReturnNiceCode(question);
-    sh.RecognizeSyntax(question);
-    TextFunctions::print(question);
-    sm.GetAnswer(jSonQ);
-    TextFunctions::print(ResultTexts::firstAnswer);
-    answer = sm.bestAnswer[0];
-    sm.RemoveHtmlTags(answer);
-    sm.ReturnNiceCode(answer);
-    sh.RecognizeSyntax(answer);
-    TextFunctions::print(answer);
+    QuestionManage();
     prompt->GetPromptAuto(dict);
     if(prompt->RetValues() == "return")
     {
@@ -53,4 +38,29 @@ void StateResult::OnUpdate() {
 void StateResult::OnExit() {
     State::OnExit();
     TextFunctions::changeTextColor(TextColors::BEIGE);
+}
+
+void StateResult::QuestionManage() {
+    sm.SetQuestion(prompt->RetValues());
+    sm.AskQuestion(question);
+    std::string jSonTemp = question;
+    sm.ChangeJsonToString(question);
+    TextFunctions::print(ResultTexts::questionText);
+    TextFunctions::changeTextColor(TextColors::WHITE);
+    sm.RemoveHtmlTags(question);
+    sm.ReturnNiceCode(question);
+    sh.RecognizeSyntax(question);
+    TextFunctions::typeWriteMessage(question, 1);
+    sm.GetAnswer(jSonTemp);
+    for (int i = 0; i < 3; i++) {
+        if (sm.bestAnswer[i] != "") {
+            std::cout << "Answer: " << i + 1 << std::endl;
+            std::string ans = sm.bestAnswer[i];
+            sm.RemoveHtmlTags(ans);
+            sm.ReturnNiceCode(ans);
+            sh.RecognizeSyntax(ans);
+            TextFunctions::typeWriteMessage(ans, 1);
+            std::cout << std::endl;
+        }
+    }
 }
