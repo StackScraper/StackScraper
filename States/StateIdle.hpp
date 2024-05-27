@@ -15,7 +15,7 @@
 
 
 class StateIdle : public State<States>{
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::vector<std::string> dict = {
             "login",
             "register",
@@ -25,9 +25,9 @@ public:
     explicit StateIdle(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::IDLE, "IDLE"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 

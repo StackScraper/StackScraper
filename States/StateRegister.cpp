@@ -8,47 +8,47 @@
 #include "../Logic/Database/LoginManager.hpp"
 using namespace TextFunctions;
 
-void StateRegister::onEnter() {
-    State::onEnter();
+void StateRegister::OnEnter() {
+    State::OnEnter();
     system("cls");
     print(RegisterTexts::title);
 }
 
-void StateRegister::onUpdate() {
-    State::onUpdate();
+void StateRegister::OnUpdate() {
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     typeWriteMessage(RegisterTexts::credentials, 50);
     TextFunctions::setCursor(32, 12);
     typeWriteMessage(RegisterTexts::login, 0);
     TextFunctions::setCursor(39, 12);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPrompt();
+    prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    log = prompt->retValues();
+    log = prompt->RetValues();
     TextFunctions::setCursor(32, 14);
     typeWriteMessage(RegisterTexts::password,0);
     TextFunctions::setCursor(42, 14);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPrompt();
+    prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    pass = prompt->retValues();
+    pass = prompt->RetValues();
     TextFunctions::setCursor(32, 16);
     typeWriteMessage(RegisterTexts::email,0);
     TextFunctions::setCursor(39, 16);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPrompt();
+    prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    email = prompt->retValues();;
+    email = prompt->RetValues();;
     if(LoginManager::registerNew(log, email, pass))
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.SetCurrentState(States::MENU);
     }
     else
     {
-        mFsm.setCurrentState(States::IDLE);
+        mFsm.SetCurrentState(States::IDLE);
     }
 }
 
-void StateRegister::onExit() {
-    State::onExit();
+void StateRegister::OnExit() {
+    State::OnExit();
 }

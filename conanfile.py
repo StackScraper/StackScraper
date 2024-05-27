@@ -4,6 +4,9 @@
 from conan import ConanFile
 from conan.tools.cmake import cmake_layout, CMakeToolchain
 
+#  Default generated file by conan package manager
+#  Provides all information about actions on packages
+
 class ConanApplication(ConanFile):
     package_type = "application"
     settings = "os", "compiler", "build_type", "arch"

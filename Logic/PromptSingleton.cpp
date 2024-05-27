@@ -6,7 +6,13 @@
 
 #include <utility>
 
-std::string getMatch(std::string &text, std::vector<std::string> dict) {
+/**
+ * Local function implemented to check for matches with dictionary in getPromptAuto
+ * @param text
+ * @param dict
+ * @return
+ */
+std::string GetMatch(std::string &text, std::vector<std::string> dict) {
     bool nEqual = false;
     int len = dict.size();
     for (int i = 0; i < len; i++) {
@@ -28,11 +34,19 @@ std::string getMatch(std::string &text, std::vector<std::string> dict) {
     return text;
 }
 
-void PromptSingleton::setValues(std::string &val) {
+/**
+ * Function to change current value of prompt
+ * @param val value to be set
+ */
+void PromptSingleton::SetValues(std::string &val) {
     this->prompt = val;
 }
 
-PromptSingleton *PromptSingleton::getInstance() {
+/**
+ * Returns instance of singleton
+ * @return instance of singleton
+ */
+PromptSingleton *PromptSingleton::GetInstance() {
     if (instancePtr == nullptr)
     {
         instancePtr = new PromptSingleton();
@@ -44,13 +58,20 @@ PromptSingleton *PromptSingleton::getInstance() {
     }
 }
 
-void PromptSingleton::getPrompt() {
+/**
+ * Sets prompt from cin stream
+ */
+void PromptSingleton::GetPrompt() {
     std::getline(std::cin, prompt);
 }
 
-void PromptSingleton::getPromptAuto(std::vector<std::string> dict) {
+/**
+ * Function which gets new prompt to set directly from cin stream but also consist autocomplete
+ * @param dict dictionary used to check for autocompletion
+ */
+void PromptSingleton::GetPromptAuto(std::vector<std::string> dict) {
     std::getline(std::cin, prompt);
-    std::string t1 = this->retValues();
-    std::string temp = getMatch(t1, std::move(dict));
-    this->setValues(temp);
+    std::string t1 = this->RetValues();
+    std::string temp = GetMatch(t1, std::move(dict));
+    this->SetValues(temp);
 }

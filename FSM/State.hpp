@@ -29,7 +29,7 @@ public:
         return mID;
     }
     /// The name of the state
-    inline const std::string& getName() const
+    inline const std::string& GetName() const
     {
         return mName;
     }
@@ -46,20 +46,20 @@ public:
     /**
      * Virtual function to describe behaviour of state on enter time
      */
-    virtual void onEnter()
+    virtual void OnEnter()
     {
     }
     /**
      * Virtual function to describe behaviour of state on exit time
      */
-    virtual void onExit()
+    virtual void OnExit()
     {
     }
     /**
      * Virtual function to describe behaviour of state on update time
      * on update - in the middle of the state flow
      */
-    virtual void onUpdate()
+    virtual void OnUpdate()
     {
     }
 protected:

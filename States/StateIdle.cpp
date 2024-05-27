@@ -8,39 +8,39 @@
 
 
 
-void StateIdle::onEnter(){
-    State<States>::onEnter();
+void StateIdle::OnEnter(){
+    State<States>::OnEnter();
     system("cls");
     TextFunctions::changeTextColor(TextColors::BEIGE);
     TextFunctions::print(IdleTexts::title);
 }
 
-void StateIdle::onUpdate() {
+void StateIdle::OnUpdate() {
 
-    State<States>::onUpdate();
+    State<States>::OnUpdate();
     TextFunctions::setCursor(40, 9);
     TextFunctions::typeWriteMessage(IdleTexts::helloIns, 50);
     TextFunctions::setCursor(40, 11);
-    prompt->getPromptAuto(dict);
-    if(prompt->retValues() == "login")
+    prompt->GetPromptAuto(dict);
+    if(prompt->RetValues() == "login")
     {
-        mFsm.setCurrentState(States::LOGIN);
+        mFsm.SetCurrentState(States::LOGIN);
     }
-    else if(prompt->retValues() == "register")
+    else if(prompt->RetValues() == "register")
     {
-        mFsm.setCurrentState(States::REGISTER);
+        mFsm.SetCurrentState(States::REGISTER);
     }
-    else if(prompt->retValues() == "about")
+    else if(prompt->RetValues() == "about")
     {
-        mFsm.setCurrentState(States::ABOUT);
+        mFsm.SetCurrentState(States::ABOUT);
     }
     else
     {
-        onEnter();
-        mFsm.setCurrentState(States::IDLE);
+        OnEnter();
+        mFsm.SetCurrentState(States::IDLE);
     }
 }
 
-void StateIdle::onExit() {
-    State<States>::onExit();
+void StateIdle::OnExit() {
+    State<States>::OnExit();
 }

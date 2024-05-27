@@ -5,55 +5,61 @@
 #include "StateResult.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/StackApi/SyntaxHighlighting.hpp"
+#include <vector>
 
-void StateResult::onEnter() {
-    State::onEnter();
+
+
+void StateResult::OnEnter() {
+    State::OnEnter();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
     system("cls");
     TextFunctions::print(ResultTexts::title);
 }
 
-void StateResult::onUpdate() {
-    State::onUpdate();
+void StateResult::OnUpdate() {
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(ResultTexts::questionText, 30);
     TextFunctions::setCursor(50, 10);
-    TextFunctions::changeTextColor(TextColors::CYAN);
-    question = prompt->retValues();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
+    question = prompt->RetValues();
     TextFunctions::print(question);
     QuestionManage();
-    prompt->getPromptAuto(dict);
-    if (prompt->retValues() == "return") {
-        mFsm.setCurrentState(States::MENU);
-    } else {
-        mFsm.setCurrentState(States::PROMPT);
+    prompt->GetPromptAuto(dict);
+    if(prompt->RetValues() == "return")
+    {
+        mFsm.SetCurrentState(States::MENU);
+    }
+    else {
+        mFsm.SetCurrentState(States::PROMPT);
     }
 }
 
-void StateResult::onExit() {
-    State::onExit();
-    TextFunctions::changeTextColor(TextColors::CYAN);
+void StateResult::OnExit() {
+    State::OnExit();
+    TextFunctions::changeTextColor(TextColors::BEIGE);
 }
 
 void StateResult::QuestionManage() {
-    sm.setQuestion(prompt->retValues());
-    std::string JsonQuestion = sm.askQuestion();
-    std::string question = sm.changeJsonToString(JsonQuestion);
-    std::cout << "Question:"<<std::endl;
+    sm.SetQuestion(prompt->RetValues());
+    sm.AskQuestion(question);
+    std::string jSonTemp = question;
+    sm.ChangeJsonToString(question);
+    TextFunctions::print(ResultTexts::questionText);
     TextFunctions::changeTextColor(TextColors::WHITE);
-    std::string questionWithoutHtml = sm.RemoveHtmlTags(question);
-    std::string finalQuestion = sm.ReturnNiceCode(questionWithoutHtml);
-    SyntaxHighlighting sh = SyntaxHighlighting();
-    sh.RecognizeSyntax(finalQuestion);
-    TextFunctions::typeWriteMessage(finalQuestion, 5);
-    sm.getAnswer(JsonQuestion);
+    sm.RemoveHtmlTags(question);
+    sm.ReturnNiceCode(question);
+    sh.RecognizeSyntax(question);
+    TextFunctions::typeWriteMessage(question, 1);
+    sm.GetAnswer(jSonTemp);
     for (int i = 0; i < 3; i++) {
         if (sm.bestAnswer[i] != "") {
             std::cout << "Answer: " << i + 1 << std::endl;
-            std::string withOutHtmlTags = sm.RemoveHtmlTags(sm.bestAnswer[i]);
-            std::string finalAnswer = sm.ReturnNiceCode(withOutHtmlTags);
-            sh.RecognizeSyntax(finalAnswer);
-            TextFunctions::typeWriteMessage(finalAnswer, 2);
+            std::string ans = sm.bestAnswer[i];
+            sm.RemoveHtmlTags(ans);
+            sm.ReturnNiceCode(ans);
+            sh.RecognizeSyntax(ans);
+            TextFunctions::typeWriteMessage(ans, 1);
             std::cout << std::endl;
         }
     }

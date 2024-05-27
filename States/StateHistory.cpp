@@ -8,18 +8,18 @@
 
 
 
-void StateHistory::onExit() {
-    State::onExit();
+void StateHistory::OnExit() {
+    State::OnExit();
     std::vector<std::string> _history = DBmanager::getHistory();
     for (auto his: _history) {
         history += his;
     }
 }
 
-void StateHistory::onUpdate() {
+void StateHistory::OnUpdate() {
 
 
-    State::onUpdate();
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(HistoryTexts::returnText, 30);
     TextFunctions::setCursor(4, 12);
@@ -27,16 +27,16 @@ void StateHistory::onUpdate() {
     TextFunctions::setCursor(27, 13);
     TextFunctions::print(history);
     TextFunctions::setCursor(27, 13 + DBmanager::getHistory().size());
-    prompt->getPromptAuto(dict);
-    if( TextFunctions::toLower(prompt->retValues()) == "return")
+    prompt->GetPromptAuto(dict);
+    if( TextFunctions::toLower(prompt->RetValues()) == "return")
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.SetCurrentState(States::MENU);
     }
 
 }
 
-void StateHistory::onEnter() {
-    State::onEnter();
+void StateHistory::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(HistoryTexts::title);
 }

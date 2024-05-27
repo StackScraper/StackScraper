@@ -10,23 +10,23 @@
 
 
 
-void StatePrompt::onEnter() {
-    State::onEnter();
+void StatePrompt::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(PromptTexts::title);
 }
 
-void StatePrompt::onUpdate() {
+void StatePrompt::OnUpdate() {
 
 
-    State::onUpdate();
+    State::OnUpdate();
     TextFunctions::setCursor(10, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);
-    prompt->getPromptAuto(dict);
-    if(prompt->retValues() == "return")
-        mFsm.setCurrentState(States::MENU);
+    prompt->GetPromptAuto(dict);
+    if(prompt->RetValues() == "return")
+        mFsm.SetCurrentState(States::MENU);
     else
-        mFsm.setCurrentState(States::RESULT);
+        mFsm.SetCurrentState(States::RESULT);
 
 
     // TextFunctions::typeWriteMessage(tescik, 30);
@@ -47,6 +47,6 @@ void StatePrompt::onUpdate() {
 
 }
 
-void StatePrompt::onExit() {
-    State::onExit();
+void StatePrompt::OnExit() {
+    State::OnExit();
 }

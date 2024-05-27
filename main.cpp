@@ -22,7 +22,7 @@ int main() {
     bool finish = false;
     while(!finish)
     {
-        eng.run(); ///< Start engine
+        eng.Run(); ///< Start engine
     }
     return 0;
 }

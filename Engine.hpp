@@ -18,7 +18,7 @@ class Engine {
     std::unique_ptr<FiniteStateMachine<States>> fsm = nullptr; ///< Pointer to state machine
 public:
     Engine(); ///< Default constructor
-    void run(); ///< Function which executes start of state machine
+    void Run(); ///< Function which executes start of state machine
 };
 
 

@@ -8,14 +8,14 @@
 
 
 
-void StateAbout::onEnter() {
-    State::onEnter();
+void StateAbout::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(AboutTexts::title);
 }
 
-void StateAbout::onUpdate() {
-    State::onUpdate();
+void StateAbout::OnUpdate() {
+    State::OnUpdate();
     TextFunctions::setCursor(42, 10);
     TextFunctions::typeWriteMessage(AboutTexts::aboutText, 30);
     TextFunctions::changeTextColor(TextColors::PINK);
@@ -27,17 +27,17 @@ void StateAbout::onUpdate() {
     TextFunctions::setCursor(32, 14);
     TextFunctions::typeWriteMessage(AboutTexts::returnText, 30);
     TextFunctions::setCursor(32, 16);
-    prompt->getPromptAuto(dict);
-    if (TextFunctions::toLower(prompt->retValues()) == "return")
+    prompt->GetPromptAuto(dict);
+    if (TextFunctions::toLower(prompt->RetValues()) == "return")
     {
-        mFsm.setCurrentState(States::IDLE);
+        mFsm.SetCurrentState(States::IDLE);
     }
     else
     {
-        onEnter();
+        OnEnter();
     }
 }
 
-void StateAbout::onExit() {
-    State::onExit();
+void StateAbout::OnExit() {
+    State::OnExit();
 }

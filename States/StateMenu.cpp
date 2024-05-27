@@ -7,15 +7,15 @@
 #include "../Logic/TextFormatter.hpp"
 using namespace TextFunctions;
 
-void StateMenu::onEnter() {
-    State::onEnter();
+void StateMenu::OnEnter() {
+    State::OnEnter();
     system("cls");
     print(MenuTexts::title);
 }
 
-void StateMenu::onUpdate() {
+void StateMenu::OnUpdate() {
 
-    State::onUpdate();
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     typeWriteMessage(MenuTexts::helloText, 30);
     TextFunctions::setCursor(32+ MenuTexts::helloText.length(), 10);
@@ -23,31 +23,31 @@ void StateMenu::onUpdate() {
     TextFunctions::print(MenuTexts::favText);
     TextFunctions::setCursor(32, 12);
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
-    prompt->getPromptAuto(dict);
+    prompt->GetPromptAuto(dict);
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    if(prompt->retValues() == "question")
+    if(prompt->RetValues() == "question")
     {
-        mFsm.setCurrentState(States::PROMPT);
+        mFsm.SetCurrentState(States::PROMPT);
     }
-    else if(prompt->retValues() == "history")
+    else if(prompt->RetValues() == "history")
     {
-        mFsm.setCurrentState(States::HISTORY);
+        mFsm.SetCurrentState(States::HISTORY);
     }
-    else if(prompt->retValues() == "tags")
+    else if(prompt->RetValues() == "tags")
     {
-        mFsm.setCurrentState(States::TAGS);
+        mFsm.SetCurrentState(States::TAGS);
     }
-    else if (prompt->retValues() == "favourites")
+    else if (prompt->RetValues() == "favourites")
     {
-        mFsm.setCurrentState(States::FAVOURITES);
+        mFsm.SetCurrentState(States::FAVOURITES);
     }
     else
     {
-        onEnter();
-        mFsm.setCurrentState(States::MENU);
+        OnEnter();
+        mFsm.SetCurrentState(States::MENU);
     }
 }
 
-void StateMenu::onExit() {
-    State::onExit();
+void StateMenu::OnExit() {
+    State::OnExit();
 }
