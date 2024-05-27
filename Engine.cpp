@@ -7,8 +7,8 @@
 /**
  * Function which executes first onUpdate of state
  */
-void Engine::run() {
-    fsm->onUpdate();
+void Engine::Run() {
+    fsm->OnUpdate();
 }
 
 /**

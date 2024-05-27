@@ -23,11 +23,11 @@ void StackManager::SetQuestionByTags(std::string newInput) {
     finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
 }
 void StackManager::GetAnswer(std::string res) {
-    int temp = getQuestionId(res);
+    int temp = GetQuestionId(res);
     answerID=std::to_string(temp);
     answerInput = std::to_string(temp);
     answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
-    fillTabel(answerInput);
+    FillTabel(answerInput);
 
 }
 
