@@ -32,11 +32,11 @@ void StateLogin::OnUpdate() {
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    pass = prompt->retValues();
+    pass = prompt->RetValues();
     DBmanager db = DBmanager();
     if(db.loginUser(log,pass))
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.SetCurrentState(States::MENU);
 
     }
     else
