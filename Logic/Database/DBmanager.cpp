@@ -69,11 +69,8 @@ int DBmanager::createUserTable()
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return 0;
     } else {
-        fprintf(stdout, "Table created successfully\n");
         return 1;
     }
 }
@@ -87,11 +84,8 @@ int DBmanager::createAdminTable() {
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return 0;
     } else {
-        fprintf(stdout, "Table created successfully\n");
         return 1;
     }
 
@@ -105,11 +99,8 @@ int DBmanager::createPhraseTable() {
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return 0;
     } else {
-        fprintf(stdout, "Table created successfully\n");
         return 1;
     }
 }
@@ -122,11 +113,8 @@ int DBmanager::createTagTable() {
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return 0;
     } else {
-        fprintf(stdout, "Table created successfully\n");
         return 1;
     }
 
@@ -141,11 +129,8 @@ int DBmanager::createPhraseTagTable()
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return 0;
     } else {
-        fprintf(stdout, "Table created successfully\n");
         return 1;
     }
 }
@@ -157,11 +142,8 @@ int DBmanager::createPhraseTagTable()
     rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return false;
     } else {
-        fprintf(stdout, "Records created successfully\n");
         return true;
     }
 }
@@ -214,11 +196,8 @@ bool DBmanager::insertAdmin(int Id) {
     rc = sqlite3_exec(db, sql, callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return false;
     } else {
-        fprintf(stdout, "Records created successfully\n");
         return true;
     }
 
@@ -257,11 +236,8 @@ bool DBmanager::insertPhrase(std::string &body, std::string &response) {
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return false;
     } else {
-        fprintf(stdout, "Records created successfully\n");
         return true;
     }
 
@@ -299,11 +275,8 @@ bool DBmanager::insertTag(std::string& body) {
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return false;
     } else {
-        fprintf(stdout, "Records created successfully\n");
         return true;
     }
 }
@@ -339,11 +312,8 @@ bool DBmanager::insertFavourite(int phraseId) {
     rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
         return false;
     } else {
-        fprintf(stdout, "Records created successfully\n");
         return true;
     }
 
@@ -399,7 +369,6 @@ std::vector<std::pair<std::string, std::string>> DBmanager::getPhraseWithTag() {
     }
 }
 
-
 bool DBmanager::loginUser(std::string &log, std::string &pass) {
 
     const char* sql = QueryHelper::loginUser(log,pass).c_str();
@@ -408,10 +377,6 @@ bool DBmanager::loginUser(std::string &log, std::string &pass) {
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
-    for(int i =0;i<receivedData.size();i++) {
-        std::cout<<receivedData[i].first<<" "<< receivedData[i].second<<std::endl;
-    }
-    std::cout<<std::endl;
 
     if( rc != SQLITE_OK ) {
         return false;
