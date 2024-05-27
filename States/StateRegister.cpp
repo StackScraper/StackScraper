@@ -39,11 +39,12 @@ void StateRegister::OnUpdate() {
     prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
 
-    email = prompt->retValues();
+    email = prompt->RetValues();
+    std::cout<<"hej";
     DBmanager db = DBmanager();
     if(db.insertUser(log,pass))
     {
-        mFsm.setCurrentState(States::LOGIN);
+        mFsm.SetCurrentState(States::LOGIN);
     }
     else
     {
