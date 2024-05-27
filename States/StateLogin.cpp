@@ -7,7 +7,7 @@
 #include "../Logic/Database/DBmanager.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/Database/LoginManager.hpp"
+#include "..//Logic/Database/DBmanager.hpp"
 
 void StateLogin::OnEnter() {
     State::OnEnter();
@@ -32,11 +32,12 @@ void StateLogin::OnUpdate() {
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    pass = prompt->RetValues();
-    if(LoginManager::login(log, pass))
+    pass = prompt->retValues();
+    DBmanager db = DBmanager();
+    if(db.loginUser(log,pass))
     {
-      //  DBmanager::setNickName(log);
-        mFsm.SetCurrentState(States::MENU);
+        mFsm.setCurrentState(States::MENU);
+
     }
     else
     {

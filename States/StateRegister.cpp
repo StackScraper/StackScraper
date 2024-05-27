@@ -5,7 +5,7 @@
 #include "StateRegister.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include "../Logic/Database/LoginManager.hpp"
+#include "..//Logic/Database/DBmanager.hpp"
 using namespace TextFunctions;
 
 void StateRegister::OnEnter() {
@@ -38,10 +38,12 @@ void StateRegister::OnUpdate() {
     TextFunctions::changeTextColor(TextColors::LIGHTGREEN);
     prompt->GetPrompt();
     TextFunctions::changeTextColor(TextColors::BEIGE);
-    email = prompt->RetValues();;
-    if(LoginManager::registerNew(log, email, pass))
+
+    email = prompt->retValues();
+    DBmanager db = DBmanager();
+    if(db.insertUser(log,pass))
     {
-        mFsm.SetCurrentState(States::MENU);
+        mFsm.setCurrentState(States::LOGIN);
     }
     else
     {

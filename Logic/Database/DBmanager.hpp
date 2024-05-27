@@ -12,12 +12,12 @@
 
 class DBmanager {
     static std::string nickName;
+    static int id;
+
     sqlite3 *db;
     char *zErrMsg;
     int rc;
     const char* data = "Callback function called";
-
-    QueryHelper queryHelper =  QueryHelper();
 
     int openDatabase();
     int createDatabase();
@@ -28,26 +28,35 @@ class DBmanager {
     int createPhraseTable();
     int createTagTable();
     int createPhraseTagTable();
-    int createFavPhrasesTable();
-    int createSearchedPhrasesTable();
 public:
     bool insertUser(std::string& nickname, std::string& password);
     std::vector<std::pair<std::string,std::string>> getUsers();
     bool updateUserPassword(int id,std::string& password);
     bool deleteUser(int id);
 
+    bool loginUser(std::string& log, std::string& pass);
+
     bool insertAdmin(int Id);
     std::vector<std::pair<std::string,std::string>> getAdmins();
     bool deleteAdmin(int adminId);
 
+    bool insertPhrase(std::string &body, std::string &response);
+    std::vector<std::pair<std::string,std::string>>  getPhrases();
+    bool deletePhrase(int id);
+
+    bool insertTag(std::string& body);
+    std::vector<std::pair<std::string,std::string>> getTags();
+    bool deleteTag(int id);
+
+    bool insertFavourite(int phraseId);
+    std::vector<std::pair<std::string,std::string>> getFavourites();
+    bool deleteFavourite(int favId);
+
+    bool connectTagToPhrase(int phraseId,int tagId);
+    std::vector<std::pair<std::string,std::string>> getPhraseWithTag();
+
     DBmanager();
     ~DBmanager();
-   static bool registerMember(std::string& log, std::string& email, std::string& pass);
-    static void setNickName(std::string& nick);
-     static std::vector<std::string> getTags();
-     static std::vector<std::string> getMembers();
-     static std::vector<std::string> getFavourites();
-     static std::vector<std::string> getHistory();
 };
 
 
