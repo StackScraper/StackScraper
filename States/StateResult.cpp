@@ -10,25 +10,25 @@
 
 
 
-void StateResult::onEnter() {
-    State::onEnter();
+void StateResult::OnEnter() {
+    State::OnEnter();
     system("cls");
     TextFunctions::print(ResultTexts::title);
 }
 
-void StateResult::onUpdate() {
-    State::onUpdate();
+void StateResult::OnUpdate() {
+    State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(ResultTexts::questionText, 30);
     TextFunctions::setCursor(50, 10);
     TextFunctions::changeTextColor(TextColors::CYAN);
-    question = prompt->retValues();
+    question = prompt->RetValues();
     TextFunctions::print(question);
 
-    sm.setQuestion(prompt->retValues());
-    std::string JsonQuestion = sm.askQuestion();
+    sm.SetQuestion(prompt->RetValues());
+    std::string JsonQuestion = sm.AskQuestion();
 
-    std::string question = sm.changeJsonToString(JsonQuestion);
+    std::string question = sm.ChangeJsonToString(JsonQuestion);
     //TextFunctions::typeWriteMessage(question, 30);
 
     std::cout << "Question:"<< std::endl;
@@ -42,7 +42,7 @@ void StateResult::onUpdate() {
     std::cout << finalQuestion;
 
 
-    sm.getAnswer(JsonQuestion);
+    sm.GetAnswer(JsonQuestion);
     std::cout << "Answer 1:" << std::endl;
 
     const std::string tescik = sm.bestAnswer[0];
@@ -52,18 +52,18 @@ void StateResult::onUpdate() {
 
     sh.RecognizeSyntax(finalAnswer);
     std::cout << finalAnswer;
-    prompt->getPromptAuto(dict);
-    if(prompt->retValues() == "return")
+    prompt->GetPromptAuto(dict);
+    if(prompt->RetValues() == "return")
     {
-        mFsm.setCurrentState(States::MENU);
+        mFsm.SetCurrentState(States::MENU);
     }
     else {
-        mFsm.setCurrentState(States::PROMPT);
+        mFsm.SetCurrentState(States::PROMPT);
     }
 }
 
-void StateResult::onExit() {
-    State::onExit();
+void StateResult::OnExit() {
+    State::OnExit();
     TextFunctions::changeTextColor(TextColors::CYAN);
 
 }

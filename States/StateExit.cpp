@@ -4,14 +4,14 @@
 
 #include "StateExit.hpp"
 
-void StateExit::onExit() {
-    State::onExit();
+void StateExit::OnExit() {
+    State::OnExit();
 }
 
-void StateExit::onUpdate() {
-    State::onUpdate();
+void StateExit::OnUpdate() {
+    State::OnUpdate();
 }
 
-void StateExit::onEnter() {
-    State::onEnter();
+void StateExit::OnEnter() {
+    State::OnEnter();
 }

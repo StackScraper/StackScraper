@@ -9,20 +9,20 @@
 #include <string>
 
 //SEARCH: https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=how%20to%20declare%20array%20of%20string%20in%20cpp&site=stackoverflow&filter=withbody
-std::string StackManager::askQuestion() {
+std::string StackManager::AskQuestion() {
     cpr::Response r = cpr::Get(cpr::Url{finalInput});
     return r.text;
     //return  finalInput;
 }
-void StackManager::setQuestion(std::string newInput) {
+void StackManager::SetQuestion(std::string newInput) {
     questionInput = regex_replace(newInput, std::regex(" "), space);
     finalInput = baseInput+apiVesion+"search/advanced?order=desc&sort=relevance&q="+questionInput+"&site=stackoverflow&filter=withbody";
 }
-void StackManager::setQuestionByTags(std::string newInput) {
+void StackManager::SetQuestionByTags(std::string newInput) {
     questionInput = regex_replace(newInput, std::regex(" "), space);
     finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
 }
-void StackManager::getAnswer(std::string res) {
+void StackManager::GetAnswer(std::string res) {
     int temp = getQuestionId(res);
     answerID=std::to_string(temp);
     answerInput = std::to_string(temp);
@@ -31,7 +31,7 @@ void StackManager::getAnswer(std::string res) {
 
 }
 
-std::string StackManager::changeJsonToString(std::string input) {
+std::string StackManager::ChangeJsonToString(std::string input) {
 
     nlohmann::json data = nlohmann::json::parse(input);
 
@@ -53,7 +53,7 @@ std::string StackManager::changeJsonToString(std::string input) {
 
 }
 
-int StackManager::getQuestionId(std::string input) {
+int StackManager::GetQuestionId(std::string input) {
 
     nlohmann::json data = nlohmann::json::parse(input);
 
@@ -72,7 +72,7 @@ int StackManager::getQuestionId(std::string input) {
         return 0;
     }
 }
-void StackManager::fillTabel(std::string input) {
+void StackManager::FillTabel(std::string input) {
 
     cpr::Response r = cpr::Get(cpr::Url{input});
 

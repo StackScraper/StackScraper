@@ -36,13 +36,13 @@ public:
     int posOfKeyWord;
 
     std::string bestAnswer[3] = {"","",""};
-    std::string askQuestion();
-    void setQuestion(std::string newInput);
-    void setQuestionByTags(std::string newInput);
-    void getAnswer(std::string res);
-    std::string changeJsonToString(std::string);
-    int getQuestionId(std::string);
-    void fillTabel(std::string input);
+    std::string AskQuestion();
+    void SetQuestion(std::string newInput);
+    void SetQuestionByTags(std::string newInput);
+    void GetAnswer(std::string res);
+    std::string ChangeJsonToString(std::string);
+    int GetQuestionId(std::string);
+    void FillTabel(std::string input);
     std::string RemoveHtmlTags(const std::string& input);
     std::string ReturnNiceCode(std::string input);
 

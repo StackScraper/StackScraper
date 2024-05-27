@@ -42,7 +42,7 @@ public:
      * @return pointer on the new state
      */
     template <class S>
-    State<T>& add(T id)
+    State<T>& Add(T id)
     {
         static_assert(not std::is_same<State<T>, S>());
         mStates[id] = std::make_unique<S>(*this);
@@ -53,7 +53,7 @@ public:
      * @param stateID identification of desired state
      * @return desired state
      */
-    State<T>& getState(T stateID)
+    State<T>& GetState(T stateID)
     {
         return *mStates[stateID];
     }
@@ -61,7 +61,7 @@ public:
      * Function for returning current state
      * @return current state
      */
-    State<T>& getCurrentState()
+    State<T>& GetCurrentState()
     {
         return *mCurrentState;
     }
@@ -70,7 +70,7 @@ public:
      * Function for returning current state
      * @return current state
      */
-    const State<T>& getCurrentState() const
+    const State<T>& GetCurrentState() const
     {
         return *mCurrentState;
     }
@@ -79,19 +79,19 @@ public:
      * Function for changing state as desired
      * @param stateID id of desired state
      */
-    void setCurrentState(T stateID)
+    void SetCurrentState(T stateID)
     {
-        State<T>* state = &getState(stateID);
-        setCurrentState(state);
+        State<T>* state = &GetState(stateID);
+        SetCurrentState(state);
     }
     /**
      * Function called to change state
      */
-    void onUpdate()
+    void OnUpdate()
     {
         if (mCurrentState != nullptr)
         {
-            mCurrentState->onUpdate();
+            mCurrentState->OnUpdate();
         }
     }
 protected:
@@ -100,7 +100,7 @@ protected:
      * creating multiple instances of same state
      * @param state
      */
-    void setCurrentState(State<T>* state)
+    void SetCurrentState(State<T>* state)
     {
         if (mCurrentState == state)
         {
@@ -108,12 +108,12 @@ protected:
         }
         if (mCurrentState != nullptr)
         {
-            mCurrentState->onExit();
+            mCurrentState->OnExit();
         }
         mCurrentState = state;
         if (mCurrentState != nullptr)
         {
-            mCurrentState->onEnter();
+            mCurrentState->OnEnter();
         }
     }
 };

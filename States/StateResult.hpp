@@ -16,7 +16,7 @@
 #include "../Logic/StackApi/StackManager.hpp"
 
 class StateResult : public State<States> {
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string question;
     std::string answer;
     StackManager sm = StackManager();
@@ -28,9 +28,9 @@ public:
     explicit StateResult(FiniteStateMachine<States>& fsm)
             : State<States>(fsm, States::RESULT, "RESULT"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 

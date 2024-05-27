@@ -15,7 +15,7 @@
 #include <vector>
 
 class StateMenu : public State<States> {
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::vector<std::string> dict = {
             "question",
             "history",
@@ -27,9 +27,9 @@ public:
     explicit StateMenu(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::MENU, "MENU"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 

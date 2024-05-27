@@ -15,7 +15,7 @@
 #include "../Logic/PromptSingleton.hpp"
 
 class StateFavourites : public State<States> {
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string favs;
     std::vector<std::string> dict = {
             "return"
@@ -24,9 +24,9 @@ public:
     explicit StateFavourites(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::FAVOURITES, "FAVOURITES"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 

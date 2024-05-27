@@ -14,14 +14,14 @@
 #include <string>
 
 class StateExit : public State<States> {
-    PromptSingleton* prompt = PromptSingleton::getInstance();
+    PromptSingleton* prompt = PromptSingleton::GetInstance();
 public:
     explicit StateExit(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::EXIT, "EXIT"){}
 
-    void onEnter() override;
-    void onUpdate() override;
-    void onExit() override;
+    void OnEnter() override;
+    void OnUpdate() override;
+    void OnExit() override;
 };
 
 
