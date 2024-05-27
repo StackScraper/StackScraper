@@ -112,6 +112,7 @@ namespace ResultTexts
     static std::string answer = "Example answered question: ";
     static std::string proceed = "Press enter to get back to menu";
     static std::string questionText = "Your question is: ";
+    static std::string firstAnswer = "Answer 1: ";
 }
 
 ///namespace for History state

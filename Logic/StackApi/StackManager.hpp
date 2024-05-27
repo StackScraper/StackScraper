@@ -32,15 +32,15 @@ public:
 
 
     std::string bestAnswer[3] = {"","",""};
-    std::string AskQuestion();
+    void AskQuestion(std::string & question);
     void SetQuestion(std::string newInput);
     void SetQuestionByTags(std::string newInput);
     void GetAnswer(std::string res);
-    std::string ChangeJsonToString(std::string);
+    void ChangeJsonToString(std::string&);
     int GetQuestionId(std::string);
     void FillTabel(std::string input);
-    std::string RemoveHtmlTags(const std::string& input);
-    std::string ReturnNiceCode(std::string input);
+    void RemoveHtmlTags(std::string& input);
+    void ReturnNiceCode(std::string& input);
     void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
 };
 

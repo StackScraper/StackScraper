@@ -14,12 +14,15 @@
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
 #include "../Logic/StackApi/StackManager.hpp"
+#include "../Logic/StackApi/SyntaxHighlighting.hpp"
+
 
 class StateResult : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string question;
     std::string answer;
     StackManager sm = StackManager();
+    SyntaxHighlighting sh = SyntaxHighlighting();
     std::vector<std::string> dict = {
             "question",
             "return"

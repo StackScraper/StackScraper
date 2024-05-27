@@ -9,9 +9,9 @@
 #include <string>
 
 //SEARCH: https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=how%20to%20declare%20array%20of%20string%20in%20cpp&site=stackoverflow&filter=withbody
-std::string StackManager::AskQuestion() {
+void StackManager::AskQuestion(std::string & question) {
     cpr::Response r = cpr::Get(cpr::Url{finalInput});
-    return r.text;
+    question = r.text;
     //return  finalInput;
 }
 void StackManager::SetQuestion(std::string newInput) {
@@ -28,10 +28,9 @@ void StackManager::GetAnswer(std::string res) {
     answerInput = std::to_string(temp);
     answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
     FillTabel(answerInput);
-
 }
 
-std::string StackManager::ChangeJsonToString(std::string input) {
+void StackManager::ChangeJsonToString(std::string & input) {
 
     nlohmann::json data = nlohmann::json::parse(input);
 
@@ -43,12 +42,12 @@ std::string StackManager::ChangeJsonToString(std::string input) {
         // Sprawdzenie czy istnieje klucz "body"
         if (item.contains("body")) {
             std::string body = item["body"]; // Pobranie wartości "body"
-            return body;
+            input = body;
         } else {
-            return "Nie znaleziono klucza 'body'.";
+            input = "Nie znaleziono klucza 'body'.";
         }
     } else {
-        return "Nie znaleziono klucza 'items' lub nie jest to tablica.";
+        input = "Nie znaleziono klucza 'items' lub nie jest to tablica.";
     }
 
 }
@@ -101,11 +100,11 @@ void StackManager::FillTabel(std::string input) {
         std::cout << "Brak klucza 'items' lub 'items' nie jest tablicą" << std::endl;
     }
 }
-std::string StackManager::RemoveHtmlTags(const std::string& input) {
+void StackManager::RemoveHtmlTags(std::string& input) {
     std::regex htmlTagRegex(R"(<(?!\/?code)[^>]*>)");
-    return std::regex_replace(input, htmlTagRegex, "");
+    input = std::regex_replace(input, htmlTagRegex, "");
 }
-std::string StackManager::ReturnNiceCode(std::string input) {
+void StackManager::ReturnNiceCode(std::string& input) {
 
     int pos = input.find("&lt;");
 
@@ -130,5 +129,4 @@ std::string StackManager::ReturnNiceCode(std::string input) {
         pos = input.find("&amp;", pos + 1);
 
     }
-    return input;
 }
