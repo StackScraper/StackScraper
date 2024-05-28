@@ -50,7 +50,7 @@ void StateResult::QuestionManage() {
     sm.RemoveHtmlTags(question);
     sm.ReturnNiceCode(question);
     sh.RecognizeSyntax(question);
-    TextFunctions::typeWriteMessage(question, 1);
+    TextFunctions::print(question);
     sm.GetAnswer(jSonTemp);
     for (int i = 0; i < 3; i++) {
         if (sm.bestAnswer[i] != "") {
@@ -59,8 +59,9 @@ void StateResult::QuestionManage() {
             sm.RemoveHtmlTags(ans);
             sm.ReturnNiceCode(ans);
             sh.RecognizeSyntax(ans);
-            TextFunctions::typeWriteMessage(ans, 1);
+            TextFunctions::print(ans);
             std::cout << std::endl;
         }
+        sm.bestAnswer[i] = "";
     }
 }
