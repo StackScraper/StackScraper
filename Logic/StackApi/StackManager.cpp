@@ -100,3 +100,9 @@ void StackManager::ReturnNiceCode(std::string& input) {
     ChangingSpecialChar(input, "&quot;", "\"");
     ChangingSpecialChar(input, "&amp;", "&");
 }
+//https://api.stackexchange.com/questions?site=stackoverflow&tagged=c++;java;&filter=withbody
+void StackManager::LookForByTags(std::string &input) {
+    questionInput = regex_replace(input, std::regex(" "), ";");
+    finalInput = baseInput+apiVesion+"questions?site=stackoverflow&tagged="+questionInput+"&filter=withbody";
+}
+
