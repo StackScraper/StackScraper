@@ -110,7 +110,6 @@ void StackManager::LookForByTags(std::string &input) {
     questionInput = regex_replace(input, std::regex(" "), ";");
     finalInput = baseInput+apiVesion+"questions?site=stackoverflow&tagged="+questionInput+"&filter=withbody";
 }
-
 void StackManager::checkTagQuestionList(std::string &tagInput) {
     nlohmann::json data = nlohmann::json::parse(tagInput);
 

@@ -42,6 +42,7 @@ public:
 
     bool insertPhrase(std::string &body, std::string &response);
     std::vector<std::pair<std::string,std::string>>  getPhrases();
+    std::vector<std::pair<std::string,std::string>>  getPhrase(int phraseId);
     bool deletePhrase(int id);
 
     bool insertTag(std::string& body);

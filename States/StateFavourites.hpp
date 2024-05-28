@@ -16,10 +16,17 @@
 
 class StateFavourites : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
-    std::string favs;
     std::vector<std::string> dict = {
             "return"
     };
+
+    DBmanager db;
+    std::vector<int> indexes;
+    std::vector<std::pair<std::string,std::string>> data;
+    std::vector<std::string> trimmedData;
+
+    void ManageData();
+    int CheckFav(std::string);
 public:
     explicit StateFavourites(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::FAVOURITES, "FAVOURITES"){}

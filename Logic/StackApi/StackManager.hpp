@@ -29,12 +29,7 @@ class StackManager {
     std::string title;
     std::vector<std::string> questionsList;
 
-
-
-
 public:
-
-
 
     std::string bestAnswer[3] = {"","",""};
     void AskQuestion(std::string & question);

@@ -16,10 +16,14 @@
 
 class StateHistory : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
-    std::string history;
     std::vector<std::string> dict = {
             "return"
     };
+    DBmanager db;
+    std::vector<std::string> trimmedData;
+
+    void ManageData();
+    int CheckFav(std::string);
 public:
     explicit StateHistory(FiniteStateMachine<States>& fsm)
     : State<States>(fsm, States::HISTORY, "HISTORY"){}
