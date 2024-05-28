@@ -27,6 +27,8 @@ class StackManager {
     std::string stringQuestionID = "";
     int questionID;
     std::string title;
+    std::vector<std::string> questionsList;
+
 
 
 
@@ -46,6 +48,8 @@ public:
     void ReturnNiceCode(std::string& input);
     void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
     void LookForByTags(std::string& input);
+    void checkTagQuestionList(std::string& tagInput);
+    std::vector<std::string> getQuestionList();
 };
 
 

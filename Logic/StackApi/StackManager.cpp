@@ -20,7 +20,9 @@ void StackManager::SetQuestion(std::string newInput) {
 }
 void StackManager::SetQuestionByTags(std::string newInput) {
     questionInput = regex_replace(newInput, std::regex(" "), space);
-    finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
+    // finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
+    finalInput = baseInput+apiVesion+"search/advanced?order=desc&sort=activity&tagged="+questionInput+"&site=stackoverflow";
+
 }
 void StackManager::GetAnswer(std::string res) {
     SetQuestionId(res);
@@ -107,5 +109,33 @@ void StackManager::ReturnNiceCode(std::string& input) {
 void StackManager::LookForByTags(std::string &input) {
     questionInput = regex_replace(input, std::regex(" "), ";");
     finalInput = baseInput+apiVesion+"questions?site=stackoverflow&tagged="+questionInput+"&filter=withbody";
+}
+
+void StackManager::checkTagQuestionList(std::string &tagInput) {
+    nlohmann::json data = nlohmann::json::parse(tagInput);
+
+    for(int i = 0; i < 20; i++)
+    {
+    if (data.contains("items") && data["items"].is_array()) {
+        nlohmann::json item = data["items"][i];
+        if (item.contains("question_id")) {
+            questionID = item["question_id"];
+            title = item["title"];
+            questionsList.push_back(item["title"]);
+        } else {
+            title = "Not found";
+            questionID = 0;
+        }
+    } else {
+        title = "Not found";
+        questionID = 0;
+    }
+    }
+}
+
+std::vector<std::string> StackManager::getQuestionList(){
+    std::string temp;
+
+    return questionsList;
 }
 
