@@ -8,9 +8,11 @@
 
 
 
+
 void StateFavourites::OnExit() {
     State::OnExit();
-    std::vector<std::string> _favs = DBmanager::getFavourites();
+    std::vector<std::string> _favs;// = DBmanager::getFavourites();
+
     for (auto fav: _favs) {
         favs += fav;
     }
@@ -26,9 +28,11 @@ void StateFavourites::OnUpdate() {
     TextFunctions::typeWriteMessage(FavouriteTexts::favTheme, 30);
     TextFunctions::setCursor(4 + FavouriteTexts::favTheme.length() + 1, 13);
     TextFunctions::print(favs);
-    TextFunctions::setCursor(4 + FavouriteTexts::favTheme.length() + 1, 13 + DBmanager::getFavourites().size());
+
+    //TextFunctions::setCursor(4 + FavouriteTexts::favTheme.length() + 1, 13 + DBmanager::getFavourites().size());
     prompt->GetPromptAuto(dict);
     if (TextFunctions::toLower(prompt->RetValues()) == "return")
+
     {
         mFsm.SetCurrentState(States::MENU);
     }

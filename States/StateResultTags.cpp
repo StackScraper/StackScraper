@@ -1,22 +1,19 @@
 //
-// Created by Michin on 24.04.2024.
+// Created by jakub on 28.05.2024.
 //
 
-#include "StateResult.hpp"
-#include "../Texts/AllTexts.hpp"
+#include "StateResultTags.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include <vector>
+#include "../Texts/AllTexts.hpp"
 
-
-
-void StateResult::OnEnter() {
+void StateResultTags::OnEnter() {
     State::OnEnter();
     TextFunctions::changeTextColor(TextColors::BEIGE);
     system("cls");
     TextFunctions::print(ResultTexts::title);
 }
 
-void StateResult::OnUpdate() {
+void StateResultTags::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(ResultTexts::questionText, 30);
@@ -31,17 +28,16 @@ void StateResult::OnUpdate() {
         mFsm.SetCurrentState(States::MENU);
     }
     else {
-        mFsm.SetCurrentState(States::PROMPT);
+        mFsm.SetCurrentState(States::TAGS);
     }
 }
 
-void StateResult::OnExit() {
-    State::OnExit();
-    TextFunctions::changeTextColor(TextColors::BEIGE);
+void StateResultTags::OnExit() {
+    State<States>::OnExit();
 }
 
-void StateResult::QuestionManage() {
-    sm.SetQuestion(prompt->RetValues());
+void StateResultTags::QuestionManage() {
+    sm.SetQuestionByTags(prompt->RetValues());
     sm.AskQuestion(question);
     std::string jSonTemp = question;
     sm.ChangeJsonToString(question);

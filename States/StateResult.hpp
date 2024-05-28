@@ -34,6 +34,8 @@ public:
     void OnEnter() override;
     void OnUpdate() override;
     void OnExit() override;
+
+    void QuestionManage();
 };
 
 

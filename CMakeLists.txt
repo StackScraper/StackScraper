@@ -48,8 +48,6 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StateResult.hpp
         Globals.hpp
         Logic/TextFormatter.hpp
-        Logic/Database/LoginManager.cpp
-        Logic/Database/LoginManager.hpp
         States/StateAbout.cpp
         States/StateAbout.hpp
         Logic/Database/DBmanager.cpp
@@ -59,6 +57,10 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/StackApi/Syntax.hpp
         Logic/Database/QueryHelper.cpp
         Logic/Database/QueryHelper.hpp
+        States/StateListTags.cpp
+        States/StateListTags.hpp
+        States/StateResultTags.cpp
+        States/StateResultTags.hpp
 )
 
 
