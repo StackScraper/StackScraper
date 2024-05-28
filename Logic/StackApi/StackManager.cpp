@@ -23,10 +23,10 @@ void StackManager::SetQuestionByTags(std::string newInput) {
     finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
 }
 void StackManager::GetAnswer(std::string res) {
-    int temp = GetQuestionId(res);
-    answerID=std::to_string(temp);
+    SetQuestionId(res);
+    stringQuestionID=std::to_string(questionID);
     //answerInput = std::to_string(temp);
-    answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
+    answerInput = baseInput+apiVesion+"questions/"+stringQuestionID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
     FillTabel(answerInput);
 }
 
@@ -47,25 +47,21 @@ void StackManager::ChangeJsonToString(std::string & input) {
 
 }
 
-int StackManager::GetQuestionId(std::string input) {
+void StackManager::SetQuestionId(std::string input) {
 
     nlohmann::json data = nlohmann::json::parse(input);
 
     if (data.contains("items") && data["items"].is_array()) {
         nlohmann::json item = data["items"][0];
         if (item.contains("question_id")) {
-            int body = item["question_id"];
-            questionID = body;
-            return body;
+            questionID = item["question_id"];
         } else {
             title = "Not found";
             questionID = 0;
-            return 0;
         }
     } else {
         title = "Not found";
         questionID = 0;
-        return 0;
     }
 }
 
