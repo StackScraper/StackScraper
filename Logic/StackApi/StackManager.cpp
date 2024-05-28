@@ -63,6 +63,21 @@ int StackManager::GetQuestionId(std::string input) {
         return 0;
     }
 }
+std::string StackManager::GetQuestionTitle(std::string input) {
+    nlohmann::json data = nlohmann::json::parse(input);
+
+    if (data.contains("items") && data["items"].is_array()) {
+        nlohmann::json item = data["items"][0];
+        if (item.contains("title")) {
+            std::string body = item["title"];
+            return body;
+        } else {
+            return "";
+        }
+    } else {
+        return "";
+    }
+}
 void StackManager::FillTabel(std::string input) {
     cpr::Response r = cpr::Get(cpr::Url{input});
     std::string jsonText = r.text;
