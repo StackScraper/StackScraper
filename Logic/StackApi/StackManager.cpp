@@ -23,11 +23,10 @@ void StackManager::SetQuestionByTags(std::string newInput) {
     finalInput = baseInput+apiVesion+"search?pagesize=1&order=desc&sort=votes&intitle=="+questionInput+"&site=stackoverflow&filter=withbody";
 }
 void StackManager::GetAnswer(std::string res) {
-    // int temp = GetQuestionId(res);
-    // answerID=std::to_string(temp);
-    // answerInput = std::to_string(temp);
-    GetQuestionInfo(res);
-    answerInput = baseInput+apiVesion+"questions/"+questionID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
+    int temp = GetQuestionId(res);
+    answerID=std::to_string(temp);
+    //answerInput = std::to_string(temp);
+    answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
     FillTabel(answerInput);
 }
 
@@ -48,39 +47,28 @@ void StackManager::ChangeJsonToString(std::string & input) {
 
 }
 
-void StackManager::GetQuestionInfo(std::string input) {
+int StackManager::GetQuestionId(std::string input) {
 
     nlohmann::json data = nlohmann::json::parse(input);
 
     if (data.contains("items") && data["items"].is_array()) {
         nlohmann::json item = data["items"][0];
         if (item.contains("question_id")) {
-            title = item["title"];
-            questionID = item["quesiton_id"];
+            int body = item["question_id"];
+            questionID = body;
+            return body;
         } else {
             title = "Not found";
-            questionID = "Not found";
+            questionID = 0;
+            return 0;
         }
     } else {
         title = "Not found";
-        questionID = "Not found";
+        questionID = 0;
+        return 0;
     }
 }
-std::string StackManager::GetQuestionTitle(std::string input) {
-    nlohmann::json data = nlohmann::json::parse(input);
 
-    if (data.contains("items") && data["items"].is_array()) {
-        nlohmann::json item = data["items"][0];
-        if (item.contains("title")) {
-            std::string body = item["title"];
-            return body;
-        } else {
-            return "";
-        }
-    } else {
-        return "";
-    }
-}
 void StackManager::FillTabel(std::string input) {
     cpr::Response r = cpr::Get(cpr::Url{input});
     std::string jsonText = r.text;
