@@ -12,6 +12,9 @@
 
 class StateListTags: public State<States>  {
 	PromptSingleton* prompt = PromptSingleton::GetInstance();
+	std::vector<std::string> dict = {
+		"return"
+};
 public:
 	explicit StateListTags(FiniteStateMachine<States>& fsm)
 	: State<States>(fsm, States::LISTTAGS, "LISTTAGS"){}
