@@ -29,6 +29,7 @@ public:
 
      static std::string insertPhrase(int &id,std::string &body, std::string &response);
      static std::string getPhrases();
+     static std::string getPhrase(int phraseId);
      static std::string deletePhrase(int id);
 
      static std::string insertTag(std::string body);

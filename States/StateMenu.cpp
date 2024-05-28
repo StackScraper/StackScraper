@@ -17,7 +17,7 @@ void StateMenu::OnUpdate() {
 
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);
-    typeWriteMessage(MenuTexts::helloText, 30);
+    typeWriteMessage(MenuTexts::helloText, 1);
     TextFunctions::setCursor(32+ MenuTexts::helloText.length(), 10);
     TextFunctions::changeTextColor(TextColors::PINK);
     TextFunctions::print(MenuTexts::favText);

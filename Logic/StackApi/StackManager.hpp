@@ -21,18 +21,14 @@ class StackManager {
     std::string space = "%20";
     std::string baseInput = "https://api.stackexchange.com/";
     std::string apiVesion = "2.3/";
-    std::string questionInput = "";
-    std::string finalInput = "";
-    std::string answerInput = "";
-    std::string answerID = "";
-    int questionID;
+    std::string questionInput;
+    std::string finalInput;
+    std::string answerInput;
+    std::string answerID;
     std::string title;
-
-
+    int questionID;
 
 public:
-
-
 
     std::string bestAnswer[3] = {"","",""};
     void AskQuestion(std::string & question);
@@ -46,6 +42,8 @@ public:
     void ReturnNiceCode(std::string& input);
     void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
     void LookForByTags(std::string& input);
+    std::string  GetTitle();
+    std::string GetQuestionId();
 };
 
 

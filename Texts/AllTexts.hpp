@@ -128,7 +128,8 @@ namespace HistoryTexts
       "                                                                          \\ \\_\\               \n"
       "                                                                           \\/_/              ";
     static std::string historyTheme = "Your recent questions:";
-    static std::string returnText = "Type return to get back to menu";
+    static std::string returnText = "Type return to get back to menu or type f$ where $ = question index";
+    static std::string successText = "Question added sucessfully";
 }
 
 ///namespace for Favourites state
@@ -144,7 +145,8 @@ namespace FavouriteTexts
         "                                                                          \\ \\_\\               \n"
         "                                                                           \\/_/              ";
     static std::string favTheme = "Your favourite questions:";
-    static std::string returnText = "Type return to get back to menu";
+    static std::string returnText = "Type return to get back to menu or type d$ where $ = question index";
+    static std::string successText = "Question deleted from favourites sucessfully";
 }
 
 ///namespace for About state

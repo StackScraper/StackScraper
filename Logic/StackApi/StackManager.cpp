@@ -56,6 +56,7 @@ int StackManager::GetQuestionId(std::string input) {
         if (item.contains("question_id")) {
             int body = item["question_id"];
             questionID = body;
+            title = item["title"];
             return body;
         } else {
             title = "Not found";
@@ -110,5 +111,13 @@ void StackManager::ReturnNiceCode(std::string& input) {
 void StackManager::LookForByTags(std::string &input) {
     questionInput = regex_replace(input, std::regex(" "), ";");
     finalInput = baseInput+apiVesion+"questions?site=stackoverflow&tagged="+questionInput+"&filter=withbody";
+}
+
+std::string StackManager::GetTitle() {
+    return this->title;
+}
+
+std::string StackManager::GetQuestionId() {
+    return std::to_string(this->questionID);
 }
 

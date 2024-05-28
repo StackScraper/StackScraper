@@ -257,6 +257,19 @@ std::vector<std::pair<std::string, std::string>> DBmanager::getPhrases() {
     }
 }
 
+std::vector<std::pair<std::string, std::string>> DBmanager::getPhrase(int phraseId) {
+    receivedData = {};
+    const char* sql = QueryHelper::getPhrase(phraseId).c_str();
+
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+    if( rc != SQLITE_OK ) {
+        return {{"SQL ERROR",zErrMsg}};
+    } else {
+        return receivedData;
+    }
+}
+
 bool DBmanager::deletePhrase(int id) {
     const char* sql = QueryHelper::deletePhrase(id).c_str();
 
@@ -332,8 +345,12 @@ std::vector<std::pair<std::string, std::string>> DBmanager::getFavourites() {
     }
 }
 
-bool DBmanager::deleteFavourite(int favId) {
-    const char* sql = QueryHelper::deleteTag(favId).c_str();
+bool DBmanager::deleteFavourite(int phraseId) {
+    if(this->getPhrase(phraseId).empty()) {
+        return false;
+    }
+
+    const char* sql = QueryHelper::deleteFavourite(phraseId).c_str();
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
@@ -391,7 +408,7 @@ bool DBmanager::loginUser(std::string &log, std::string &pass) {
 
 DBmanager::DBmanager()
 {
-    std::ifstream f("test.db");
+    std::ifstream f("ss.db");
     if(f.good()) {
         this->openDatabase();
     }
