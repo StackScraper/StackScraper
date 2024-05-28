@@ -55,6 +55,7 @@ void StackManager::SetQuestionId(std::string input) {
         nlohmann::json item = data["items"][0];
         if (item.contains("question_id")) {
             questionID = item["question_id"];
+            title = item["title"];
         } else {
             title = "Not found";
             questionID = 0;
