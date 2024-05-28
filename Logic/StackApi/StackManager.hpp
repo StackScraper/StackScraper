@@ -45,6 +45,8 @@ public:
     void LookForByTags(std::string& input);
     void checkTagQuestionList(std::string& tagInput);
     std::vector<std::string> getQuestionList();
+    std::string GetTitle();
+    std::string GetQuestionId();
 };
 
 
