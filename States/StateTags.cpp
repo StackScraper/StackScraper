@@ -32,7 +32,7 @@ void StateTags::OnUpdate() {
     }
     else
     {
-        mFsm.SetCurrentState(States::LISTTAGS);
+        mFsm.SetCurrentState(States::RESULTTAGS);
     }
 }
 
