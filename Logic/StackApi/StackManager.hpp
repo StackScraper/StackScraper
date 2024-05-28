@@ -42,6 +42,7 @@ public:
     void RemoveHtmlTags(std::string& input);
     void ReturnNiceCode(std::string& input);
     void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
+    void LookForByTags(std::string& input);
 };
 
 

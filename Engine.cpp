@@ -28,6 +28,8 @@ Engine::Engine() {
     State<States>& resultState = fsm->Add<StateResult>(States::RESULT);
     State<States>& tagsState = fsm->Add<StateTags>(States::TAGS);
     State<States>& aboutState = fsm->Add<StateAbout>(States::ABOUT);
+    State<States>& listTags = fsm->Add<StateAbout>(States::LISTTAGS);
+    State<States>& resultTags = fsm->Add<StateAbout>(States::RESULTTAGS);
 
     fsm->SetCurrentState(States::IDLE);
 }
