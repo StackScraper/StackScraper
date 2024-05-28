@@ -16,5 +16,7 @@
 #include "StateResult.hpp"
 #include "StateTags.hpp"
 #include "StateAbout.hpp"
+#include "StateListTags.hpp"
+#include "StateResultTags.hpp"
 
 #endif //INC_2024__TAB_DSA__8_BRODZIAK_STATESWRAPPER_HPP

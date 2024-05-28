@@ -57,6 +57,10 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         Logic/StackApi/Syntax.hpp
         Logic/Database/QueryHelper.cpp
         Logic/Database/QueryHelper.hpp
+        States/StateListTags.cpp
+        States/StateListTags.hpp
+        States/StateResultTags.cpp
+        States/StateResultTags.hpp
 )
 
 
