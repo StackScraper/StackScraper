@@ -41,6 +41,7 @@ public:
     void GetAnswer(std::string res);
     void ChangeJsonToString(std::string&);
     void GetQuestionInfo(std::string);
+    //std::string GetQuestionTitle(std::string input);
     void FillTabel(std::string input);
     void RemoveHtmlTags(std::string& input);
     void ReturnNiceCode(std::string& input);
