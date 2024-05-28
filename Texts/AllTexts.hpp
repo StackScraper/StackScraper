@@ -193,7 +193,7 @@ namespace ListState
         "    \\/_____/\\/__/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/_____/\\/____/ \\/_/ \\/__/\\/_/ \\ \\ \\/  \\/____/ \\/_/ \n"
         "                                                                          \\ \\_\\               \n"
         "                                                                           \\/_/              ";
-    static std::string tagText = "Tags: ";
+    static std::string tagText = "List of similar question: ";
     static std::string returnText = "Type return to get back to menu";
 }
 
