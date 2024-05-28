@@ -138,3 +138,11 @@ std::vector<std::string> StackManager::getQuestionList(){
     return questionsList;
 }
 
+std::string StackManager::GetTitle() {
+    return this->title;
+}
+
+std::string StackManager::GetQuestionId() {
+    return std::to_string(this->questionID);
+}
+

@@ -67,7 +67,7 @@ void StateHistory::ManageData() {
 
 int StateHistory::CheckFav(std::string prompt) {
     std::string num;
-    if(prompt[0]=='f') {
+    if(prompt[0]=='f' && prompt.size()>1) {
         for(int i =1;i<prompt.size();i++) {
             if(isdigit(prompt[i])) {
                 num+=prompt[i];
