@@ -25,7 +25,7 @@ class StackManager {
     std::string finalInput = "";
     std::string answerInput = "";
     std::string answerID = "";
-    std::string questionID = "";
+    int questionID;
     std::string title;
 
 
@@ -40,7 +40,7 @@ public:
     void SetQuestionByTags(std::string newInput);
     void GetAnswer(std::string res);
     void ChangeJsonToString(std::string&);
-    void GetQuestionInfo(std::string);
+    int GetQuestionId(std::string);
     void FillTabel(std::string input);
     void RemoveHtmlTags(std::string& input);
     void ReturnNiceCode(std::string& input);
