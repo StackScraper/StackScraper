@@ -48,7 +48,7 @@ void StateResult::QuestionManage() {
     sm.RemoveHtmlTags(question);
     sm.ReturnNiceCode(question);
     sh.RecognizeSyntax(question);
-    TextFunctions::typeWriteMessage(question, 0);
+    TextFunctions::print(question);
     sm.GetAnswer(jSonTemp);
     DBmanager db = DBmanager();
     std::string body = sm.GetTitle();
@@ -61,8 +61,9 @@ void StateResult::QuestionManage() {
             sm.RemoveHtmlTags(ans);
             sm.ReturnNiceCode(ans);
             sh.RecognizeSyntax(ans);
-            TextFunctions::typeWriteMessage(ans, 0);
+            TextFunctions::print(ans);
             std::cout << std::endl;
         }
+        sm.bestAnswer[i] = "";
     }
 }
