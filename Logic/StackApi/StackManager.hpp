@@ -25,6 +25,9 @@ class StackManager {
     std::string finalInput = "";
     std::string answerInput = "";
     std::string answerID = "";
+    std::string questionID = "";
+    std::string title;
+
 
 
 public:

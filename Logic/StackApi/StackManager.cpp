@@ -26,7 +26,8 @@ void StackManager::GetAnswer(std::string res) {
     // int temp = GetQuestionId(res);
     // answerID=std::to_string(temp);
     // answerInput = std::to_string(temp);
-    answerInput = baseInput+apiVesion+"questions/"+answerID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
+    GetQuestionInfo(res);
+    answerInput = baseInput+apiVesion+"questions/"+questionID+"/answers?pagesize=3&order=desc&sort=votes&site=stackoverflow&filter=withbody";
     FillTabel(answerInput);
 }
 
