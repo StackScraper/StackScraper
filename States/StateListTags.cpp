@@ -22,7 +22,26 @@ void StateListTags::OnUpdate() {
 
 	ManageList();
 	prompt->GetPromptAuto(dict);
-	if (TextFunctions::toLower(prompt->RetValues()) == "return")
+
+	bool flag = true;  //We initialise flag as true.
+	for (int i=0; i<prompt->RetValues().length(); i++){
+		if (!isdigit(prompt->RetValues()[i])){
+			flag = false;
+			break;
+		}
+	}
+
+	int questionIdx = 0;
+
+	if(flag)
+		questionIdx = std::stoi(prompt->RetValues());
+
+	if(questionIdx > 0 && questionIdx < 21) {
+		questionsList[questionIdx-1].GetID();
+
+		mFsm.SetCurrentState(States::RESULTTAGS);
+	}
+	else if (TextFunctions::toLower(prompt->RetValues()) == "return")
 	{
 		mFsm.SetCurrentState(States::IDLE);
 	}
