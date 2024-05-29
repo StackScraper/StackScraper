@@ -7,6 +7,7 @@
 #include "cpr/cpr.h"
 #include "nlohmann/json.hpp"
 #include <string>
+#include "../Logic/TagList/TagsList.hpp"
 
 //SEARCH: https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=how%20to%20declare%20array%20of%20string%20in%20cpp&site=stackoverflow&filter=withbody
 void StackManager::AskQuestion(std::string & question) {
@@ -120,7 +121,10 @@ void StackManager::checkTagQuestionList(std::string &tagInput) {
         if (item.contains("question_id")) {
             questionID = item["question_id"];
             title = item["title"];
-            questionsList.push_back(item["title"]);
+
+            TagsList tl = TagsList(questionID,title);
+            questionsList.push_back(tl);
+
         } else {
             title = "Not found";
             questionID = 0;
@@ -132,9 +136,7 @@ void StackManager::checkTagQuestionList(std::string &tagInput) {
     }
 }
 
-std::vector<std::string> StackManager::getQuestionList(){
-    std::string temp;
-
+std::vector<TagsList> StackManager::getQuestionList(){
     return questionsList;
 }
 

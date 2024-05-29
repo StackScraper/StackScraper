@@ -45,7 +45,7 @@ void StateListTags::ManageList() {
 	std::string temp;
 	if(!questionsList.empty()) {
 		for(int i = 0; i < questionsList.size(); i++) {
-			temp = std::to_string(i+1) + ". " + questionsList[i];
+			temp = std::to_string(i+1) + ". " + questionsList[i].GetTitle();
 			TextFunctions::print( temp);
 		}
 	}
