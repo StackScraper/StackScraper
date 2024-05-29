@@ -8,8 +8,8 @@
 
 /**
  * Local function implemented to check for matches with dictionary in getPromptAuto
- * @param text
- * @param dict
+ * @param text text to be matched
+ * @param dict dict to search from
  * @return
  */
 std::string GetMatch(std::string &text, std::vector<std::string> dict) {
