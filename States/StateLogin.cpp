@@ -18,7 +18,7 @@ void StateLogin::OnEnter() {
 void StateLogin::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);
-    TextFunctions::typeWriteMessage(LoginTexts::credentials, 50);
+    TextFunctions::typeWriteMessage(LoginTexts::credentials, 1);
     TextFunctions::setCursor(32, 12);
     TextFunctions::print(LoginTexts::login);
     TextFunctions::setCursor(39, 12);

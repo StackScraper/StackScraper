@@ -90,6 +90,10 @@ std::string QueryHelper::getPhrases() {
     return "SELECT * from PHRASE";
 }
 
+std::string QueryHelper::getPhrase(int phraseId) {
+    return std::format("SELECT * from PHRASE WHERE ID={}",phraseId);
+}
+
 std::string QueryHelper::deletePhrase(int id) {
     return std::format("DELETE from PHRASE where ID={}; ",id);
 }

@@ -5,9 +5,7 @@
 #include "StateResult.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
-#include <vector>
-
-
+#include "../Logic/Database/DBmanager.hpp"
 
 void StateResult::OnEnter() {
     State::OnEnter();
@@ -50,8 +48,12 @@ void StateResult::QuestionManage() {
     sm.RemoveHtmlTags(question);
     sm.ReturnNiceCode(question);
     sh.RecognizeSyntax(question);
-    TextFunctions::typeWriteMessage(question, 1);
+    TextFunctions::print(question);
     sm.GetAnswer(jSonTemp);
+    DBmanager db = DBmanager();
+    std::string body = sm.GetTitle();
+    std::string response = sm.GetQuestionId();
+    if(body != "Not found")db.insertPhrase(body,response);
     for (int i = 0; i < 3; i++) {
         if (sm.bestAnswer[i] != "") {
             std::cout << "Answer: " << i + 1 << std::endl;
@@ -59,8 +61,9 @@ void StateResult::QuestionManage() {
             sm.RemoveHtmlTags(ans);
             sm.ReturnNiceCode(ans);
             sh.RecognizeSyntax(ans);
-            TextFunctions::typeWriteMessage(ans, 1);
+            TextFunctions::print(ans);
             std::cout << std::endl;
         }
+        sm.bestAnswer[i] = "";
     }
 }

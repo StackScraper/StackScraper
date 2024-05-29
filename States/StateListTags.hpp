@@ -8,9 +8,13 @@
 #include "../FSM/StateMachine.hpp"
 #include "../FSM/State.hpp"
 #include "../Logic/PromptSingleton.hpp"
+#include "../Logic/StackApi/StackManager.hpp"
 
 
 class StateListTags: public State<States>  {
+	std::string question;
+	std::vector<std::string> questionsList;
+	StackManager sm = StackManager();
 	PromptSingleton* prompt = PromptSingleton::GetInstance();
 	std::vector<std::string> dict = {
 		"return"
@@ -21,6 +25,7 @@ public:
 	void OnEnter() override;
 	void OnUpdate() override;
 	void OnExit() override;
+	void ManageList();
 };
 
 

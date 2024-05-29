@@ -19,7 +19,7 @@ void StateIdle::OnUpdate() {
 
     State<States>::OnUpdate();
     TextFunctions::setCursor(40, 9);
-    TextFunctions::typeWriteMessage(IdleTexts::helloIns, 50);
+    TextFunctions::typeWriteMessage(IdleTexts::helloIns, 1);
     TextFunctions::setCursor(40, 11);
     prompt->GetPromptAuto(dict);
     if(prompt->RetValues() == "login")
