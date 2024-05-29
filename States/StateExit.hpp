@@ -13,6 +13,10 @@
 #include <iostream>
 #include <string>
 
+/**
+ * Exit State of the application
+ * TBD
+ */
 class StateExit : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
 public:

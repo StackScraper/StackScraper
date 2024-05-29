@@ -5,6 +5,10 @@
 #ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATESWRAPPER_HPP
 #define INC_2024__TAB_DSA__8_BRODZIAK_STATESWRAPPER_HPP
 
+/**
+ * File which wraps all of the states for convenience
+ */
+
 #include "StateExit.hpp"
 #include "StateLogin.hpp"
 #include "StateRegister.hpp"

@@ -13,8 +13,10 @@ void StateMenu::OnEnter() {
     print(MenuTexts::title);
 }
 
+/**
+ * Implements transitions between main states
+ */
 void StateMenu::OnUpdate() {
-
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     typeWriteMessage(MenuTexts::helloText, 1);

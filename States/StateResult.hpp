@@ -16,7 +16,10 @@
 #include "../Logic/StackApi/StackManager.hpp"
 #include "../Logic/StackApi/SyntaxHighlighting.hpp"
 
-
+/**
+ * Most important class of the program
+ * Searches for questions and answers on stackoverflow
+ */
 class StateResult : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string question;

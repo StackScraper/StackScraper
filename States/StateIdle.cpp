@@ -7,7 +7,9 @@
 #include "../Logic/TextFormatter.hpp"
 
 
-
+/**
+ * Function which executes on enter to state
+ */
 void StateIdle::OnEnter(){
     State<States>::OnEnter();
     system("cls");
@@ -15,6 +17,10 @@ void StateIdle::OnEnter(){
     TextFunctions::print(IdleTexts::title);
 }
 
+/**
+ * Function which executes after on enter
+ * Provides title and options to choose (login/register)
+ */
 void StateIdle::OnUpdate() {
 
     State<States>::OnUpdate();
@@ -41,6 +47,9 @@ void StateIdle::OnUpdate() {
     }
 }
 
+/**
+ * Function which executes after on update
+ */
 void StateIdle::OnExit() {
     State<States>::OnExit();
 }

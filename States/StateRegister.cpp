@@ -14,6 +14,9 @@ void StateRegister::OnEnter() {
     print(RegisterTexts::title);
 }
 
+/**
+ * Check if credentials are valid and pass them to database
+ */
 void StateRegister::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);

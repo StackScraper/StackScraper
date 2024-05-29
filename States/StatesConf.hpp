@@ -5,6 +5,10 @@
 #ifndef INC_2024__TAB_DSA__8_BRODZIAK_STATESCONF_HPP
 #define INC_2024__TAB_DSA__8_BRODZIAK_STATESCONF_HPP
 
+/**
+ * File which provides Enumeration of all States possible
+ */
+
 enum class States
 {
     IDLE,

@@ -15,6 +15,9 @@
 #include <string>
 #include <vector>
 
+/**
+ * Provides information about application
+ */
 class StateAbout : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::vector<std::string> dict = {

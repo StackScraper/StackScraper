@@ -12,6 +12,9 @@ void StateListTags::OnEnter() {
 	TextFunctions::print(ListState::title);
 }
 
+/**
+ * Prints the list of the questions, fills the canva
+ */
 void StateListTags::OnUpdate() {
 	State::OnUpdate();
 

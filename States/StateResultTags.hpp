@@ -11,6 +11,9 @@
 #include "../Logic/StackApi/StackManager.hpp"
 #include "../Logic/StackApi/SyntaxHighlighting.hpp"
 
+/**
+ * Prints result question and answers chosen in StateListTags by user
+ */
 class StateResultTags : public State<States>  {
 	PromptSingleton* prompt = PromptSingleton::GetInstance();
 	std::string question;

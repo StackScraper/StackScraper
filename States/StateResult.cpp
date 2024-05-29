@@ -15,6 +15,7 @@ void StateResult::OnEnter() {
 }
 
 void StateResult::OnUpdate() {
+    ///prepare canva
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(ResultTexts::questionText, 30);
@@ -22,6 +23,7 @@ void StateResult::OnUpdate() {
     TextFunctions::changeTextColor(TextColors::BEIGE);
     question = prompt->RetValues();
     TextFunctions::print(question);
+    ///find questions, answers and print them
     QuestionManage();
     prompt->GetPromptAuto(dict);
     if(prompt->RetValues() == "return")
@@ -38,15 +40,22 @@ void StateResult::OnExit() {
     TextFunctions::changeTextColor(TextColors::BEIGE);
 }
 
+/**
+ * Provides stack scraping and formatting
+ */
 void StateResult::QuestionManage() {
     sm.SetQuestion(prompt->RetValues());
     sm.AskQuestion(question);
     std::string jSonTemp = question;
+    ///parse json to string
     sm.ChangeJsonToString(question);
     TextFunctions::print(ResultTexts::questionText);
     TextFunctions::changeTextColor(TextColors::WHITE);
+    ///remove html tags
     sm.RemoveHtmlTags(question);
+    ///return string with spaces, tabs and with some attributes changed
     sm.ReturnNiceCode(question);
+    ///color syntax
     sh.RecognizeSyntax(question);
     TextFunctions::print(question);
     sm.GetAnswer(jSonTemp);
@@ -54,6 +63,9 @@ void StateResult::QuestionManage() {
     std::string body = sm.GetTitle();
     std::string response = sm.GetQuestionId();
     if(body != "Not found")db.insertPhrase(body,response);
+    /**
+     * Do the same as above, but for answers
+     */
     for (int i = 0; i < 3; i++) {
         if (sm.bestAnswer[i] != "") {
             std::cout << "Answer: " << i + 1 << std::endl;

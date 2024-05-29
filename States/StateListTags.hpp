@@ -10,7 +10,9 @@
 #include "../Logic/PromptSingleton.hpp"
 #include "../Logic/StackApi/StackManager.hpp"
 
-
+/**
+ * State which provides list of questions found by tags provided in Tags state
+ */
 class StateListTags: public State<States>  {
 	std::string question;
 	std::vector<std::string> questionsList;
