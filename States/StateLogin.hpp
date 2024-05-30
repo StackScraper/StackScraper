@@ -12,7 +12,9 @@
 #include <iostream>
 #include <string>
 
-
+/**
+ * State which controls login authorization
+ */
 class StateLogin : public State<States>{
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string log;

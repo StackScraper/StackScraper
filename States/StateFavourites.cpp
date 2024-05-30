@@ -13,6 +13,9 @@ void StateFavourites::OnExit() {
     State::OnExit();
 }
 
+/**
+ * Provides favourites question of user by overriding virtual OnUpdate from State
+ */
 void StateFavourites::OnUpdate() {
     State::OnUpdate();
     this->trimmedData = {};

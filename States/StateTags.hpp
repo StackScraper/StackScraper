@@ -15,6 +15,9 @@
 #include<vector>
 #include "../Logic/PromptSingleton.hpp"
 
+/**
+ * Provides searching by tags
+ */
 class StateTags : public State<States>{
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string tags;

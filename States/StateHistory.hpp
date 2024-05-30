@@ -14,12 +14,15 @@
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
 
+/**
+ * State which contains history of our searching
+ */
 class StateHistory : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::vector<std::string> dict = {
             "return"
     };
-    DBmanager db;
+    DBmanager db; ///< database manager for executing queries
     std::vector<std::string> trimmedData;
 
     void ManageData();

@@ -13,6 +13,9 @@
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
 
+/**
+ * Controls registration process
+ */
 class StateRegister : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::string log;

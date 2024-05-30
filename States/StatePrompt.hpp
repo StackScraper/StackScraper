@@ -14,7 +14,9 @@
 #include "../Logic/PromptSingleton.hpp"
 #include "../Logic/StackApi/StackManager.hpp"
 
-
+/**
+ * Takes keywords from user, which will be used later in the stack scraping
+ */
 class StatePrompt : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     StackManager sm = StackManager();
