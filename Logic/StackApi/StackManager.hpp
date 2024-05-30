@@ -9,7 +9,7 @@
 #include <iostream>
 #include <regex>
 #include "nlohmann/adl_serializer.hpp"
-#include "../Logic/TagList/TagsList.hpp"
+#include "../TagList/TagsList.hpp"
 
 class StackManager {
     //URL TO SEARCH
