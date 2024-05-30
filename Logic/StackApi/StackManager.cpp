@@ -7,7 +7,6 @@
 #include "cpr/cpr.h"
 #include "nlohmann/json.hpp"
 #include <string>
-#include "../Logic/TagList/TagsList.hpp"
 
 //SEARCH: https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=how%20to%20declare%20array%20of%20string%20in%20cpp&site=stackoverflow&filter=withbody
 void StackManager::AskQuestion(std::string & question) {
