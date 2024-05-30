@@ -15,6 +15,9 @@ void StateLogin::OnEnter() {
     TextFunctions::print(LoginTexts::title);
 }
 
+/**
+ * Controls credentials by refering to dbmanager instance
+ */
 void StateLogin::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);

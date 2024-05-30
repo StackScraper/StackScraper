@@ -10,6 +10,9 @@ void StateHistory::OnExit() {
     State::OnExit();
 }
 
+/**
+ * Provides information about history of searching in Prompt State
+ */
 void StateHistory::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);

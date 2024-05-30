@@ -16,6 +16,9 @@ void StateTags::OnEnter() {
     }
 }
 
+/**
+ * Takes tags from user, which will be later used to search
+ */
 void StateTags::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);

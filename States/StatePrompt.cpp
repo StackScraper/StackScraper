@@ -16,9 +16,10 @@ void StatePrompt::OnEnter() {
     TextFunctions::print(PromptTexts::title);
 }
 
+/**
+ * Takes desired prompt from user
+ */
 void StatePrompt::OnUpdate() {
-
-
     State::OnUpdate();
     TextFunctions::setCursor(10, 10);
     TextFunctions::typeWriteMessage(PromptTexts::promptText, 30);

@@ -14,6 +14,10 @@
 #include <string>
 #include <vector>
 
+/**
+ * State which provides main Menu of the app
+ * Contains all of the most important options - question, tags, favourites
+ */
 class StateMenu : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::vector<std::string> dict = {

@@ -14,6 +14,9 @@ void StateAbout::OnEnter() {
     TextFunctions::print(AboutTexts::title);
 }
 
+/**
+ * Implements virtual OnUpdate, in which provides app description
+ */
 void StateAbout::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(42, 10);

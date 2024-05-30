@@ -13,6 +13,9 @@ void StateResultTags::OnEnter() {
     TextFunctions::print(ResultTexts::title);
 }
 
+/**
+ * Prints question with answer(s) based on specific question id
+ */
 void StateResultTags::OnUpdate() {
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);

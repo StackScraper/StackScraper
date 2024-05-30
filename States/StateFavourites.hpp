@@ -14,13 +14,16 @@
 #include <string>
 #include "../Logic/PromptSingleton.hpp"
 
+/**
+ * Provides information about questions which user added to favourites
+ */
 class StateFavourites : public State<States> {
     PromptSingleton* prompt = PromptSingleton::GetInstance();
     std::vector<std::string> dict = {
             "return"
     };
 
-    DBmanager db;
+    DBmanager db; ///< database manager for executing queries
     std::vector<int> indexes;
     std::vector<std::pair<std::string,std::string>> data;
     std::vector<std::string> trimmedData;
