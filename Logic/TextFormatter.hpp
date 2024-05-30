@@ -83,7 +83,20 @@ namespace TextFunctions{
     {
         return SetConsoleCursorPosition(cmd::hOutput, {x, y});
     }
-
+    static COORD GetConsoleCursorPosition(HANDLE hConsoleOutput)
+    {
+        CONSOLE_SCREEN_BUFFER_INFO cbsi;
+        if (GetConsoleScreenBufferInfo(hConsoleOutput, &cbsi))
+        {
+            return cbsi.dwCursorPosition;
+        }
+        else
+        {
+            // The function failed. Call GetLastError() for details.
+            COORD invalid = { 0, 0 };
+            return invalid;
+        }
+    }
     /**
      * Function which changes all letters in string to lowercase
      * @param data text to be changed

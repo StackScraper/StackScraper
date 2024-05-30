@@ -34,6 +34,7 @@ public:
 	void OnUpdate() override;
 	void OnExit() override;
 	void ManageList();
+	bool ChoosingTitle(std::string in);
 };
 
 
