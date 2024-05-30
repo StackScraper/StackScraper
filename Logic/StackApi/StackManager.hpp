@@ -9,6 +9,7 @@
 #include <iostream>
 #include <regex>
 #include "nlohmann/adl_serializer.hpp"
+#include "../Logic/TagList/TagsList.hpp"
 
 class StackManager {
     //URL TO SEARCH
@@ -25,9 +26,9 @@ class StackManager {
     std::string finalInput = "";
     std::string answerInput = "";
     std::string stringQuestionID = "";
-    int questionID;
+    int questionID = 0;
     std::string title;
-    std::vector<std::string> questionsList;
+    std::vector<TagsList> questionsList;
 
 public:
 
@@ -44,7 +45,7 @@ public:
     void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
     void LookForByTags(std::string& input);
     void checkTagQuestionList(std::string& tagInput);
-    std::vector<std::string> getQuestionList();
+    std::vector<TagsList> getQuestionList();
     std::string GetTitle();
     std::string GetQuestionId();
 };

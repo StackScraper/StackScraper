@@ -10,17 +10,23 @@
 #include "../Logic/PromptSingleton.hpp"
 #include "../Logic/StackApi/StackManager.hpp"
 
+#include "../Logic/TagList/TagsList.hpp"
+
+
+
 /**
  * State which provides list of questions found by tags provided in Tags state
  */
+
 class StateListTags: public State<States>  {
 	std::string question;
-	std::vector<std::string> questionsList;
+	std::vector<TagsList> questionsList;
 	StackManager sm = StackManager();
 	PromptSingleton* prompt = PromptSingleton::GetInstance();
 	std::vector<std::string> dict = {
 		"return"
 };
+
 public:
 	explicit StateListTags(FiniteStateMachine<States>& fsm)
 	: State<States>(fsm, States::LISTTAGS, "LISTTAGS"){}
