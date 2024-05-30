@@ -61,6 +61,8 @@ add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
         States/StateListTags.hpp
         States/StateResultTags.cpp
         States/StateResultTags.hpp
+        Logic/TagList/TagsList.cpp
+        Logic/TagList/TagsList.hpp
 )
 
 
