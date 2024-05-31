@@ -7,6 +7,7 @@
 #include "cpr/cpr.h"
 #include "nlohmann/json.hpp"
 #include <string>
+#include "../TagList/TagsList.hpp"
 
 //SEARCH: https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=how%20to%20declare%20array%20of%20string%20in%20cpp&site=stackoverflow&filter=withbody
 void StackManager::AskQuestion(std::string & question) {
@@ -113,6 +114,7 @@ void StackManager::LookForByTags(std::string &input) {
 void StackManager::checkTagQuestionList(std::string &tagInput) {
     nlohmann::json data = nlohmann::json::parse(tagInput);
 
+    questionsList.clear();
     for(int i = 0; i < 20; i++)
     {
     if (data.contains("items") && data["items"].is_array()) {
@@ -147,5 +149,9 @@ std::string StackManager::GetQuestionId() {
     return std::to_string(this->questionID);
 }
 
+//https://api.stackexchange.com/2.3/questions/75339138?order=desc&sort=activity&site=stackoverflow&filter=withbody
+std::string StackManager::GetQuestionFromID(std::string id) {
+    return "saasdasd";
+}
 
 

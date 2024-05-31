@@ -5,6 +5,7 @@
 #include "StateListTags.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Texts/AllTexts.hpp"
+#include "../Globals.hpp"
 
 void StateListTags::OnEnter() {
 	State::OnEnter();
@@ -24,33 +25,33 @@ void StateListTags::OnUpdate() {
 	TextFunctions::changeTextColor(TextColors::WHITE);
 
 	ManageList();
-	prompt->GetPromptAuto(dict);
 
-	bool flag = true;  //We initialise flag as true.
-	for (int i=0; i<prompt->RetValues().length(); i++){
-		if (!isdigit(prompt->RetValues()[i])){
-			flag = false;
-			break;
+	bool changeState= false;
+	while(!changeState) {
+		prompt->GetPromptAuto(dict);
+
+		if(TextFunctions::toLower(prompt->RetValues()) == "return") {
+			changeState=true;
+			mFsm.SetCurrentState(States::MENU);
+
+
+		}else if(!ChoosingTitle(prompt->RetValues())) {
+			std::string error = "\033[0;31mYou have to from the list\033[0m";
+			COORD position = TextFunctions::GetConsoleCursorPosition(cmd::hOutput);
+			TextFunctions::print(error);
+
+			TextFunctions::setCursor(position.X,position.Y-1);
+
+			std::cout << "\x1b[2K";
+			TextFunctions::changeTextColor(TextColors::YELLOW);
+			std::cout << "Prompt: ";
+			TextFunctions::changeTextColor(TextColors::WHITE);
+
 		}
-	}
-
-	int questionIdx = 0;
-
-	if(flag)
-		questionIdx = std::stoi(prompt->RetValues());
-
-	if(questionIdx > 0 && questionIdx < 21) {
-		questionsList[questionIdx-1].GetID();
-
-		mFsm.SetCurrentState(States::RESULTTAGS);
-	}
-	else if (TextFunctions::toLower(prompt->RetValues()) == "return")
-	{
-		mFsm.SetCurrentState(States::IDLE);
-	}
-	else
-	{
-		 mFsm.SetCurrentState(States::RESULTTAGS);
+		else if (ChoosingTitle(prompt->RetValues()))
+		{
+			mFsm.SetCurrentState(States::RESULTTAGS);
+		}
 	}
 }
 
@@ -71,4 +72,23 @@ void StateListTags::ManageList() {
 			TextFunctions::print( temp);
 		}
 	}
+	TextFunctions::changeTextColor(TextColors::YELLOW);
+	std::cout << std::endl << "Prompt: ";
+	TextFunctions::changeTextColor(TextColors::WHITE);
+}
+
+bool StateListTags::ChoosingTitle(std::string in) {
+
+	for (int i=0; i<in.length(); i++){
+		if (!isdigit(in[i])){
+			return false;
+		}
+	}
+	int questionIdx = std::stoi(in);
+
+	if(questionIdx>0 && questionIdx<21) {
+		return true;
+	}
+	return false;
+
 }
