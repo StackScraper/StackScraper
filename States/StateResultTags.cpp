@@ -40,7 +40,8 @@ void StateResultTags::OnExit() {
 }
 
 void StateResultTags::QuestionManage() {
-    sm.SetQuestionByTags(prompt->RetValues());
+
+    sm.GetQuestionFromID(prompt->RetValues());
     sm.AskQuestion(question);
     std::string jSonTemp = question;
     sm.ChangeJsonToString(question);
@@ -61,6 +62,7 @@ void StateResultTags::QuestionManage() {
             TextFunctions::print(ans);
             std::cout << std::endl;
         }
+
         sm.bestAnswer[i] = "";
     }
 }

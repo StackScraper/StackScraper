@@ -48,7 +48,7 @@ public:
     std::vector<TagsList> getQuestionList();
     std::string GetTitle();
     std::string GetQuestionId();
-    std::string GetQuestionFromID(std::string id);
+    void GetQuestionFromID(std::string id);
 };
 
 
