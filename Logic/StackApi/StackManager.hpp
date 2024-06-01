@@ -28,9 +28,12 @@ class StackManager {
     std::string stringQuestionID = "";
     int questionID = 0;
     std::string title;
-    std::vector<TagsList> questionsList;
+    static std::vector<TagsList> questionsList;
+
+
 
 public:
+
 
     std::string bestAnswer[3] = {"","",""};
     void AskQuestion(std::string & question);
@@ -45,7 +48,7 @@ public:
     void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
     void LookForByTags(std::string& input);
     void checkTagQuestionList(std::string& tagInput);
-    std::vector<TagsList> getQuestionList();
+    static std::vector<TagsList> getQuestionList();
     std::string GetTitle();
     std::string GetQuestionId();
     void GetQuestionFromID(std::string id);

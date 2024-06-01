@@ -67,7 +67,7 @@ void StateListTags::ManageList() {
 	sm.AskQuestion(question);
 	std::string jSonTemp = question;
 	sm.checkTagQuestionList(question);
-	questionsList = sm.getQuestionList();
+	questionsList = StackManager::getQuestionList();
 	std::string temp;
 	if(!questionsList.empty()) {
 		for(int i = 0; i < questionsList.size(); i++) {

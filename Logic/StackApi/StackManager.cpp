@@ -154,4 +154,5 @@ void StackManager::GetQuestionFromID(std::string id) {
     finalInput = baseInput + apiVesion + "questions/" + id + "?order=desc&sort=activity&site=stackoverflow&filter=withbody";
 }
 
+std::vector<TagsList> StackManager::questionsList;
 
