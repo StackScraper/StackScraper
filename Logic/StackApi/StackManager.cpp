@@ -150,8 +150,9 @@ std::string StackManager::GetQuestionId() {
 }
 
 //https://api.stackexchange.com/2.3/questions/75339138?order=desc&sort=activity&site=stackoverflow&filter=withbody
-std::string StackManager::GetQuestionFromID(std::string id) {
-    return "saasdasd";
+void StackManager::GetQuestionFromID(std::string id) {
+    finalInput = baseInput + apiVesion + "questions/" + id + "?order=desc&sort=activity&site=stackoverflow&filter=withbody";
 }
 
+std::vector<TagsList> StackManager::questionsList;
 

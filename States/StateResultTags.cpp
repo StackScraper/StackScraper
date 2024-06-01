@@ -23,7 +23,9 @@ void StateResultTags::OnUpdate() {
     TextFunctions::setCursor(50, 10);
     TextFunctions::changeTextColor(TextColors::BEIGE);
     question = prompt->RetValues();
-    TextFunctions::print(question);
+    int index = std::stoi(prompt->RetValues())-1;
+    std::string title = StackManager::getQuestionList()[index].GetTitle();
+    TextFunctions::print(title);
     QuestionManage();
     prompt->GetPromptAuto(dict);
     if(prompt->RetValues() == "return")
@@ -40,7 +42,11 @@ void StateResultTags::OnExit() {
 }
 
 void StateResultTags::QuestionManage() {
-    sm.SetQuestionByTags(prompt->RetValues());
+
+
+    int index = std::stoi(prompt->RetValues())-1;
+    std::string problem = std::to_string(StackManager::getQuestionList()[index].GetID());
+    sm.GetQuestionFromID(problem);
     sm.AskQuestion(question);
     std::string jSonTemp = question;
     sm.ChangeJsonToString(question);
@@ -61,6 +67,7 @@ void StateResultTags::QuestionManage() {
             TextFunctions::print(ans);
             std::cout << std::endl;
         }
+
         sm.bestAnswer[i] = "";
     }
 }

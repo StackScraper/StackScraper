@@ -33,10 +33,11 @@ void StateListTags::OnUpdate() {
 		if(TextFunctions::toLower(prompt->RetValues()) == "return") {
 			changeState=true;
 			mFsm.SetCurrentState(States::MENU);
-
+			changeState=true;
 
 		}else if(!ChoosingTitle(prompt->RetValues())) {
-			std::string error = "\033[0;31mYou have to from the list\033[0m";
+			mFsm.SetCurrentState(States::LISTTAGS);
+			std::string error = "\033[0;31mYou have to choose from the list\033[0m";
 			COORD position = TextFunctions::GetConsoleCursorPosition(cmd::hOutput);
 			TextFunctions::print(error);
 
@@ -46,11 +47,13 @@ void StateListTags::OnUpdate() {
 			TextFunctions::changeTextColor(TextColors::YELLOW);
 			std::cout << "Prompt: ";
 			TextFunctions::changeTextColor(TextColors::WHITE);
+			changeState=true;
 
 		}
 		else if (ChoosingTitle(prompt->RetValues()))
 		{
 			mFsm.SetCurrentState(States::RESULTTAGS);
+			changeState=true;
 		}
 	}
 }
@@ -64,17 +67,19 @@ void StateListTags::ManageList() {
 	sm.AskQuestion(question);
 	std::string jSonTemp = question;
 	sm.checkTagQuestionList(question);
-	questionsList = sm.getQuestionList();
+	questionsList = StackManager::getQuestionList();
 	std::string temp;
 	if(!questionsList.empty()) {
 		for(int i = 0; i < questionsList.size(); i++) {
 			temp = std::to_string(i+1) + ". " + questionsList[i].GetTitle();
+			sm.ReturnNiceCode(temp);
 			TextFunctions::print( temp);
 		}
 	}
 	TextFunctions::changeTextColor(TextColors::YELLOW);
 	std::cout << std::endl << "Prompt: ";
 	TextFunctions::changeTextColor(TextColors::WHITE);
+
 }
 
 bool StateListTags::ChoosingTitle(std::string in) {

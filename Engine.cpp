@@ -31,5 +31,6 @@ Engine::Engine() {
     State<States>& listTagsState = fsm->Add<StateListTags>(States::LISTTAGS);
     State<States>& resultTagsState = fsm->Add<StateResultTags>(States::RESULTTAGS);
 
-    fsm->SetCurrentState(States::IDLE);
+    fsm->SetCurrentState(States::TAGS);
+
 }
