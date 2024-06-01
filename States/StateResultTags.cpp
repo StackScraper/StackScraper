@@ -23,7 +23,9 @@ void StateResultTags::OnUpdate() {
     TextFunctions::setCursor(50, 10);
     TextFunctions::changeTextColor(TextColors::BEIGE);
     question = prompt->RetValues();
-    TextFunctions::print(question);
+    int index = std::stoi(prompt->RetValues())-1;
+    std::string title = StackManager::getQuestionList()[index].GetTitle();
+    TextFunctions::print(title);
     QuestionManage();
     prompt->GetPromptAuto(dict);
     if(prompt->RetValues() == "return")
