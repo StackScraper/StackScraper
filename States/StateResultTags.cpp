@@ -41,7 +41,11 @@ void StateResultTags::OnExit() {
 
 void StateResultTags::QuestionManage() {
 
-    sm.GetQuestionFromID(prompt->RetValues());
+
+    int index = std::stoi(prompt->RetValues())-1;
+    std::string problem = std::to_string(sm.getQuestionList()[index].GetID());
+    std::cout << problem;
+    sm.GetQuestionFromID("");
     sm.AskQuestion(question);
     std::string jSonTemp = question;
     sm.ChangeJsonToString(question);
