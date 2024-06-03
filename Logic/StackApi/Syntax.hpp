@@ -7,6 +7,9 @@
 #ifndef SYNTAX_HPP
 #define SYNTAX_HPP
 
+/**
+ * Contains syntax keywords for all supported programming languages
+ */
 namespace Syntax {
  static std::vector<std::string> basicSyntax = {
   "for", "while", "do",

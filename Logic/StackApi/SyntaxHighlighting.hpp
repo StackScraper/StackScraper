@@ -9,15 +9,19 @@
 #include <string>
 #include <vector>
 #include <regex>
+
+/**
+ * Takes control of highlighting of syntax
+ */
 class SyntaxHighlighting {
         std::vector<std::regex> regexes;
 public:
-        SyntaxHighlighting();
-        void RecognizeSyntax(std::string& in);
-        std::string Hightlighting(std::string &in);
-        void RemoveTags(std::string &input,std::string tag, std::string out, int pos);
-        void ColorChar(std::string &input,std::string tag, std::string out);
-        void ColorBracket(std::string &in);
+        SyntaxHighlighting(); ///< default constructor
+        void RecognizeSyntax(std::string& in); ///< finding <code> and </code> marks in questions and answers
+        std::string Hightlighting(std::string &in); ///< highlights code
+        void RemoveTags(std::string &input,std::string tag, std::string out, int pos); ///< deleting html tags
+        void ColorChar(std::string &input,std::string tag, std::string out); ///< coloring special chars
+        void ColorBracket(std::string &in); ///< provides brackets coloring
 };
 
 

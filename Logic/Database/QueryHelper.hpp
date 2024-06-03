@@ -8,6 +8,10 @@
 #include<string>
 #include <format>
 
+/**
+ * Helper class which contains queries
+ * All queries are self-explanatory
+ */
 class QueryHelper {
 public:
      static std::string createUserTable();

@@ -11,6 +11,9 @@
 #include "nlohmann/adl_serializer.hpp"
 #include "../TagList/TagsList.hpp"
 
+/**
+ * Class utilizing stackoverflow api
+ */
 class StackManager {
     //URL TO SEARCH
     //https://api.stackexchange.com/2.3/search?order=desc&sort=activity&intitle=CPP&site=stackoverflow
@@ -36,22 +39,22 @@ public:
 
 
     std::string bestAnswer[3] = {"","",""};
-    void AskQuestion(std::string & question);
-    void SetQuestion(std::string newInput);
-    void SetQuestionByTags(std::string newInput);
-    void GetAnswer(std::string res);
-    void ChangeJsonToString(std::string&);
-    void SetQuestionId(std::string);
-    void FillTabel(std::string input);
-    void RemoveHtmlTags(std::string& input);
-    void ReturnNiceCode(std::string& input);
-    void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar);
+    void AskQuestion(std::string & question); ///< returns answers
+    void SetQuestion(std::string newInput); ///< sets question
+    void SetQuestionByTags(std::string newInput); ///< sets question with usage of tags
+    void GetAnswer(std::string res); ///< gets answers
+    void ChangeJsonToString(std::string&); ///< changes provided question/answer to string from json format
+    void SetQuestionId(std::string); ///< sets question by provided id
+    void FillTabel(std::string input); ///< fill table of questions for list tags state
+    void RemoveHtmlTags(std::string& input); ///< removes html code
+    void ReturnNiceCode(std::string& input); ///< utilize tabs and space to code format
+    void ChangingSpecialChar(std::string &input,std::string inChar, std::string outChar); ///< color special chars
     void LookForByTags(std::string& input);
-    void checkTagQuestionList(std::string& tagInput);
-    static std::vector<TagsList> getQuestionList();
-    std::string GetTitle();
-    std::string GetQuestionId();
-    void GetQuestionFromID(std::string id);
+    void checkTagQuestionList(std::string& tagInput); ///< checks for list of questions based on tags
+    static std::vector<TagsList> getQuestionList(); ///< returnS vector of questions
+    std::string GetTitle(); ///< returns title of question
+    std::string GetQuestionId(); ///< returns id of question
+    void GetQuestionFromID(std::string id); ///< gets quesiton from provided id
 };
 
 

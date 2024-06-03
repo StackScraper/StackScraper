@@ -8,6 +8,9 @@
 #include <iostream>
 #include <string>
 
+/**
+ * Class which contains functions to list of questions creation
+ */
 class TagsList {
 	int id;
 	std::string title;

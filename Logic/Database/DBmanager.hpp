@@ -10,6 +10,10 @@
 #include <sqlite3.h>
 #include "QueryHelper.hpp"
 
+/**
+ * Controls usage of database in the application
+ * Most of the functions are self-explanatory
+ */
 class DBmanager {
     static std::string nickName;
     static int id;
@@ -19,9 +23,9 @@ class DBmanager {
     int rc;
     const char* data = "Callback function called";
 
-    int openDatabase();
-    int createDatabase();
-    int closeDatabase();
+    int openDatabase(); ///< opens connection
+    int createDatabase(); ///< creates db
+    int closeDatabase(); ///< close db
 
     int createUserTable();
     int createAdminTable();
