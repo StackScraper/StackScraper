@@ -45,7 +45,12 @@ void StateFavourites::OnUpdate() {
         int index = indexes[phraseId-1];
         if(db.deleteFavourite(index)) TextFunctions::print(FavouriteTexts::successText);
         prompt->GetPrompt();
-        OnEnter();
+        if(prompt->RetValues() == "return") {
+            mFsm.SetCurrentState(States::MENU);
+        }
+        else {
+            OnEnter();
+        }
     }
     else if (TextFunctions::toLower(prompt->RetValues()) == "return")
     {
