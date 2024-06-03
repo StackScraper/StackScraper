@@ -14,14 +14,15 @@ void StateHistory::OnExit() {
  * Provides information about history of searching in Prompt State
  */
 void StateHistory::OnUpdate() {
+    this->trimmedData = {};
+    this->ManageData();
     State::OnUpdate();
     TextFunctions::setCursor(32, 10);
     TextFunctions::typeWriteMessage(HistoryTexts::returnText, 1);
     TextFunctions::setCursor(4, 12);
     TextFunctions::typeWriteMessage(HistoryTexts::historyTheme, 1);
     TextFunctions::setCursor(0, 14);
-    this->trimmedData = {};
-    this->ManageData();
+
     for(int i=0;i<trimmedData.size();i++) {
         if(i%2==0){    TextFunctions::changeTextColor(TextColors::WHITE);}
         else {    TextFunctions::changeTextColor(TextColors::BEIGE);}
@@ -37,7 +38,12 @@ void StateHistory::OnUpdate() {
         db.insertFavourite(phraseId);
         TextFunctions::print(HistoryTexts::successText);
         prompt->GetPrompt();
-        OnEnter();
+        if(prompt->RetValues() == "return") {
+            mFsm.SetCurrentState(States::MENU);
+        }
+        else {
+            OnEnter();
+        }
     }
     else if( TextFunctions::toLower(prompt->RetValues()) == "return")
     {

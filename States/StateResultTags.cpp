@@ -5,6 +5,7 @@
 #include "StateResultTags.hpp"
 #include "../Logic/TextFormatter.hpp"
 #include "../Texts/AllTexts.hpp"
+#include "..//Logic/Database/DBmanager.hpp"
 
 void StateResultTags::OnEnter() {
     State::OnEnter();
@@ -57,6 +58,10 @@ void StateResultTags::QuestionManage() {
     sh.RecognizeSyntax(question);
     TextFunctions::print(question);
     sm.GetAnswer(jSonTemp);
+    DBmanager db = DBmanager();
+    std::string body = sm.GetTitle();
+    std::string response = sm.GetQuestionId();
+    if(body != "Not found")db.insertPhrase(body,response);
     for (int i = 0; i < 3; i++) {
         if (sm.bestAnswer[i] != "") {
             std::cout << "Answer: " << i + 1 << std::endl;
