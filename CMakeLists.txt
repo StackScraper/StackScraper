@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(2024__TAB_DSA__8_BRODZIAK)
+project(StackScraper)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -14,7 +14,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
-add_executable(2024__TAB_DSA__8_BRODZIAK main.cpp
+add_executable(StackScraper main.cpp
         Engine.cpp
         Engine.hpp
         FSM/StateMachine.hpp
@@ -72,7 +72,7 @@ if(WIN32) # Install dlls in the same directory as the executable on Windows
 endif()
 
 # Specify include and link directories
-target_include_directories(2024__TAB_DSA__8_BRODZIAK PRIVATE libs)
+target_include_directories(StackScraper PRIVATE libs)
 
 include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
@@ -87,7 +87,7 @@ FetchContent_MakeAvailable(json)
 find_package(SQLite3 REQUIRED)
 
 # Then, link your executable or library with the corresponding package targets:
-target_link_libraries(2024__TAB_DSA__8_BRODZIAK
+target_link_libraries(StackScraper
         PRIVATE cpr::cpr
         nlohmann_json
         SQLite::SQLite3
