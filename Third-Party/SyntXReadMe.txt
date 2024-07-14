@@ -1,3 +1,3 @@
-git clone https://github.com/michalshy/SyntX
+git clone https://github.com/StackScraper/SyntX
 
 and then follow SyntX readme

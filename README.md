@@ -33,4 +33,4 @@ Comments:
   ///<
   
 Documentation:
-https://michalshy.github.io/StackScraperDox/
+https://stackscraper.github.io/StackScraperDox/
