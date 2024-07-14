@@ -14,6 +14,9 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
+include_directories(Third-Party/Sqlite3)
+link_directories(Third-Party/Sqlite3)
+
 add_executable(StackScraper main.cpp
         Engine.cpp
         Engine.hpp
@@ -63,6 +66,7 @@ add_executable(StackScraper main.cpp
         States/StateResultTags.hpp
         Logic/TagList/TagsList.cpp
         Logic/TagList/TagsList.hpp
+        Third-Party/Sqlite3/sqlite3.c
 )
 
 
@@ -84,13 +88,10 @@ FetchContent_Declare(json GIT_REPOSITORY https://github.com/nlohmann/json.git
         GIT_TAG 8c391e04fe4195d8be862c97f38cfe10e2a3472e) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
 FetchContent_MakeAvailable(json)
 
-find_package(SQLite3 REQUIRED)
-
 # Then, link your executable or library with the corresponding package targets:
 target_link_libraries(StackScraper
         PRIVATE cpr::cpr
         nlohmann_json
-        SQLite::SQLite3
 )
 
 
