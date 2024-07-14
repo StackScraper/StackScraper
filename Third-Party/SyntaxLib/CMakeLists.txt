@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.30)
 
-project(logger VERSION 1.0.0 DESCRIPTION "example lib")
+project(syntx VERSION 1.0.0 DESCRIPTION "example lib")
 
 set(CMAKE_CXX_VISIBLITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINE_HIDDEN YES)
 
-set(logger_src  ./Logger/Logger.cpp)
-set(logger_headers ./Logger/Logger.hpp ${CMAKE_CURRENT_BINARY_DIR}/logger_export.h)
+set(syntx_src  ./SyntX/SyntX.cpp)
+set(syntx_headers ./SyntX/SyntX.hpp ${CMAKE_CURRENT_BINARY_DIR}/syntx_export.h)
 
 include(GenerateExportHeader)
 
@@ -14,51 +14,51 @@ include(CMakePackageConfigHelpers)
 
 
 configure_package_config_file (
-  ${CMAKE_CURRENT_SOURCE_DIR}/loggerConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/loggerConfig.cmake
-  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger
+  ${CMAKE_CURRENT_SOURCE_DIR}/syntxConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/syntxConfig.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/syntx
 )
 
 write_basic_package_version_file(
-${CMAKE_CURRENT_BINARY_DIR}/loggerConfigVersion.cmake
+${CMAKE_CURRENT_BINARY_DIR}/syntxConfigVersion.cmake
 VERSION ${PROJECT_VERSION}
 COMPATIBILITY SameMajorVersion
 )
-add_library(logger ${logger_src} ${logger_headers})
-add_library(logger::logger ALIAS logger)
+add_library(syntx ${syntx_src} ${syntx_headers})
+add_library(syntx::syntx ALIAS syntx)
 
-install(TARGETS logger
-EXPORT loggerTargets
+install(TARGETS syntx
+EXPORT syntxTargets
 LIBRARY
-        COMPONENT logger-lib
+        COMPONENT syntx-lib
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
 PUBLIC_HEADER
-    COMPONENT logger-dev
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/logger
+    COMPONENT syntx-dev
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/syntx
 )
-export(EXPORT loggerTargets FILE ${CMAKE_CURRENT_BINARY_DIR}/loggerTargets.cmake)
-install(EXPORT loggerTargets
-NAMESPACE logger::
-COMPONENT logger-dev
-DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger
+export(EXPORT syntxTargets FILE ${CMAKE_CURRENT_BINARY_DIR}/syntxTargets.cmake)
+install(EXPORT syntxTargets
+NAMESPACE syntx::
+COMPONENT syntx-dev
+DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/syntx
 )
 install(
 FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/loggerConfig.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/loggerConfigVersion.cmake
-COMPONENT logger-dev
-DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger
+    ${CMAKE_CURRENT_BINARY_DIR}/syntxConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/syntxConfigVersion.cmake
+COMPONENT syntx-dev
+DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/syntx
 )
 
 
-set_target_properties(logger PROPERTIES
+set_target_properties(syntx PROPERTIES
 PUBLIC_HEADER "${numbers_headers}"
 )
-generate_export_header(logger)
-target_include_directories(logger PUBLIC
+generate_export_header(syntx)
+target_include_directories(syntx PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-    $<INSTALL_INTERFACE:include/logger>
+    $<INSTALL_INTERFACE:include/syntx>
 )
 
 

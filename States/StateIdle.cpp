@@ -5,6 +5,7 @@
 #include "StateIdle.hpp"
 #include "../Texts/AllTexts.hpp"
 #include "../Logic/TextFormatter.hpp"
+#include <Syntx/SyntX.hpp>
 
 
 /**
@@ -28,6 +29,8 @@ void StateIdle::OnUpdate() {
     TextFunctions::typeWriteMessage(IdleTexts::helloIns, 1);
     TextFunctions::setCursor(40, 11);
     prompt->GetPromptAuto(dict);
+    CLogger c;
+    c.Log("chuj");
     if(prompt->RetValues() == "login")
     {
         mFsm.SetCurrentState(States::LOGIN);
