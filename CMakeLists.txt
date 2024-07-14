@@ -88,7 +88,7 @@ FetchContent_Declare(json GIT_REPOSITORY https://github.com/nlohmann/json.git
         GIT_TAG 8c391e04fe4195d8be862c97f38cfe10e2a3472e) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
 FetchContent_MakeAvailable(json)
 
-find_package(syntx REQUIRED PATHS Third-Party/SyntaxLib/build)
+find_package(syntx REQUIRED PATHS Third-Party/SyntX/build)
 
 # Then, link your executable or library with the corresponding package targets:
 target_link_libraries(StackScraper
